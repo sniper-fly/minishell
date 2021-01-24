@@ -99,13 +99,14 @@ void exec_pipes(cmd_lst *lst)
 	int status;
 
 	if(!(lst->next)){
+		// redirect
 		if(lst->in){
 			fd = open(lst->in, O_RDONLY);
 			dup2(fd, 0);
 			close(fd);
 		}
 		if(lst->out){
-			fd = open(lst->out, O_CREAT | O_WRONLY, S_IRWXU, S_IRWXG, S_IRWXO);
+			fd = open(lst->out, O_TRUNC | O_CREAT | O_WRONLY, S_IRWXU, S_IRWXG, S_IRWXO);
 			dup2(fd, 1);
 			close(fd);
 		}
@@ -118,6 +119,17 @@ void exec_pipes(cmd_lst *lst)
 		close(fds[1]);
 		dup2(fds[0], 0);
 		close(fds[0]);
+		// redirect
+		if(lst->in){
+			fd = open(lst->in, O_RDONLY);
+			dup2(fd, 0);
+			close(fd);
+		}
+		if(lst->out){
+			fd = open(lst->out, O_TRUNC | O_CREAT | O_WRONLY, S_IRWXU, S_IRWXG, S_IRWXO);
+			dup2(fd, 1);
+			close(fd);
+		}
 		execvp(lst->arg[0], lst->arg);
 		wait(&status);
 		exit(0);
@@ -184,7 +196,7 @@ int main(void)
 //	char *line = "du -a | sort -n | wc -l ; ls -l | wc";
 //	char *line = "du -a | sort -n | wc -l ; ls -l | wc -l ; echo hello world";
 //	char *line = "du -a | sort -n";
-	char *line = "wc < in1.txt < in2.txt > out.txt";
+	char *line = "wc < in1.txt < in2.txt | wc";
 //	char *line = "env ; export foo=foo ; env";
 //	char *line = "unset PATH ; env | grep PATH";
 
