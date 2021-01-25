@@ -23,7 +23,7 @@ $(NAME): $(OBJS)
 -include $(DEPS)
 
 clean:
-	rm -rf $(OBJS)
+	rm -rf $(OBJS) $(DEPS)
 
 fclean: clean
 	rm -rf $(NAME)
