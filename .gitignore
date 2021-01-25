@@ -1,0 +1,5 @@
+.vscode
+minishell
+
+*.o
+*.d
