@@ -1,0 +1,28 @@
+
+export
+unset
+cd
+exit
+
+if(is_built_in?)
+{
+	export arg=arg
+	unset
+}
+
+1) echo hello | sleep 10| export foo=foo | echo world
+2) echo hello>hello | sleep 10| export foo=foo | echo world
+echo hello | export foo=foo | cat
+echo hello | export foo=foo
+A B C
+D E
+F
+G H
+
+execve(char* arg1st, char** arg, char** envp)
+my_execve(t_cmd_list *cmd)
+中で環境変数を加工&コマンドをPATHを用いて検索してexecveが使える形に整形
+PATH=/bin:/usr/bin
+ls
+/bin/ls
+/usr/bin/ls

@@ -146,17 +146,15 @@ void exec_pipes(cmd_lst *lst)
 void exec_cmds(prcss_lst *p_lst)
 {
 	int child;
-	static int status;
+	int status;
 
 	while(p_lst){
-		//echo hello | export foo=foo
-		//ここではexport, unset, cd, exitがパイプでつながれていなければ実行
 		// if(builtin)
 		// 	builtin("export");
 		if(child = fork())
 			wait(&status);
 		else
-			exec_pipes(p_lst->c_lst, status);
+			exec_pipes(p_lst->c_lst);
 		p_lst = p_lst->next;
 	}
 }
