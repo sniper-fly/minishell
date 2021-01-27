@@ -118,12 +118,20 @@ void exec_pipe(cmd_lst *lst)
 	}
 }
 
+// **envp
+// g_envp
 void exec_cmd(prcss_lst *p_lst)
 {
 	int child;
 	int status;
 
 	while(p_lst){
+		// if (is_builtin?)
+		// {
+		// 	export();
+		// 	//振り分け
+		// 	execve("export", **char, **envp)
+		// }
 		if(child = fork())
 			wait(&status);
 		else
