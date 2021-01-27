@@ -1,8 +1,9 @@
 
-# Makefile ver1.0	
+# Makefile ver1.1
 
 NAME = minishell
-SRCS = $(shell find ./src -type f -name "*.c")
+SRCS = $(shell find ./src -type f -name "*.c") \
+	$(shell find ./lib -type f -name "*.c")
 OBJS = $(SRCS:.c=.o)
 DEPS = $(OBJS:.o=.d)
 CC = gcc
