@@ -21,46 +21,52 @@ void pipeline(char ***cmd)
 	int		fd[2*cmd_len];
 
 	// pipe(2) for cmd_len times
-	for(i = 0; i < cmd_len; i++){
-			pipe(fd + i*2);
-    }
-	while (*cmd != NULL) {
+	for (i = 0; i < cmd_len; i++)
+	{
+		pipe(fd + i * 2);
+	}
+	while (*cmd != NULL)
+	{
 
 		pid = fork();
-		if (pid == 0) {
+		if (pid == 0)
+		{
 			// if there is next
-			if (*(cmd + 1) != NULL) {
+			if (*(cmd + 1) != NULL)
+			{
 				dup2(fd[j + 1], 1);
 			}
 			// if there is previous
-			if (j != 0) {
+			if (j != 0)
+			{
 				dup2(fd[j - 2], 0);
 			}
 
-			for(i = 0; i < 2 * cmd_len; i++){
-                close(fd[i]);
-            }
+			for (i = 0; i < 2 * cmd_len; i++)
+			{
+				close(fd[i]);
+			}
 
 			execvp((*cmd)[0], *cmd);
 		}
 
-		// no wait in each process, 
+		// no wait in each process,
 		// because I want children to exec without waiting for each other
 		// as bash does.
 		cmd++;
 		j += 2;
 	}
 	// close fds in parent process
-	for(i = 0; i < 2 * cmd_len; i++){
-        close(fd[i]);
-    }
-	// wait for children 
-    for(i = 0; i < cmd_len; i++)
-        wait(NULL);
+	for (i = 0; i < 2 * cmd_len; i++)
+	{
+		close(fd[i]);
+	}
+	// wait for children
+	for (i = 0; i < cmd_len; i++)
+		wait(NULL);
 }
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	char *ls[] = {"ls", NULL};
 	// char *rev[] = {"rev", NULL};
@@ -70,7 +76,8 @@ main(int argc, char *argv[])
 	// char *head[] = {"head", "-c", "1000", NULL};
 	// char *time[] = {"time", "-p", "sleep", "3", NULL};
 	// char *echo[] = {"echo", "toto", NULL};
-	(void)argc; (void)argv;
+	(void)argc;
+	(void)argv;
 
 	char **cmd[] = {cat, ls, NULL};
 
