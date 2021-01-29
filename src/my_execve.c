@@ -16,7 +16,7 @@ int		my_execve(t_cmd_list *cmd)
 	char	**command_path;
 
 	//1)envlstからPATHを取得し、PATHをsplitして二次元配列を作る。
-	path_db_ptr = get_path_array();
+	path_db_ptr = get_path_array();	// TODO:free
 
 	i = 0;
 	while(path_db_ptr[i]){
