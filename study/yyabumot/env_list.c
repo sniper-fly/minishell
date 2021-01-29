@@ -4,7 +4,7 @@
 
 t_env_list *env_list;
 
-char **path_to_array(void)
+char **get_path_array(void)
 {
 	t_env_list *tmp;
 	char **path;
@@ -19,26 +19,29 @@ char **path_to_array(void)
 	return path;
 }
 
-char **env_to_array(void)
+char **get_env_array(void)
 {
 	int i;
 	int count;
 	char **env;
-	t_env_list *tmp;
+	char *tmp;
+	t_env_list *env_var;
 
 	count = 0;
-	tmp = env_list->next;
-	while(tmp->key){
+	env_var = env_list->next;
+	while(env_var->key){
 		++count;
-		tmp = tmp->next;
+		env_var = env_var->next;
 	}
 	i = 0;
-	env = malloc(sizeof(char *)*(count+1));
-	tmp = env_list->next;
-	while(tmp->key){
-		env[i] = ft_strjoin(ft_strjoin(tmp->key, "="), tmp->value);	// memory leak?
+	env = malloc(sizeof(char *)*(count+1));	// TODO:エラー処理
+	env_var = env_list->next;
+	while(env_var->key){
+		tmp = ft_strjoin(env_var->key, "=");
+		env[i] = ft_strjoin(tmp, env_var->value);
 		++i;
-		tmp = tmp->next;
+		env_var = env_var->next;
+		free(tmp);
 	}
 	env[i] = NULL;
 	return env;
@@ -48,20 +51,21 @@ void make_env_list(char **envp)
 {
 	int i;
 	t_env_list *new;
-	char **tmp;
+	char **splitted;
 
 	i = 0;
-	env_list = malloc(sizeof(t_env_list));
+	env_list = malloc(sizeof(t_env_list));	// TODO:mallocエラー処理
 	env_list->key = NULL;
 	env_list->value = NULL;
 	env_list->prev = NULL;
 	env_list->next = NULL;
 	while(envp[i])
 	{
-		new = malloc(sizeof(t_env_list));
-		tmp = ft_split(envp[i], '=');
-		new->key = ft_strdup(tmp[0]);
-		new->value = ft_strdup(tmp[1]);
+		new = malloc(sizeof(t_env_list));	// TODO:mallocエラー処理
+		splitted = ft_split(envp[i], '=');
+		new->key = splitted[0];
+		new->value = splitted[1];
+		free(splitted);
 		new->next = env_list;
 		if(!(env_list->next)){
 			env_list->next = new;
