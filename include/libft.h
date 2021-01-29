@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: yyabumot <yyabumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 11:36:34 by rnakai            #+#    #+#             */
-/*   Updated: 2021/01/27 15:11:42 by rnakai           ###   ########.fr       */
+/*   Updated: 2021/01/29 17:11:06 by yyabumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char			*ft_strjoin(char const *s1, char const *s2);
 void			ft_putchar_fd(char ch, int fd);
 void			ft_putstr_fd(char *str, int fd);
 void			ft_putnbr_fd(int num, int fd);
+char			**ft_split(char const *s, char c);
 
 void			ft_perror(char *str);
 
