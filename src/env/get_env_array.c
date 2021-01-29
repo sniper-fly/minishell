@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "libft.h"
-#include "env_list.h"
+#include "struct/env_list.h"
 
 int count_env_list(void)
 {
@@ -8,7 +8,7 @@ int count_env_list(void)
 	t_env_list *env_var;
 
 	count = 0;
-	env_var = env_list->next;
+	env_var = g_env_list->next;
 	while(env_var->key){
 		++count;
 		env_var = env_var->next;
@@ -25,10 +25,10 @@ char **get_env_array(void)
 
 	i = 0;
 	env = malloc(sizeof(char *)*(count_env_list()+1));	// TODO:エラー処理
-	env_var = env_list->next;
+	env_var = g_env_list->next;
 	while(env_var->key){
-		tmp = ft_strjoin(env_var->key, "=");
-		env[i] = ft_strjoin(tmp, env_var->value);
+		tmp = ft_strjoin(env_var->key, "=");	// TODO:エラー処理
+		env[i] = ft_strjoin(tmp, env_var->value);	// TODO:エラー処理
 		free(tmp);
 		++i;
 		env_var = env_var->next;
