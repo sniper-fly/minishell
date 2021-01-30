@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "libft.h"
 #include "struct/env_list.h"
+#include <stdlib.h>
 
 int count_env_list(void)
 {

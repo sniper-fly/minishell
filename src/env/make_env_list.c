@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "libft.h"
 #include "struct/env_list.h"
+#include <stdlib.h>
 
 static void init_env_list(void)
 {
@@ -46,3 +47,13 @@ void make_env_list(char **envp)
 		++i;
 	}
 }
+
+#ifdef MAKE_ENV_LIST_C
+
+int	main(void)
+{
+	;
+	//none test yet
+}
+
+#endif
