@@ -3,3 +3,4 @@ minishell
 
 *.o
 *.d
+.gdb_history

@@ -1,5 +1,5 @@
 
-# Makefile ver1.1
+# Makefile ver1.3
 
 NAME = minishell
 SRCS = $(shell find ./src -type f -name "*.c") \
@@ -9,8 +9,9 @@ DEPS = $(OBJS:.o=.d)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I./include
 
+# make debug ARG=READ_CMD_LINE_C　のようにして使う。
 ifdef DEBUG
-CFLAGS += -g -fsanitize=address
+CFLAGS += -g -fsanitize=address -D DEBUG=1 -D $(ARG)=1
 endif
 
 all: $(NAME)
