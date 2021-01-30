@@ -4,7 +4,7 @@
 // -nオプション
 // 有->endl_flag = 1
 // 無->endl_flag = 0
-void echo(char *str, int endl_flag)
+void my_echo(char *str, int endl_flag)
 {
 	ft_putstr_fd(str, STD_OUT);
 	if(endl_flag)

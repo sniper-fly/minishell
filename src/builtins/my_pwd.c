@@ -2,7 +2,7 @@
 #include "libft.h"
 #include "constants.h"
 
-void pwd(void)
+void my_pwd(void)
 {
 	size_t size;
 	char *current_working_dir;
