@@ -15,6 +15,6 @@ void pwd(void)
 			break;
 		free(current_working_dir);
 	}
-	ft_putendl_fd(current_working_dir, STD_IN);
+	ft_putendl_fd(current_working_dir, STD_OUT);
 	exit(0);
 }
