@@ -11,7 +11,7 @@ static void init_env_list(void)
 	g_env_list->next = NULL;
 }
 
-static t_env_list *make_new_env_node(char *envp_i)
+t_env_list *make_new_env_node(char *envp_i)
 {
 	t_env_list *new;
 	char **splitted;
