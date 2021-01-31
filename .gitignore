@@ -4,3 +4,4 @@ minishell
 *.o
 *.d
 .gdb_history
+libft.a

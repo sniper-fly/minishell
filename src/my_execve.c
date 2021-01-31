@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
-// #include "utils.h"
+#include "utils.h"
 #include "libft.h"
 #include "constants.h"
 #include "struct/data_list.h"
