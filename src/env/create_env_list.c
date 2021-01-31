@@ -13,7 +13,7 @@ static void init_env_list(void)
 	g_env_list->next = NULL;
 }
 
-void make_env_list(char **envp)
+void create_env_list(char **envp)
 {
 	int i;
 	t_env_list *new;
