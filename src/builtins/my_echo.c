@@ -1,21 +1,31 @@
 #include "libft.h"
 #include "constants.h"
 
-// -nオプション
-// 有->endl_flag = 1
-// 無->endl_flag = 0
-void my_echo(char **args, int endl_flag)
+void my_echo(char **args)
 {
-	int	i;
+	int idx;
+	int endline_flag;	// 行末に改行を入れるかどうかのフラグ
 
-	i = 0;
-	while(args[i])
+	if(!ft_strncmp(args[1], "-n", ft_strlen(args[1])))
 	{
-		ft_putstr_fd(args[i], STD_OUT);
-		ft_putchar_fd(' ', STD_OUT);
-		++i;
+		// -nオプションあり
+		idx = 2;
+		endline_flag = 0;
 	}
-	if(!endl_flag)
+	else
+	{
+		// -nオプションなし
+		idx = 1;
+		endline_flag = 1;
+	}
+	while(args[idx])
+	{
+		ft_putstr_fd(args[idx], STD_OUT);
+		if(args[idx+1])
+			ft_putchar_fd(' ', STD_OUT);
+		++idx;
+	}
+	if(endline_flag)
 		ft_putstr_fd("\n", STD_OUT);
 }
 
@@ -23,10 +33,9 @@ void my_echo(char **args, int endl_flag)
 
 int main(void)
 {
-	char *arg []= {"hello", "world", NULL};
+	char *args[]= {"echo", "hello", NULL};
 
-	my_echo(arg, 0);
-	my_echo(arg, 1);
+	my_echo(args);
 }
 
 #endif
