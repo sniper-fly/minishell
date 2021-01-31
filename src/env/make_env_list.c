@@ -1,7 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include "utils.h"
 #include "libft.h"
 #include "struct/env_list.h"
-#include <stdlib.h>
 
 static void init_env_list(void)
 {
@@ -10,19 +11,6 @@ static void init_env_list(void)
 	g_env_list->value = NULL;
 	g_env_list->prev = NULL;
 	g_env_list->next = NULL;
-}
-
-t_env_list *make_new_env_node(char *envp_i)
-{
-	t_env_list *new;
-	char **splitted;
-
-	new = malloc(sizeof(t_env_list));	// TODO:mallocエラー処理
-	splitted = ft_split(envp_i, '=');	// TODO:エラー処理
-	new->key = splitted[0];
-	new->value = splitted[1];
-	free(splitted);
-	return new;
 }
 
 void make_env_list(char **envp)
