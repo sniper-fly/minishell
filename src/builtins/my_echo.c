@@ -78,6 +78,8 @@ int main(void)
 
 	char *args14[] = {"echo", NULL};
 
+	char *args15[] = {"echo", "hello", "-n", NULL};
+
 	my_echo(args);
 	my_echo(args2);
 	my_echo(args3);
@@ -92,6 +94,7 @@ int main(void)
 	my_echo(args12);
 	my_echo(args13);
 	my_echo(args14);
+	my_echo(args15);
 }
 
 #endif
