@@ -12,20 +12,13 @@ static t_bool	is_there_endl(char *line)
 	return (FALSE);
 }
 
-static void		reput_line_has_read(char *line, int size_has_read)
-{
-	putchar_times_fd('\b', size_has_read, STD_OUT);
-	ft_putstr_fd(line, STD_OUT);
-}
-
 static int		read_cmd_line_recursive(char *line, int size_has_read)
 {
 	int		actual_read_size;
 
-	reput_line_has_read(line, size_has_read); //TODO: コンソールのプロンプト、bash>などは未対応
 	actual_read_size =
 		read(STD_IN, &line[size_has_read], ARG_MAX - size_has_read);
-	if (actual_read_size < 0)
+	if (actual_read_size == ERROR)
 	{
 		ft_perror("minishell");
 		return (ERROR);
@@ -52,7 +45,7 @@ int		read_cmd_line(char *line)
 	actual_read_size = read(STD_IN, line, ARG_MAX);
 	if (line[0] == '\0')
 		exit(1);		//TODO: exitコードは最後のコマンドの終了値、つまり$?が入る
-	else if (actual_read_size < 0)
+	else if (actual_read_size == ERROR)
 	{
 		ft_perror("minishell");
 		return (ERROR);
