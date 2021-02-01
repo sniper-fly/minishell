@@ -1,10 +1,11 @@
-// #include "read_cmd_line.h"
+#include "read_cmd_line.h"
+#include "constants.h"
 
 #ifndef DEBUG
 
 int		main(int argc, char **argv, char **envp)
 {
-	char	line[ARG_MAX];
+	char	line[ARG_MAX + 1];
 
 	setup_signal();
 	while (1)
