@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "utils.h"
 #include "libft.h"
+#include "env_ctrl.h"
 #include "struct/env_list.h"
 
 static void init_env_list(void)
