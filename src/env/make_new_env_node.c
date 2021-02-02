@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "libft.h"
+#include "env_ctrl.h"
 #include "struct/env_list.h"
 
 t_env_list *make_new_env_node(char *raw_env_var)
