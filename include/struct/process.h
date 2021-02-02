@@ -5,8 +5,9 @@ typedef struct	s_process
 {
 	char		**cmd;
 	char		*red_in_file_name;
-	int			should_append;
 	char		*red_out_file_name;
+	int			red_out_mode; //APPEND, OVERWRITEフラグで管理する
+	int			is_end; //列の最後を表す。列の終わりのみTRUE
 }				t_process;
 
 #endif
