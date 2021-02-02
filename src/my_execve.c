@@ -4,7 +4,7 @@
 #include "utils.h"
 #include "libft.h"
 #include "constants.h"
-#include "struct/data_list.h"
+#include "struct/process.h"
 #include "struct/env_list.h"
 #include <stdlib.h>
 #include "env_ctrl.h"
