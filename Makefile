@@ -9,7 +9,7 @@ SRCS += $(shell find ./src/builtins -type f -name "*.c")
 SRCS += $(shell find ./src/env -type f -name "*.c")
 SRCS += $(shell find ./src/utils -type f -name "*.c")
 # SRCS += $(shell find ./src/exec_cmd -type f -name "*.c")
-# SRCS += $(shell find ./src/parse -type f -name "*.c")
+SRCS += $(shell find ./src/parse -type f -name "*.c")
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(OBJS:.o=.d)
@@ -22,7 +22,7 @@ CFLAGS = -Wall -Wextra -Werror -I./include -g
 
 # make debug ARG=READ_CMD_LINE_C　のようにして使う。
 ifdef DEBUG
-CFLAGS += -D DEBUG=1 -D $(ARG)=1 #-fsanitize=address
+CFLAGS += -D DEBUG=1 -D $(ARG)=1 -fsanitize=address
 endif
 
 all: $(NAME)
