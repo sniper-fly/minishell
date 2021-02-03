@@ -4,6 +4,15 @@
 #include <stdlib.h>
 #include "utils.h"
 
+static void		cut_last_endl(char *line)
+{
+	char	*endl_ptr;
+
+	endl_ptr = ft_strchr(line, '\n');
+	if (endl_ptr)
+		*endl_ptr = '\0';
+}
+
 t_process		**parse_cmd_line(char *line, int *status)
 {
 	char		**semicolon_splitted;
@@ -12,6 +21,7 @@ t_process		**parse_cmd_line(char *line, int *status)
 	int			i;
 	int			j;
 
+	cut_last_endl(line);
 	*status = SUCCESS;
 	semicolon_splitted = ft_split(line, ';'); //should free TODO: error処理
 	//ここでプロセス行数がわかるので、行数分+1 malloc
@@ -44,6 +54,7 @@ t_process		**parse_cmd_line(char *line, int *status)
 
 //TODO:メモリリーク解消
 #include <stdio.h>
+#include "debug.h"
 int		main(void)
 {
 	t_process	**procs;
@@ -51,15 +62,7 @@ int		main(void)
 
 	procs = parse_cmd_line("cat -e  aa  jfdk | echo aaa bb   dd | eee; hoge ; ajfsdla ; afda", &status);
 	(void)status;
-	for (int i = 0; procs[i]; i++)
-	{
-		for (int j = 0; procs[i][j].is_end != TRUE; j++)
-		{
-			show_string_arr(procs[i][j].cmd);
-			ft_putchar_fd(',', STD_OUT);
-		}
-		ft_putchar_fd('\n', STD_OUT);
-	}
+	show_procs(procs);
 }
 
 #endif

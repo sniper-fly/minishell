@@ -1,5 +1,5 @@
-#ifndef DATA_LIST_H
-#define DATA_LIST_H
+#ifndef PROCESS_H
+#define PROCESS_H
 
 typedef struct	s_process
 {
@@ -9,8 +9,6 @@ typedef struct	s_process
 	int			red_out_mode; //APPEND, OVERWRITEフラグで管理する
 	int			is_end; //列の最後を表す。列の終わりのみTRUE
 }				t_process;
-
-#endif
 
 // "cat aaa | ls -l ; echo hello"
 // A | B | C ; D | E ; F
@@ -29,6 +27,7 @@ typedef struct	s_cmd_list
 	struct s_cmd_list	*next;
 }				t_cmd_list;
 
+#endif
 // //リストの列
 // typedef struct	s_process_list
 // {

@@ -25,3 +25,31 @@ int		main(int argc, char **argv, char **envp)
 }
 
 #endif
+
+#ifdef MAIN_C
+
+#include "struct/process.h"
+#include "constants.h"
+#include "read_cmd_line.h"
+#include "libft.h"
+#include "utils.h"
+#include "parse.h"
+#include "debug.h"
+#include "main.h"
+
+int		main(void)
+{
+	char		line[ARG_MAX + 1];
+	t_process	**procs;
+	int			status;
+
+	while (TRUE)
+	{
+		print_prompt();
+		read_cmd_line(line);
+		procs = parse_cmd_line(line, &status);
+		show_procs(procs);
+	}
+}
+
+#endif
