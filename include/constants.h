@@ -16,4 +16,6 @@
 
 # define ARG_MAX 262144 //guacamolle でgetconf ARG_MAX
 
+# define PROMPT "minishell> "
+
 #endif
