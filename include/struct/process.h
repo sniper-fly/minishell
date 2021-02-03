@@ -1,5 +1,5 @@
-#ifndef DATA_LIST_H
-#define DATA_LIST_H
+#ifndef PROCESS_H
+#define PROCESS_H
 
 typedef struct	s_process
 {
