@@ -58,7 +58,7 @@ void exec_pipes(t_process *procs)
 {
 	int i;
 	pid_t pid;
-	int pipe_fd[count_procs(procs) - 1][2];
+	int pipe_fd[count_procs(procs)][2];
 
 	i = 0;
 	while (procs[i].is_end != TRUE)
@@ -94,16 +94,19 @@ int main(void)
 {
 	int status;
 	int pid;
-	char *cmd_line = "echo hello | wc";
-	// char *cmd_line = "du -a | wc -l";
+	char cmd_line[ARG_MAX + 1];
 	t_process **cmd_procs;
-	cmd_procs = parse_cmd_line(cmd_line, &status);
 
-	if((pid = fork()))
-		wait(&status);
-	else
-		exec_pipes(cmd_procs[0]);
+	while(TRUE)
+	{
+		print_prompt();
+		read_cmd_line(cmd_line);
+		cmd_procs = parse_cmd_line(cmd_line, &status);
+		if((pid = fork()))
+			wait(&status);
+		else
+			exec_pipes(cmd_procs[0]);
+	}
 }
-
 
 #endif
