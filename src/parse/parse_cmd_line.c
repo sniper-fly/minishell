@@ -44,6 +44,7 @@ t_process		**parse_cmd_line(char *line, int *status)
 
 //TODO:メモリリーク解消
 #include <stdio.h>
+#include "debug.h"
 int		main(void)
 {
 	t_process	**procs;
@@ -51,15 +52,7 @@ int		main(void)
 
 	procs = parse_cmd_line("cat -e  aa  jfdk | echo aaa bb   dd | eee; hoge ; ajfsdla ; afda", &status);
 	(void)status;
-	for (int i = 0; procs[i]; i++)
-	{
-		for (int j = 0; procs[i][j].is_end != TRUE; j++)
-		{
-			show_string_arr(procs[i][j].cmd);
-			ft_putchar_fd(',', STD_OUT);
-		}
-		ft_putchar_fd('\n', STD_OUT);
-	}
+	show_procs(procs);
 }
 
 #endif

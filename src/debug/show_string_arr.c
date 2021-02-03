@@ -37,6 +37,7 @@ void		show_string_arr(char **strings)
 }
 
 #ifdef SHOW_STRING_ARR_C
+#include "debug.h"
 
 int		main(void)
 {
