@@ -4,7 +4,7 @@
 #include "constants.h"
 #include "struct/process.h"
 
-int status;
+int g_status;
 
 static int count_procs(t_process *procs)
 {
@@ -21,8 +21,8 @@ void wait_child_procs(pid_t last_pid, int count_procs)
 	int i;
 
 	i = 0;
-	waitpid(last_pid, &status, 0);
-	while(i <= count_procs){
+	waitpid(last_pid, &g_status, 0);
+	while(i < count_procs - 1){
 		wait(NULL);
 		++i;
 	}
@@ -89,11 +89,12 @@ void exec_pipes(t_process *procs)
 #include "debug.h"
 #include "utils.h"
 #include "read_cmd_line.h"
+#include "libft.h"
 
 int main(void)
 {
-	int status;
-	int pid;
+	// int status;
+	// int pid;
 	char cmd_line[ARG_MAX + 1];
 	t_process **cmd_procs;
 
@@ -101,11 +102,10 @@ int main(void)
 	{
 		print_prompt();
 		read_cmd_line(cmd_line);
-		cmd_procs = parse_cmd_line(cmd_line, &status);
-		if((pid = fork()))
-			wait(&status);
-		else
-			exec_pipes(cmd_procs[0]);
+		cmd_procs = parse_cmd_line(cmd_line, &g_status);
+		exec_pipes(cmd_procs[0]);
+		ft_putnbr_fd(WEXITSTATUS(g_status), 1);
+		pendl();
 	}
 }
 
