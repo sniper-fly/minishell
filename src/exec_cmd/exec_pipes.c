@@ -16,6 +16,23 @@ static int	count_procs(t_process *procs)
 	return count;
 }
 
+static int **create_pipe_fd_array(t_process *procs)
+{
+	int i;
+	int num_of_procs;
+	int **pipe_fd;
+
+	i = 0;
+	num_of_procs = count_procs(procs);
+	pipe_fd = malloc(sizeof(int *)*num_of_procs);	// TODO:mallocエラー処理
+	while(i < num_of_procs)
+	{
+		pipe_fd[i] = malloc(sizeof(int)*2); // TODO:mallocエラー処理
+		++i;
+	}
+	return pipe_fd;
+}
+
 static void	wait_child_procs(pid_t last_pid, int count_procs)
 {
 	int i;
@@ -54,13 +71,29 @@ static void	close_and_dup_fds_in_child_proc(int i, int pipe_fd[][2], t_process *
 	}
 }
 
+static void free_pipe_fd_array(int **pipe_fd, t_process *procs)
+{
+	int i;
+	int num_of_procs;
+
+	i = 0;
+	num_of_procs = count_procs(procs);
+	while(i < num_of_procs)
+	{
+		free(pipe_fd[i]);
+		++i;
+	}
+	free(pipe_fd);
+}
+
 void		exec_pipes(t_process *procs)
 {
 	int i;
 	pid_t pid;
-	int pipe_fd[count_procs(procs)][2];
+	int **pipe_fd;
 
 	i = 0;
+	pipe_fd = create_pipe_fd_array(procs);
 	while (procs[i].is_end != TRUE)
 	{
 		if (procs[i+1].is_end != TRUE)
@@ -80,6 +113,7 @@ void		exec_pipes(t_process *procs)
 		++i;
 	}
 	wait_child_procs(pid, count_procs(procs));
+	free_pipe_fd_array(pipe_fd, procs);
 }
 
 #ifdef EXEC_PIPES_C
