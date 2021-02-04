@@ -32,7 +32,6 @@ void	exec_cmd(t_process **procs)
 
 int main(void)
 {
-	int i;
 	char cmd_line[ARG_MAX + 1];
 	t_process **cmd_procs;
 
@@ -41,12 +40,7 @@ int main(void)
 		print_prompt();
 		read_cmd_line(cmd_line);
 		cmd_procs = parse_cmd_line(cmd_line, &g_status);
-		i = 0;
-		while(cmd_procs[i])
-		{
-			exec_pipes(cmd_procs[i]);
-			++i;
-		}
+		exec_cmd(cmd_procs);
 	}
 }
 
