@@ -9,6 +9,7 @@ SRCS += $(shell find ./src/builtins -type f -name "*.c")
 # SRCS += $(shell find ./src/env -type f -name "*.c")
 SRCS += $(shell find ./src/utils -type f -name "*.c")
 # SRCS += $(shell find ./src/exec_cmd -type f -name "*.c")
+SRCS += ./src/exec_cmd/exec_pipes.c	# TODO: exex_cmdディレクトリ内のファイルがコンパイルできるなら消す
 SRCS += $(shell find ./src/parse -type f -name "*.c")
 SRCS += $(shell find ./src/debug -type f -name "*.c")
 
