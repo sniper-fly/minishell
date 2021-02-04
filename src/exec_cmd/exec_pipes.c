@@ -1,20 +1,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include "utils.h"
 #include "constants.h"
 #include "struct/process.h"
 
 int			g_status;
-
-static int	count_procs(t_process *procs)
-{
-	int count;
-
-	count = 0;
-	while(procs[count].is_end != TRUE)
-		++count;
-	return count;
-}
 
 static int **create_pipe_fd_array(t_process *procs)
 {
@@ -45,7 +36,7 @@ static void	wait_child_procs(pid_t last_pid, int count_procs)
 	}
 }
 
-static void	close_and_dup_fds_in_child_proc(int i, int pipe_fd[][2], t_process *procs)
+static void	close_and_dup_fds_in_child_proc(int i, int **pipe_fd, t_process *procs)
 {
 
 	if(i == 0)
