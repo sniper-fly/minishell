@@ -4,9 +4,9 @@
 #include "constants.h"
 #include "struct/process.h"
 
-int g_status;
+int			g_status;
 
-static int count_procs(t_process *procs)
+static int	count_procs(t_process *procs)
 {
 	int count;
 
@@ -16,7 +16,7 @@ static int count_procs(t_process *procs)
 	return count;
 }
 
-void wait_child_procs(pid_t last_pid, int count_procs)
+static void	wait_child_procs(pid_t last_pid, int count_procs)
 {
 	int i;
 
@@ -28,7 +28,7 @@ void wait_child_procs(pid_t last_pid, int count_procs)
 	}
 }
 
-void close_and_dup_fds_in_child_proc(int i, int pipe_fd[][2], t_process *procs)
+static void	close_and_dup_fds_in_child_proc(int i, int pipe_fd[][2], t_process *procs)
 {
 
 	if(i == 0)
@@ -54,7 +54,7 @@ void close_and_dup_fds_in_child_proc(int i, int pipe_fd[][2], t_process *procs)
 	}
 }
 
-void exec_pipes(t_process *procs)
+void		exec_pipes(t_process *procs)
 {
 	int i;
 	pid_t pid;
