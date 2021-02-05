@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdlib.h>
 #include <sys/wait.h>
 #include "exec_cmd.h"
 #include "struct/process.h"
@@ -16,7 +17,10 @@ void	exec_cmd(t_process **procs)
 		if (fork())
 			wait(&g_status);
 		else
+		{
 			exec_pipes(procs[i]); //パイプのwhileループ(列のループ)
+			exit(0);
+		}
 		++i;
 	}
 }
