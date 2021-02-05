@@ -1,39 +1,51 @@
-#include "process.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include "exec_cmd.h"
+#include "struct/process.h"
 
-//!!!現状コンパイルできません。!!!大枠を示したただの参考資料です。
+int g_status;
 
-void	exec_cmd()
+void	exec_cmd(t_process **procs)
 {
-	while () //行のループ
+	int i;
+
+	i = 0;
+	while (procs[i]) //行のループ
 	{
-		if () //ビルトインを実行するかどうか(前後が番兵かi.e.コマンドがFのように単一かどうか)
-			exec_builtins(/*t_cmd_list*/)
-		else if (fork())
-		{
-			wait()
-		}
+		// TODO:ビルトインを実行するかどうかのチェック(前後が番兵かi.e.コマンドが単一かどうか)
+		if (fork())
+			wait(&g_status);
 		else
 		{
-			exec_pipes(/*t_process_list*/); //パイプのwhileループ(列のループ)
+			exec_pipes(procs[i]); //パイプのwhileループ(列のループ)
+			exit(0);
 		}
+		++i;
 	}
 }
 
-void	exec_pipes()
-{
-	//並列にforkする
-	// forkしたプロセスの中でまずビルトインかどうか調べる
-	//ビルトインリストになければmy_execve(t_cmd_list)
+#ifdef EXEC_CMD_C
 
-	// waitpid()
-	// for wait()
+#include "main.h"
+#include "parse.h"
+#include "utils.h"
+#include "debug.h"
+#include "constants.h"
+#include "read_cmd_line.h"
+
+int main(void)
+{
+	char cmd_line[ARG_MAX + 1];
+	t_process **cmd_procs;
+
+	while(TRUE)
+	{
+		print_prompt();
+		read_cmd_line(cmd_line);
+		cmd_procs = parse_cmd_line(cmd_line, &g_status);
+		exec_cmd(cmd_procs);
+	}
 }
 
-/////  exec_pipesで、どうやって最後に終了したプロセスの終了ステータスを取得するか
-//  for(i = 0; i < cmd_len; i++)
-//  {
-//         wait(&status);
-// 		if (status != 0)
-// 			ret_status = status;
-//  }	
-//  exit(ret_status);
+#endif
