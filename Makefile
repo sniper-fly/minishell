@@ -6,11 +6,9 @@ NAME = minishell
 #SRCS += の形式でディレクトリを追加。コメントアウトで特定ディレクトリ除外可能
 SRCS  = $(shell find ./src -maxdepth 1 -type f -name "*.c")
 SRCS += $(shell find ./src/builtins -type f -name "*.c")
-# SRCS += $(shell find ./src/env -type f -name "*.c")
+SRCS += $(shell find ./src/env -type f -name "*.c")
 SRCS += $(shell find ./src/utils -type f -name "*.c")
-# SRCS += $(shell find ./src/exec_cmd -type f -name "*.c")
-SRCS += ./src/exec_cmd/exec_pipes.c	# TODO: exex_cmdディレクトリ内のファイルがコンパイルできるなら消す
-SRCS += ./src/exec_cmd/exec_cmd.c	# TODO: 上と同様
+SRCS += $(shell find ./src/exec_cmd -type f -name "*.c")
 SRCS += $(shell find ./src/parse -type f -name "*.c")
 SRCS += $(shell find ./src/debug -type f -name "*.c")
 
