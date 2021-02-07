@@ -4,5 +4,6 @@
 
 void		show_string_arr(char **strings);
 void		show_procs(t_process **procs);
+t_process	**generate_simple_procs(char *line);
 
 #endif
