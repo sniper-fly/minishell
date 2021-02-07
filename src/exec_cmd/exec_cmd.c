@@ -4,7 +4,7 @@
 #include "exec_cmd.h"
 #include "struct/process.h"
 
-int g_status;
+extern int	g_status;
 
 void	exec_cmd(t_process **procs)
 {
@@ -14,13 +14,7 @@ void	exec_cmd(t_process **procs)
 	while (procs[i]) //行のループ
 	{
 		// TODO:ビルトインを実行するかどうかのチェック(前後が番兵かi.e.コマンドが単一かどうか)
-		if (fork())
-			wait(&g_status);
-		else
-		{
-			exec_pipes(procs[i]); //パイプのwhileループ(列のループ)
-			exit(0);
-		}
+		exec_pipes(procs[i]); //パイプのwhileループ(列のループ)
 		++i;
 	}
 }
@@ -33,6 +27,7 @@ void	exec_cmd(t_process **procs)
 #include "debug.h"
 #include "constants.h"
 #include "read_cmd_line.h"
+#include "libft.h"
 
 int main(void)
 {
@@ -45,6 +40,8 @@ int main(void)
 		read_cmd_line(cmd_line);
 		cmd_procs = parse_cmd_line(cmd_line, &g_status);
 		exec_cmd(cmd_procs);
+		ft_putnbr_fd(WEXITSTATUS(g_status), 1);
+		pendl();
 	}
 }
 
