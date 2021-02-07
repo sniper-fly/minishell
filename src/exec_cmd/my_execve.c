@@ -2,6 +2,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 #include "utils.h"
 #include "libft.h"
 #include "env_ctrl.h"
@@ -15,7 +16,7 @@ static int is_there_execute_file_at(char *command_path)
 {
 	int		fd;
 
-	fd = open(command_path, O_RDONLY);
+	fd = open(command_path, O_WRONLY);
 	return (fd != ERROR || errno != ENOENT);
 }
 
@@ -42,6 +43,17 @@ static void occur_an_error_at_execve(void)
 	exit(1);	// TODO: exitのステータス要検証
 }
 
+static void check_if_the_full_path_is_valid(char *path)
+{
+	if(open(path, O_RDWR) == -1 && (errno == EISDIR || errno == ENOENT)){
+		ft_putstr_fd("minishlell: ", STD_ERR);
+		ft_putstr_fd(path, STD_ERR);
+		ft_putstr_fd(": ", STD_ERR);
+		ft_putendl_fd(strerror(errno), STD_ERR);
+		exit(1);
+	}
+}
+
 void		my_execve(char **cmd)
 {
 	int		i;
@@ -50,6 +62,8 @@ void		my_execve(char **cmd)
 	char	*command_path;
 
 	envp = get_env_array();
+	if(cmd[0][0] == '/')
+		check_if_the_full_path_is_valid(cmd[0]);
 	if (is_there_execute_file_at(cmd[0])){
 		if(execve(cmd[0], cmd, envp) == ERROR)
 			occur_an_error_at_execve();
@@ -64,14 +78,16 @@ void		my_execve(char **cmd)
 		if (is_there_execute_file_at(command_path))
 		{
 			//3)ファイルが見つかったらprefixをつけてarguments二次元ポインタに格納する
-			cmd[0] = command_path;	// TODO:cmd[0]free必要?
 			if (execve(command_path, cmd, envp) == ERROR)
 				occur_an_error_at_execve();
 		}
 		free(command_path);
 		++i;
 	}
-	occur_an_error_at_execve();
+	ft_putstr_fd(cmd[0], STD_ERR);
+	ft_putstr_fd(": ", STD_ERR);
+	ft_putendl_fd("command not found", STD_ERR);
+	exit(1);
 }
 
 #ifdef MY_EXECVE_C
