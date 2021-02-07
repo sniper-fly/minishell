@@ -78,19 +78,43 @@ void		my_execve(char **cmd)
 
 #include <sys/wait.h>
 
-int main(int argc, char *argv[], char *envp[])
+static void exec_test(char **cmd)
 {
-	char *cmd[] = {"ls", "-l", NULL};
-
-	argc += 0;
-	argv[0][0] = 'A';
-	create_env_list(envp);
 	if(fork())
 		wait(NULL);
 	else{
 		my_execve(cmd);
 		exit(0);
 	}
+}
+
+int main(int argc, char *argv[], char *envp[])
+{
+	char *cmd[] = {"ls", "-l", NULL};
+	
+	char *cmd1[] = {"/bin/", "-l", NULL};
+	// ディレクトリを指定
+
+	char *cmd2[] = {"/bin/", "-l", NULL};
+	// ディレクトリを指定
+
+	char *cmd3[] = {"実行権限がないファイル", "-l", NULL};
+	// 実行権限がないファイル
+
+	char *cmd4[] = {"/not/exist", "-l", NULL};
+	//存在しないファイル
+
+	char *cmd5[] = {"notexist", "-l", NULL};
+	//存在しないファイル
+	argc += 0;
+	argv[0][0] = 'A';
+	create_env_list(envp);
+	exec_test(cmd);
+	exec_test(cmd1);
+	exec_test(cmd2);
+	exec_test(cmd3);
+	exec_test(cmd4);
+	exec_test(cmd5);
 }
 
 #endif

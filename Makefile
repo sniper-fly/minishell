@@ -23,7 +23,7 @@ CFLAGS = -Wall -Wextra -Werror -I./include -g
 
 # make debug ARG=READ_CMD_LINE_C　のようにして使う。
 ifdef DEBUG
-CFLAGS += -D DEBUG=1 -D $(ARG)=1 -fsanitize=address
+CFLAGS += -D DEBUG=1 -D $(ARG)=1 #-fsanitize=address
 endif
 
 all: $(NAME)
