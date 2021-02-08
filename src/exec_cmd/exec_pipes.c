@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include "utils.h"
-#include "env_ctrl.h"
 #include "constants.h"
 #include "my_execve.h"
 #include "struct/process.h"
@@ -116,8 +115,9 @@ void		exec_pipes(t_process *procs)
 #include "parse.h"
 #include "debug.h"
 #include "utils.h"
-#include "read_cmd_line.h"
 #include "libft.h"
+#include "env_ctrl.h"
+#include "read_cmd_line.h"
 
 int main(int argc, char *argv[], char *envp[])
 {
