@@ -3,6 +3,7 @@
 #include <sys/wait.h>
 #include "utils.h"
 #include "constants.h"
+#include "my_execve.h"
 #include "struct/process.h"
 
 int			g_status;
@@ -92,7 +93,8 @@ void		exec_pipes(t_process *procs)
 		if ((pid = fork()) == 0)
 		{
 			close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
-			execvp(procs[i].cmd[0], procs[i].cmd);	// TODO: use my_execve
+			// execvp(procs[i].cmd[0], procs[i].cmd);	// TODO: use my_execve
+			my_execve(procs[i].cmd);
 			exit(0);	// TODO: exitステータスの修正
 		}
 		else if (i > 0)
@@ -113,16 +115,20 @@ void		exec_pipes(t_process *procs)
 #include "parse.h"
 #include "debug.h"
 #include "utils.h"
-#include "read_cmd_line.h"
 #include "libft.h"
+#include "env_ctrl.h"
+#include "read_cmd_line.h"
 
-int main(void)
+int main(int argc, char *argv[], char *envp[])
 {
 	// int status;
 	// int pid;
 	char cmd_line[ARG_MAX + 1];
 	t_process **cmd_procs;
 
+	argc += 1;
+	argv[0][0] = 'a';
+	create_env_list(envp);
 	while(TRUE)
 	{
 		print_prompt();
