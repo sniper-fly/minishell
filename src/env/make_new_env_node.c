@@ -5,13 +5,17 @@
 t_env_list *make_new_env_node(char *raw_env_var)
 {
 	t_env_list *new;
-	char **splitted;
+	char *equal_ptr;
+	char *key_ptr;
+	char *val_ptr;
 
 	new = malloc(sizeof(t_env_list));	// TODO:mallocエラー処理
-	splitted = ft_split(raw_env_var, '=');	// TODO:エラー処理
-	new->key = splitted[0];
-	new->value = splitted[1];
-	free(splitted);
+	key_ptr = raw_env_var;
+	equal_ptr = ft_strchr(raw_env_var, '=');	// TODO:エラー処理
+	*equal_ptr = '\0';
+	val_ptr = equal_ptr + 1;
+	new->key = ft_strdup(key_ptr);	// TODO?エラー処理
+	new->value = ft_strdup(val_ptr);	// TODO:エラー処理
 	return new;
 }
 
@@ -22,7 +26,7 @@ t_env_list *make_new_env_node(char *raw_env_var)
 int main(void)
 {
 	t_env_list *new;
-	char *test_env = "foo=foo";
+	char test_env[] = "foo=foo";
 
 	new = make_new_env_node(test_env);
 	printf("key:%s\n", new->key);
