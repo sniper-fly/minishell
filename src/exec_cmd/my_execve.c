@@ -25,7 +25,7 @@ static void check_if_the_full_path_is_valid(char *cmd_path)
 {
 	if (open(cmd_path, O_RDWR) == ERROR && (errno == EISDIR || errno == ENOENT))
 	{
-		ft_putstr_fd("minishlell: ", STD_ERR);
+		ft_putstr_fd("minishell: ", STD_ERR);
 		ft_putstr_fd(cmd_path, STD_ERR);
 		ft_putstr_fd(": ", STD_ERR);
 		ft_putendl_fd(strerror(errno), STD_ERR);
@@ -63,7 +63,8 @@ static void do_execve(char *cmd_path, char **cmd, char **envp)
 	// cmd[0] = cmd_path; // TODO:cmd[0]に代入必要?
 	if (execve(cmd_path, cmd, envp) == ERROR)
 	{
-		ft_perror("minishell");
+		ft_putstr_fd("minishell: ", STD_ERR);
+		ft_perror(cmd_path);
 		exit(1);	// TODO: exitのステータス要検証
 	}
 }
@@ -120,7 +121,7 @@ int main(int argc, char *argv[], char *envp[])
 	char *cmd2[] = {"/bin/", "-l", NULL};
 	// ディレクトリを指定
 
-	char *cmd3[] = {"実行権限がないファイル", "-l", NULL};
+	char *cmd3[] = {"/root/a", "-l", NULL};
 	// 実行権限がないファイル
 
 	char *cmd4[] = {"/not/exist", "-l", NULL};
