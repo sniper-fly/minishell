@@ -5,8 +5,8 @@
 #include <string.h>
 #include "utils.h"
 #include "libft.h"
-#include "exec_cmd.h"
 #include "env_ctrl.h"
+#include "my_execve.h"
 #include "constants.h"
 #include "struct/process.h"
 #include "struct/env_list.h"
@@ -39,23 +39,6 @@ static void if_command_not_found(char *cmd_path)
 	ft_putstr_fd(": ", STD_ERR);
 	ft_putendl_fd("command not found", STD_ERR);
 	exit(1);
-}
-
-static char *get_command_path(char *cmd, char *path_ptr)
-{
-	char *add_slash;
-	char *cmd_path;
-
-	add_slash = NULL;
-	if(path_ptr[ft_strlen(path_ptr) - 1] != '/')
-	{
-		add_slash = ft_strjoin(path_ptr, "/");
-		cmd_path = ft_strjoin(add_slash, cmd);	// TODO:エラー処理
-	}
-	else
-		cmd_path = ft_strjoin(path_ptr, cmd);
-	free(add_slash);
-	return (cmd_path);
 }
 
 static void do_execve(char *cmd_path, char **cmd, char **envp)
