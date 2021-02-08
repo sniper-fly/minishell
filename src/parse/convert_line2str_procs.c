@@ -13,7 +13,7 @@ static void		cut_last_endl(char *line)
 		*endl_ptr = '\0';
 }
 
-char		***parse_cmd_line(char *line)
+char		***convert_line2str_procs(char *line)
 {
 	char		**semicolon_splitted;
 	char		**pipe_spilitted;
@@ -48,7 +48,7 @@ int		main(void)
 	char		***str_procs;
 	char		*line = "cmd | cmd1 | cmd 2 ; echo | echo ; hello";
 
-	str_procs = parse_cmd_line(line);
+	str_procs = convert_line2str_procs(line);
 	show_str_procs(str_procs);
 }
 

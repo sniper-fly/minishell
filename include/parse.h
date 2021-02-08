@@ -3,6 +3,6 @@
 
 #include "struct/process.h"
 
-char		***parse_cmd_line(char *line);
+char		***convert_line2str_procs(char *line);
 
 #endif
