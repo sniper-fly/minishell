@@ -26,7 +26,7 @@ t_env_list *make_new_env_node(char *raw_env_var)
 int main(void)
 {
 	t_env_list *new;
-	char *test_env = "foo=foo";
+	char test_env[] = "foo=foo";
 
 	new = make_new_env_node(test_env);
 	printf("key:%s\n", new->key);
