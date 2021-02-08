@@ -13,42 +13,30 @@ static void		cut_last_endl(char *line)
 		*endl_ptr = '\0';
 }
 
-t_process		**parse_cmd_line(char *line, int *status)
+char		***parse_cmd_line(char *line)
 {
 	char		**semicolon_splitted;
 	char		**pipe_spilitted;
-	t_process	**procs;
+	char		***str_procs;
 	int			i;
-	int			j;
 
 	cut_last_endl(line);
-	*status = SUCCESS;
 	semicolon_splitted = ft_split(line, ';'); //should free TODO: error処理
 	//ここでプロセス行数がわかるので、行数分+1 malloc
-	procs = (t_process**)ft_calloc(sizeof(t_process*),
+	str_procs = (char***)ft_calloc(sizeof(char**),
 		(count_string_arr_row(semicolon_splitted) + 1)); //TODO:error処理
-	
+
 	i = 0;
 	while (semicolon_splitted[i])
 	{
 		pipe_spilitted = ft_split(semicolon_splitted[i], '|'); //should free TODO:error処理
-		//ここで各プロセス列数がわかるので、各行における列数 + 1 malloc
-		procs[i] = (t_process*)ft_calloc(sizeof(t_process),
-			(count_string_arr_row(pipe_spilitted) + 1)); //TODO:error処理
-		j = 0;
-		while (pipe_spilitted[j])
-		{
-			// ここで、既に二次元配列になったコマンドラインが取得できる
-			procs[i][j].cmd = ft_split(pipe_spilitted[j], ' '); //should free TODO:error処理
-			j++;
-		}
-		free_string_arr(pipe_spilitted);
-		procs[i][j].is_end = TRUE;
+		str_procs[i] = pipe_spilitted;
 		i++;
 	}
 	free_string_arr(semicolon_splitted);
-	return (procs);
+	return (str_procs);
 }
+
 
 #ifdef PARSE_CMD_LINE_C
 
@@ -57,12 +45,11 @@ t_process		**parse_cmd_line(char *line, int *status)
 #include "debug.h"
 int		main(void)
 {
-	t_process	**procs;
-	int			status;
+	char		***str_procs;
+	char		*line = "cmd | cmd1 | cmd 2 ; echo | echo ; hello";
 
-	procs = parse_cmd_line("cat -e  aa  jfdk | echo aaa bb   dd | eee; hoge ; ajfsdla ; afda", &status);
-	(void)status;
-	show_procs(procs);
+	str_procs = parse_cmd_line(line);
+	show_str_procs(str_procs);
 }
 
 #endif
