@@ -1,0 +1,15 @@
+line0: cmd ; aaa ; bbb ; ccc 'jfka;;a;'a ; hoge\; ;; ls "a;a" 
+line0: cmd @ aaa @ bbb @ ccc 'jfka;;a;'a @ hoge\; @@ ls "a;a" 
+---------------------
+line1: cmd ; aaa ; bbb
+line1: cmd @ aaa @ bbb
+---------------------
+line2: hoge 'jfka;;a;'a ; hoge;
+line2: hoge 'jfka;;a;'a @ hoge@
+---------------------
+line3: aaa "hoge;f;oo", ; a ls; ;a
+line3: aaa "hoge;f;oo", @ a ls@ @a
+---------------------
+line4: aaa;bbb;ccc\;foo;o
+line4: aaa@bbb@ccc\;foo@o
+---------------------
