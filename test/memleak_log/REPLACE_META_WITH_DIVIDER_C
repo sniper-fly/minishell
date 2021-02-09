@@ -1,0 +1,29 @@
+ Memcheck, a memory error detector
+ Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+ Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+ Command: ./minishell
+
+ cmd ; aaa ; bbb ; ccc 'jfka;;a;'a ; hoge\; ;; ls "a;a"
+ cmd @ aaa @ bbb @ ccc 'jfka;;a;'a @ hoge\; @@ ls "a;a"
+
+ cmd ; aaa ; bbb
+ cmd @ aaa @ bbb
+
+ hoge 'jfka;;a;'a ; hoge;
+ hoge 'jfka;;a;'a @ hoge@
+
+ aaa "hoge;f;oo", ; a ls; ;a
+ aaa "hoge;f;oo", @ a ls@ @a
+
+ aaa;bbb;ccc\;foo;o
+ aaa@bbb@ccc\;foo@o
+
+
+ HEAP SUMMARY:
+ in use at exit: 0 bytes in 0 blocks
+ total heap usage: 1 allocs, 1 frees, 4,096 bytes allocated
+
+ All heap blocks were freed -- no leaks are possible
+
+ For counts of detected and suppressed errors, rerun with: -v
+ ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
