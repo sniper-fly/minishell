@@ -18,22 +18,3 @@ t_env_list *make_new_env_node(char *raw_env_var)
 	new->value = ft_strdup(val_ptr);	// TODO:エラー処理
 	return new;
 }
-
-#ifdef 	MAKE_NEW_ENV_NODE_C
-
-#include <stdio.h>
-
-int main(void)
-{
-	t_env_list *new;
-	char test_env[] = "foo=foo";
-
-	new = make_new_env_node(test_env);
-	printf("key:%s\n", new->key);
-	printf("value:%s\n", new->value);
-	free(new->key);
-	free(new->value);
-	free(new);
-}
-
-#endif

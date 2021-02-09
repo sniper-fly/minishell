@@ -11,7 +11,7 @@
 #include "struct/process.h"
 #include "struct/env_list.h"
 
-t_env_list	*g_env_list;
+extern t_env_list	*g_env_list;
 
 static int is_there_execute_file_at(char *cmd_path)
 {
@@ -79,48 +79,3 @@ void		my_execve(char **cmd)
 	}
 	if_command_not_found(cmd[0]);
 }
-
-#ifdef MY_EXECVE_C
-
-#include <sys/wait.h>
-
-static void exec_test(char **cmd)
-{
-	if(fork())
-		wait(NULL);
-	else{
-		my_execve(cmd);
-		exit(0);
-	}
-}
-
-int main(int argc, char *argv[], char *envp[])
-{
-	char *cmd[] = {"ls", "-l", NULL};
-	
-	char *cmd1[] = {"/bin/ls", "-l", NULL};
-	// ディレクトリを指定
-
-	char *cmd2[] = {"/bin/", "-l", NULL};
-	// ディレクトリを指定
-
-	char *cmd3[] = {"/root/a", "-l", NULL};
-	// 実行権限がないファイル
-
-	char *cmd4[] = {"/not/exist", "-l", NULL};
-	//存在しないファイル
-
-	char *cmd5[] = {"notexist", "-l", NULL};
-	//存在しないファイル
-	argc += 0;
-	argv[0][0] = 'A';
-	create_env_list(envp);
-	exec_test(cmd);
-	exec_test(cmd1);
-	exec_test(cmd2);
-	exec_test(cmd3);
-	exec_test(cmd4);
-	exec_test(cmd5);
-}
-
-#endif

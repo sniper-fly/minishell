@@ -24,21 +24,3 @@ void		free_procs(t_process **procs)
 	}
 	free(procs);
 }
-
-#ifdef FREE_PROCS_C
-
-#include "debug.h"
-#include "parse.h"
-int		main(void)
-{
-	t_process	**procs;
-	int			status;
-
-	procs = parse_cmd_line("cat -e  aa  jfdk | echo aaa bb   dd | eee; hoge ; ajfsdla ; afda", &status);
-	(void)status;
-	(void)procs;
-	show_procs(procs);
-	free_procs(procs);
-}
-
-#endif

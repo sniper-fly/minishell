@@ -14,14 +14,3 @@ void		ft_perror(char *str)
 	ft_putstr_fd(strerror(errno), STD_ERR);
 	ft_putchar_fd('\n', STD_ERR);
 }
-
-#ifdef FT_PERROR_C
-
-#include <fcntl.h>
-int		main(void)
-{
-	open("aaaa", 0);
-	ft_perror("aa");
-}
-
-#endif

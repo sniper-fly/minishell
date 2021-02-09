@@ -4,6 +4,8 @@
 #include "libft.h"
 #include "struct/env_list.h"
 
+extern t_env_list	*g_env_list;
+
 static void init_env_list(void)
 {
 	g_env_list = malloc(sizeof(t_env_list));	// TODO:mallocエラー処理
@@ -35,22 +37,3 @@ void create_env_list(char **envp)
 		++i;
 	}
 }
-
-#ifdef CREATE_ENV_LIST_C
-
-int	main(int argc, char *argv[], char *envp[])
-{
-	t_env_list *env_node;
-
-	argc += 1;
-	argv[0][0] = 'a';
-	create_env_list(envp);
-	env_node = g_env_list->next;
-	while(env_node != g_env_list)
-	{
-		printf("%s=%s\n", env_node->key, env_node->value);
-		env_node = env_node->next;
-	}
-}
-
-#endif

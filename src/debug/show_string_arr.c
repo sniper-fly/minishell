@@ -35,25 +35,3 @@ void		show_string_arr(char **strings)
 	}
 	ft_putchar_fd('}', STD_OUT);
 }
-
-#ifdef SHOW_STRING_ARR_C
-#include "debug.h"
-
-int		main(void)
-{
-	char* hoge0[] = {"cat", "hoge", "endl", "-l", NULL};
-	char* hoge1[] = {NULL};
-	char* hoge2[] = {"", "", "dog", NULL};
-	char* hoge3[] = {"", "\"", "dog", NULL};
-
-	show_string_arr(hoge0);
-	pendl();
-	show_string_arr(hoge1);
-	pendl();
-	show_string_arr(hoge2);
-	pendl();
-	show_string_arr(hoge3);
-	pendl();
-}
-
-#endif

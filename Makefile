@@ -1,5 +1,5 @@
 
-# Makefile ver2.0
+# Makefile ver2.1
 
 NAME = minishell
 
@@ -8,7 +8,7 @@ SRCS  = $(shell find ./src -maxdepth 1 -type f -name "*.c")
 SRCS += $(shell find ./src/builtins -type f -name "*.c")
 SRCS += $(shell find ./src/env -type f -name "*.c")
 SRCS += $(shell find ./src/utils -type f -name "*.c")
-SRCS += $(shell find ./src/exec_cmd -type f -name "*.c")
+SRCS += $(shell find ./src/execute -type f -name "*.c")
 SRCS += $(shell find ./src/parse -type f -name "*.c")
 SRCS += $(shell find ./src/debug -type f -name "*.c")
 
@@ -18,11 +18,16 @@ DEPS = $(OBJS:.o=.d)
 LIBFT = ./lib/libft/libft.a
 LIBFT_PATH = ./lib/libft
 
+TEST_SRCS = $(shell find ./test/cfiles -type f -name "*.c")
+TEST_OBJS = $(TEST_SRCS:.c=.o)
+TEST_DEPS = $(TEST_OBJS:.o=.d)
+
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I./include -g
 
 # make debug ARG=READ_CMD_LINE_C　のようにして使う。
 ifdef DEBUG
+SRCS += $(TEST_SRCS)
 CFLAGS += -D DEBUG=1 -D $(ARG)=1 #-fsanitize=address
 endif
 
@@ -38,7 +43,7 @@ $(NAME): $(OBJS)
 -include $(DEPS)
 
 clean:
-	rm -rf $(OBJS) $(DEPS)
+	rm -rf $(OBJS) $(DEPS) $(TEST_OBJS) $(TEST_DEPS)
 
 fclean: clean
 	make fclean -C $(LIBFT_PATH)

@@ -65,14 +65,3 @@ int		read_cmd_line(char *line)
 	}
 	return (0);
 }
-
-#ifdef READ_CMD_LINE_C
-
-int main(void)
-{
-	char line[ARG_MAX + 1];
-	read_cmd_line(line);
-	ft_putstr_fd(line, STD_OUT);
-}
-
-#endif

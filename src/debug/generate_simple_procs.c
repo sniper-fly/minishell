@@ -48,16 +48,3 @@ t_process		**generate_simple_procs(char *line)
 	free_string_arr(semicolon_splitted);
 	return (procs);
 }
-
-#ifdef GENERATE_SIMPLE_PROCS_C
-
-#include "debug.h"
-int		main(void)
-{
-	t_process	**procs;
-
-	procs = generate_simple_procs("cat -e  aa  jfdk | echo aaa bb   dd | eee; hoge ; ajfsdla ; afda");
-	show_procs(procs);
-}
-
-#endif
