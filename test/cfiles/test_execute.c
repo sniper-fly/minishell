@@ -60,6 +60,10 @@ int main(int argc, char *argv[], char *envp[])
 
 #ifdef MY_EXECVE_C
 
+#include <stdlib.h>
+#include <unistd.h>
+#include "execute.h"
+#include "env_ctrl.h"
 #include <sys/wait.h>
 
 static void exec_test(char **cmd)
@@ -74,21 +78,21 @@ static void exec_test(char **cmd)
 
 int main(int argc, char *argv[], char *envp[])
 {
-	char *cmd[] = {"ls", "-l", NULL};
+	char *cmd[] = {"ls", NULL};
 	
-	char *cmd1[] = {"/bin/ls", "-l", NULL};
+	char *cmd1[] = {"/bin/ls", NULL};
 	// ディレクトリを指定
 
-	char *cmd2[] = {"/bin/", "-l", NULL};
+	char *cmd2[] = {"/bin/", NULL};
 	// ディレクトリを指定
 
-	char *cmd3[] = {"/root/a", "-l", NULL};
+	char *cmd3[] = {"/root/a", NULL};
 	// 実行権限がないファイル
 
-	char *cmd4[] = {"/not/exist", "-l", NULL};
+	char *cmd4[] = {"/not/exist", NULL};
 	//存在しないファイル
 
-	char *cmd5[] = {"notexist", "-l", NULL};
+	char *cmd5[] = {"notexist", NULL};
 	//存在しないファイル
 	argc += 0;
 	argv[0][0] = 'A';
