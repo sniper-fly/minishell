@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/wait.h>
-#include "exec_cmd.h"
+#include "execute.h"
 #include "struct/process.h"
 
 extern int	g_status;

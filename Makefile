@@ -8,7 +8,7 @@ SRCS  = $(shell find ./src -maxdepth 1 -type f -name "*.c")
 SRCS += $(shell find ./src/builtins -type f -name "*.c")
 SRCS += $(shell find ./src/env -type f -name "*.c")
 SRCS += $(shell find ./src/utils -type f -name "*.c")
-SRCS += $(shell find ./src/exec_cmd -type f -name "*.c")
+SRCS += $(shell find ./src/execute -type f -name "*.c")
 SRCS += $(shell find ./src/parse -type f -name "*.c")
 SRCS += $(shell find ./src/debug -type f -name "*.c")
 
@@ -23,6 +23,7 @@ CFLAGS = -Wall -Wextra -Werror -I./include -g
 
 # make debug ARG=READ_CMD_LINE_C　のようにして使う。
 ifdef DEBUG
+SRCS += $(shell find ./test/cfiles -type f -name "*.c")
 CFLAGS += -D DEBUG=1 -D $(ARG)=1 #-fsanitize=address
 endif
 

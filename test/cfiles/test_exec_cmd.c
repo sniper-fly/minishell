@@ -1,7 +1,6 @@
-#include "exec_cmd.h"
-
 #ifdef EXEC_CMD_C
 
+#include "execute.h"
 #include "main.h"
 #include "parse.h"
 #include "utils.h"
