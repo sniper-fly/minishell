@@ -6,6 +6,11 @@ function touch_all() {
 	touch $all_test_files
 }
 
-touch_all
-make debug ARG=REPLACE_META_WITH_DIVIDER_C
-./minishell > ./test/result/REPLACE_META_WITH_DIVIDER_C 2>&1
+function update_each_file() {
+	touch_all
+	make debug ARG=$1
+	./minishell > ./test/result/$1 2>&1
+}
+
+update_each_file REPLACE_META_WITH_DIVIDER_C
+update_each_file MY_EXECVE_C
