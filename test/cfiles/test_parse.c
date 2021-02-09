@@ -32,6 +32,18 @@ int		main(void)
 #ifdef REPLACE_META_WITH_DIVIDER_C
 #include <stdio.h>
 
+static void	skip_until_end_quote(char *line, int *idx)
+{
+	char	quote;
+
+	quote = line[*idx];
+	(*idx)++;
+	//ヌル文字までにクォートが閉じているかはvalidateで検査するが、一応チェックしておく
+	while (line[*idx] != quote && line[*idx] != '\0')
+		(*idx)++;
+	(*idx)++;
+}
+
 static void	test_replace_meta_with_divider(char *line, char rplced_ch)
 {
 	int		i;
