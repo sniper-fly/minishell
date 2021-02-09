@@ -38,35 +38,3 @@ char		***convert_line2str_procs(char *line)
 	free_string_arr(semicolon_splitted);
 	return (str_procs);
 }
-
-
-#ifdef CONVERT_LINE2STR_PROCS_C
-
-//TODO:メモリリーク解消
-#include <stdio.h>
-#include "debug.h"
-
-static void	p_test(char *line, int i)
-{
-	char		***str_procs;
-
-	str_procs = convert_line2str_procs(line);
-	printf("line%d\n", i);
-	show_str_procs(str_procs);
-	printf("=======================\n");
-}
-
-int		main(void)
-{
-	char		line0[] = "cmd | cmd1 | cmd 2 ; echo | echo ; hello";
-	char		line1[] = "cmd \";\" \"|\"| cmd1 \";\" | ";
-	char		line2[] = "cmd \\; aaa; bbb \\|\\; | cc; a";
-	char		line3[] = "cmd ';;' aa | cmd1 '|''|' | cmd 2 'a;' ; echo | echo ; hello";
-
-	p_test(line0, 0);
-	p_test(line1, 1);
-	p_test(line2, 2);
-	p_test(line3, 3);
-}
-
-#endif
