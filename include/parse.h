@@ -1,8 +1,11 @@
 #ifndef PARSE_H
-#define PARSE_H
+# define PARSE_H
 
-#include "struct/process.h"
+# include "struct/process.h"
 
-t_process		**parse_cmd_line(char *line, int *status);
+# define DIVIDER -3
+
+char		***convert_line2str_procs(char *line);
+void		replace_meta_with_divider(char *line, char rplced_ch);
 
 #endif

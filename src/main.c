@@ -47,7 +47,7 @@ int		main(void)
 	{
 		print_prompt();
 		read_cmd_line(line);
-		procs = parse_cmd_line(line, &status);
+		procs = convert_line2str_procs(line, &status);
 		show_procs(procs);
 	}
 }
