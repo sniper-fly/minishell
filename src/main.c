@@ -1,3 +1,8 @@
+#include "struct/env_list.h"
+
+t_env_list	*g_env_list;
+int			g_status;
+
 #ifndef DEBUG
 
 #include "read_cmd_line.h"

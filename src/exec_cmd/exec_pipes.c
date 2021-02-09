@@ -6,7 +6,7 @@
 #include "my_execve.h"
 #include "struct/process.h"
 
-int			g_status;
+extern int	g_status;
 
 static int **create_pipe_fd_array(t_process *procs)
 {

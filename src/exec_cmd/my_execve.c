@@ -11,7 +11,7 @@
 #include "struct/process.h"
 #include "struct/env_list.h"
 
-t_env_list	*g_env_list;
+extern t_env_list	*g_env_list;
 
 static int is_there_execute_file_at(char *cmd_path)
 {

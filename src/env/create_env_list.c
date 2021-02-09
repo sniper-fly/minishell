@@ -4,6 +4,8 @@
 #include "libft.h"
 #include "struct/env_list.h"
 
+extern t_env_list	*g_env_list;
+
 static void init_env_list(void)
 {
 	g_env_list = malloc(sizeof(t_env_list));	// TODO:mallocエラー処理
