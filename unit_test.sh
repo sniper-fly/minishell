@@ -13,5 +13,6 @@ function test_unit() {
 	diff <(./minishell 2>&1) ./test/result/$1
 }
 
-test_unit REPLACE_META_WITH_DIVIDER_C
+# test_unit REPLACE_META_WITH_DIVIDER_C
 test_unit MY_EXECVE_C
+test unit CHECK_EXIT_STATUS_OF_MY_EXECVE_C
