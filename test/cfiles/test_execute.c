@@ -106,3 +106,56 @@ int main(int argc, char *argv[], char *envp[])
 }
 
 #endif
+
+#ifdef 	CHECK_EXIT_STATUS_OF_MY_EXECVE_C
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "execute.h"
+#include "env_ctrl.h"
+#include <sys/wait.h>
+
+static void exec_test_and_output_exit_status(char **cmd)
+{
+	int status;
+
+	printf("=====================\n");
+	if(fork()){
+		wait(&status);
+		printf("status:%d\n", WEXITSTATUS(status));
+	}else{
+		my_execve(cmd);
+	}
+}
+
+int main(int argc, char *argv[], char *envp[])
+{
+	char *cmd[] = {"ls", NULL};
+	
+	char *cmd1[] = {"/bin/ls", NULL};
+	// ディレクトリを指定
+
+	char *cmd2[] = {"/bin/", NULL};
+	// ディレクトリを指定
+
+	char *cmd3[] = {"/root/a", NULL};
+	// 実行権限がないファイル
+
+	char *cmd4[] = {"/not/exist", NULL};
+	//存在しないファイル
+
+	char *cmd5[] = {"notexist", NULL};
+	//存在しないファイル
+	argc += 0;
+	argv[0][0] = 'A';
+	create_env_list(envp);
+	exec_test_and_output_exit_status(cmd);
+	exec_test_and_output_exit_status(cmd1);
+	exec_test_and_output_exit_status(cmd2);
+	exec_test_and_output_exit_status(cmd3);
+	exec_test_and_output_exit_status(cmd4);
+	exec_test_and_output_exit_status(cmd5);
+}
+
+#endif
