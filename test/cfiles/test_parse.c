@@ -3,15 +3,21 @@
 //TODO:メモリリーク解消
 #include <stdio.h>
 #include "debug.h"
+#include "parse.h"
+#include "libft.h"
+#include "constants.h"
+#include "utils.h"
 
 static void	p_test(char *line, int i)
 {
 	char		***str_procs;
 
 	str_procs = convert_line2str_procs(line);
-	printf("line%d\n", i);
+	ft_putstr_fd("line", STD_OUT);
+	ft_putnbr_fd(i, STD_OUT);
+	pendl();
 	show_str_procs(str_procs);
-	printf("=======================\n");
+	ft_putstr_fd("=======================\n", STD_OUT);
 }
 
 int		main(void)
