@@ -21,21 +21,24 @@ int		main(void)
 
 #endif
 
-#ifdef GENERATE_SIMPLE_PROCS_C
+//上でテストしているので削除
+// #ifdef GENERATE_SIMPLE_PROCS_C
 
-#include "debug.h"
-int		main(void)
-{
-	t_process	**procs;
+// #include "debug.h"
+// int		main(void)
+// {
+// 	t_process	**procs;
 
-	procs = generate_simple_procs("cat -e  aa  jfdk | echo aaa bb   dd | eee; hoge ; ajfsdla ; afda");
-	show_procs(procs);
-}
+// 	procs = generate_simple_procs("cat -e  aa  jfdk | echo aaa bb   dd | eee; hoge ; ajfsdla ; afda");
+// 	show_procs(procs);
+// }
 
-#endif
+// #endif
 
 #ifdef SHOW_STRING_ARR_C
 #include "debug.h"
+#include "utils.h"
+#include <stddef.h>
 
 int		main(void)
 {
