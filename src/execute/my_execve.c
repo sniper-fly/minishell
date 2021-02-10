@@ -8,6 +8,7 @@
 #include "env_ctrl.h"
 #include "my_execve.h"
 #include "constants.h"
+#include "exit_status.h"
 #include "struct/process.h"
 #include "struct/env_list.h"
 
@@ -29,7 +30,12 @@ static void check_if_the_full_path_is_valid(char *cmd_path)
 		ft_putstr_fd(cmd_path, STD_ERR);
 		ft_putstr_fd(": ", STD_ERR);
 		ft_putendl_fd(strerror(errno), STD_ERR);
-		exit(1);
+		if(errno == EISDIR)
+			exit(IS_DIR);
+		else if(errno == ENOENT)
+			exit(COMMAND_NOT_FOUND);
+		else
+			exit(FAILED);
 	}
 }
 
@@ -38,7 +44,7 @@ static void if_command_not_found(char *cmd_path)
 	ft_putstr_fd(cmd_path, STD_ERR);
 	ft_putstr_fd(": ", STD_ERR);
 	ft_putendl_fd("command not found", STD_ERR);
-	exit(1);
+	exit(COMMAND_NOT_FOUND);
 }
 
 static void do_execve(char *cmd_path, char **cmd, char **envp)
@@ -48,7 +54,10 @@ static void do_execve(char *cmd_path, char **cmd, char **envp)
 	{
 		ft_putstr_fd("minishell: ", STD_ERR);
 		ft_perror(cmd_path);
-		exit(1);	// TODO: exitのステータス要検証
+		if(errno == EACCES)
+			exit(PERMISSION_DENIED);
+		else
+			exit(FAILED);	// TODO: exitのステータス要検証
 	}
 }
 

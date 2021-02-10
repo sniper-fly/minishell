@@ -25,3 +25,5 @@ function update_each_file() {
 # update_each_file FREE_PROCS_C
 # update_each_file SHOW_STRING_ARR_C
 # update_each_file FT_PERROR_C
+# update_each_file CHECK_EXIT_STATUS_OF_MY_EXECVE_C
+

@@ -37,6 +37,7 @@ function test_unit() {
 
 test_unit REPLACE_META_WITH_DIVIDER_C
 test_unit MY_EXECVE_C
+test_unit CHECK_EXIT_STATUS_OF_MY_EXECVE_C
 test_unit FREE_PROCS_C
 test_unit SHOW_STRING_ARR_C
 test_unit FT_PERROR_C

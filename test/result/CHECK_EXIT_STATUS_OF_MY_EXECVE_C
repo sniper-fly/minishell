@@ -1,0 +1,36 @@
+=====================
+Makefile
+README.md
+include
+intermediate_files
+lib
+minishell
+src
+study
+test
+unit_test.sh
+status:0
+=====================
+Makefile
+README.md
+include
+intermediate_files
+lib
+minishell
+src
+study
+test
+unit_test.sh
+status:0
+=====================
+minishell: /bin/: Is a directory
+status:126
+=====================
+minishell: /root/a: Permission denied
+status:126
+=====================
+minishell: /not/exist: No such file or directory
+status:127
+=====================
+notexist: command not found
+status:127
