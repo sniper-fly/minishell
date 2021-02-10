@@ -14,3 +14,4 @@ function update_each_file() {
 
 update_each_file REPLACE_META_WITH_DIVIDER_C
 update_each_file MY_EXECVE_C
+update_each_file CHECK_EXIT_STATUS_OF_MY_EXECVE_C
