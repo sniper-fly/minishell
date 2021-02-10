@@ -24,5 +24,4 @@ function update_each_file() {
 # update_each_file MY_EXECVE_C
 # update_each_file FREE_PROCS_C
 # update_each_file SHOW_STRING_ARR_C
-# update_each_file CONVERT_LINE2STR_PROCS_C  メモリリークしてるので後で修正してアプデ
 # update_each_file FT_PERROR_C

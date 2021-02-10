@@ -39,5 +39,4 @@ test_unit REPLACE_META_WITH_DIVIDER_C
 test_unit MY_EXECVE_C
 test_unit FREE_PROCS_C
 test_unit SHOW_STRING_ARR_C
-test_unit CONVERT_LINE2STR_PROCS_C
 test_unit FT_PERROR_C
