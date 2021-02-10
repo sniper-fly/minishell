@@ -5,3 +5,5 @@ minishell
 *.d
 .gdb_history
 libft.a
+
+test/memleak_log/
