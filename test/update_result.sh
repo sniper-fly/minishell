@@ -14,7 +14,8 @@ function update_each_file() {
 	make debug ARG=$1
 	./minishell > ./test/result/$1 2>&1
 	# valgrindの一列目はprocess IDが入ってしまって比較の邪魔なのでawkで消している
-	valgrind ./minishell 2>&1 | awk -F" " '{$1=""; print}' > ./test/memleak_log/$1
+	valgrind --undef-value-errors=no ./minishell 2>&1 |
+	awk -F" " '{$1=""; print}' > ./test/memleak_log/$1
 	echo "==================================="
 }
 
@@ -26,4 +27,4 @@ function update_each_file() {
 # update_each_file SHOW_STRING_ARR_C
 # update_each_file FT_PERROR_C
 # update_each_file CHECK_EXIT_STATUS_OF_MY_EXECVE_C
-
+# update_each_file CONVERT_LINE2STR_PROCS_C

@@ -1,6 +1,5 @@
 #ifdef CONVERT_LINE2STR_PROCS_C
 
-//TODO:メモリリーク解消
 #include <stdio.h>
 #include "debug.h"
 #include "parse.h"
@@ -17,6 +16,7 @@ static void	p_test(char *line, int i)
 	ft_putnbr_fd(i, STD_OUT);
 	pendl();
 	show_str_procs(str_procs);
+	free_str_procs(str_procs);
 	ft_putstr_fd("=======================\n", STD_OUT);
 }
 

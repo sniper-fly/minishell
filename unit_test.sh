@@ -25,7 +25,8 @@ function test_unit() {
 
 	echo "---valgrind test---"
 	# valgrindの一列目はprocess IDが入ってしまって比較の邪魔なのでawkで消している
-	diff <(valgrind ./minishell 2>&1 | awk -F" " '{$1=""; print}') ./test/memleak_log/$1
+	diff <(valgrind --undef-value-errors=no ./minishell 2>&1 |
+	awk -F" " '{$1=""; print}') ./test/memleak_log/$1
 	if [ $? -eq 0 ] ; then
 		printf "\033[32m%s\033[m\n" 'SUCCESS'
 	else
@@ -41,3 +42,4 @@ test_unit CHECK_EXIT_STATUS_OF_MY_EXECVE_C
 test_unit FREE_PROCS_C
 test_unit SHOW_STRING_ARR_C
 test_unit FT_PERROR_C
+test_unit CONVERT_LINE2STR_PROCS_C
