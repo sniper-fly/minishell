@@ -1,6 +1,6 @@
+=====================
 Makefile
 README.md
-cachegrind.out.15803
 include
 intermediate_files
 lib
@@ -9,9 +9,10 @@ src
 study
 test
 unit_test.sh
+status:0
+=====================
 Makefile
 README.md
-cachegrind.out.15803
 include
 intermediate_files
 lib
@@ -20,51 +21,16 @@ src
 study
 test
 unit_test.sh
+status:0
+=====================
 minishell: /bin/: Is a directory
-=====================
-status:0
-=====================
-status:0
+status:126
 =====================
 minishell: /root/a: Permission denied
-=====================
-status:0
-=====================
-status:0
-=====================
 status:126
 =====================
 minishell: /not/exist: No such file or directory
-=====================
-status:0
-=====================
-status:0
-=====================
-status:126
-=====================
-status:126
+status:127
 =====================
 notexist: command not found
-=====================
-status:0
-=====================
-status:0
-=====================
-status:126
-=====================
-status:126
-=====================
-status:127
-=====================
-=====================
-status:0
-=====================
-status:0
-=====================
-status:126
-=====================
-status:126
-=====================
-status:127
-=====================
 status:127

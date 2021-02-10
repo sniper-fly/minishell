@@ -115,15 +115,20 @@ int main(int argc, char *argv[], char *envp[])
 #include "execute.h"
 #include "env_ctrl.h"
 #include <sys/wait.h>
+#include "libft.h"
+#include "constants.h"
+#include "utils.h"
 
 static void exec_test_and_output_exit_status(char **cmd)
 {
 	int status;
 
-	printf("=====================\n");
+	ft_putstr_fd("=====================\n", STD_OUT);
 	if(fork()){
 		wait(&status);
-		printf("status:%d\n", WEXITSTATUS(status));
+		ft_putstr_fd("status:", STD_OUT);
+		ft_putnbr_fd(WEXITSTATUS(status), STD_OUT);
+		pendl();
 	}else{
 		my_execve(cmd);
 	}
