@@ -1,7 +1,7 @@
 #ifndef EXIT_STATUS_C
 #define EXIT_STATUS_C
 
-#define SUCCESSED 0
+#define SUCCEEDED 0
 #define FAILED 1
 #define IS_DIR 126
 #define PERMISSION_DENIED 126
