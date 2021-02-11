@@ -26,11 +26,13 @@ int		main(void)
 	char		line1[] = "cmd \";\" \"|\"| cmd1 \";\" | ";
 	char		line2[] = "cmd \\; aaa; bbb \\|\\; | cc; a";
 	char		line3[] = "cmd ';;' aa | cmd1 '|''|' | cmd 2 'a;' ; echo | echo ; hello";
+	char		line4[] = {'c', 'm', 'd', ' ', '"', 'a', '\\', '"', ';', '"', '\0'}; //echo "a\";"
 
 	p_test(line0, 0);
 	p_test(line1, 1);
 	p_test(line2, 2);
 	p_test(line3, 3);
+	p_test(line4, 4);
 }
 
 #endif
