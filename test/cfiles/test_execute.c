@@ -1,5 +1,6 @@
 #ifdef EXEC_CMD_C
 
+#include <sys/wait.h>
 #include "execute.h"
 #include "main.h"
 #include "parse.h"
@@ -8,6 +9,8 @@
 #include "constants.h"
 #include "read_cmd_line.h"
 #include "libft.h"
+
+int g_status;
 
 int main(void)
 {
@@ -18,8 +21,8 @@ int main(void)
 	{
 		print_prompt();
 		read_cmd_line(cmd_line);
-		cmd_procs = parse_cmd_line(cmd_line, &g_status);
-		exec_cmd(cmd_procs);
+		cmd_procs = generate_simple_procs(cmd_line);
+		exec_cmd_for_debug(cmd_procs);
 		ft_putnbr_fd(WEXITSTATUS(g_status), 1);
 		pendl();
 	}
@@ -29,13 +32,18 @@ int main(void)
 
 #ifdef EXEC_PIPES_C
 
+#include <sys/wait.h>
 #include "main.h"
 #include "parse.h"
 #include "debug.h"
 #include "utils.h"
 #include "libft.h"
+#include "execute.h"
 #include "env_ctrl.h"
+#include "constants.h"
 #include "read_cmd_line.h"
+
+int g_status;
 
 int main(int argc, char *argv[], char *envp[])
 {
@@ -49,7 +57,7 @@ int main(int argc, char *argv[], char *envp[])
 	{
 		print_prompt();
 		read_cmd_line(cmd_line);
-		cmd_procs = parse_cmd_line(cmd_line, &g_status);
+		cmd_procs = generate_simple_procs(cmd_line);
 		exec_pipes(cmd_procs[0]);
 		ft_putnbr_fd(WEXITSTATUS(g_status), 1);
 		pendl();
