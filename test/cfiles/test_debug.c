@@ -95,7 +95,7 @@ int main(int argc, char *argv[], char *envp[])
 
 	char cmd0[] = "echo hello world";
 	char cmd1[] = "/bin/ls -l | wc -l";
-	char cmd2[] = "du -a | wc -l ; echo fin";
+	// char cmd2[] = "du -a | wc -l ; echo fin";
 	char cmd3[] = "echo hello | /bin";
 	char cmd4[] = "noexist";
 	char cmd5[] = "/bin/noexist";
@@ -103,7 +103,7 @@ int main(int argc, char *argv[], char *envp[])
 
 	test_exec_cmd(cmd0);
 	test_exec_cmd(cmd1);
-	test_exec_cmd(cmd2);
+	// test_exec_cmd(cmd2);
 	test_exec_cmd(cmd3);
 	test_exec_cmd(cmd4);
 	test_exec_cmd(cmd5);
