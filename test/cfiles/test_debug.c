@@ -73,7 +73,7 @@ int		main(void)
 #include "libft.h"
 #include "env_ctrl.h"
 
-int g_status;
+extern int g_status;
 
 void	test_exec_cmd(char *cmd_line)
 {
