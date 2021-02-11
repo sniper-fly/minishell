@@ -1,0 +1,39 @@
+===============
+hello world
+status:0
+===============
+11
+status:0
+===============
+minishell: /bin: Is a directory
+status:126
+===============
+noexist: command not found
+status:127
+===============
+minishell: /bin/noexist: No such file or directory
+status:127
+===============
+noexist: command not found
+status:127
+===============
+cmd6
+2kaime
+status:0
+===============
+minishell: /root/noright: Permission denied
+minishell: /root/: Is a directory
+minishell: /bin/: Is a directory
+notexist: command not found
+status:127
+===============
+cmd8
+cat: notexist: No such file or directory
+status:0
+===============
+cat: notexist: No such file or directory
+cmd9
+status:0
+===============
+minishell: /root/status_check: Permission denied
+status:126
