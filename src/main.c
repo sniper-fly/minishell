@@ -8,24 +8,26 @@ int			g_status;
 #include "read_cmd_line.h"
 #include "constants.h"
 #include "struct/process.h"
+#include "parse.h"
 
 int		main(int argc, char **argv, char **envp)
 {
-	char		line[ARG_MAX + 1];
-	t_process	**procs;
+	char		*line;
+	char		***str_procs;
 	int			status;
 
 	setup_signal();
+	line = setup_cmd_line_buf(); //ARG_MAX + 1確保　
 	while (1)
 	{
 		read_cmd_line(line);
-		procs = parse_line(line, &status);
-		create_empty_file(); // open とclose
-		exec_cmd();
-
-		free_line();
-		free_list();
+		if (!is_syntax_valid(line)) //lineは再利用するのでfreeしない
+			continue ;
+		str_procs = convert_line2str_procs(line);
+		exec_cmd(str_procs); //失敗したらstr_procsをfreeし忘れないように
+		free_str_procs();
 	}
+	free(line);
 	(void)argc; (void)argv; (void)envp;
 }
 
