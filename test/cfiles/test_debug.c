@@ -70,14 +70,18 @@ int		main(void)
 #include "constants.h"
 #include "read_cmd_line.h"
 #include "libft.h"
+#include "env_ctrl.h"
 
 int g_status;
 
-int main(void)
+int main(int argc, char *argv[], char *envp[])
 {
 	char cmd_line[ARG_MAX + 1];
 	t_process **cmd_procs;
 
+	argc += 1;
+	argv[0][0] = 'a';
+	create_env_list(envp);
 	while(TRUE)
 	{
 		print_prompt();
