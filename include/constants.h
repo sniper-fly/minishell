@@ -18,4 +18,8 @@
 
 # define PROMPT "minishell> "
 
+# define SINGLE_QUOTE '\''
+# define DOUBLE_QUOTE '"'
+# define BACK_SLASH '\\'
+
 #endif
