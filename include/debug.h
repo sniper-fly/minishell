@@ -7,5 +7,6 @@ void		show_procs(t_process **procs);
 t_process	**generate_simple_procs(char *line);
 void		show_str_procs(char ***str_procs);
 void		free_procs(t_process **procs);
+void	exec_cmd_for_debug(t_process **procs);
 
 #endif

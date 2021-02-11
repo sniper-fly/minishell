@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "constants.h"
 #include "my_execve.h"
+#include "exit_status.h"
 #include "struct/process.h"
 
 extern int	g_status;
@@ -95,7 +96,6 @@ void		exec_pipes(t_process *procs)
 			close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
 			// execvp(procs[i].cmd[0], procs[i].cmd);	// TODO: use my_execve
 			my_execve(procs[i].cmd);
-			exit(0);	// TODO: exitステータスの修正
 		}
 		else if (i > 0)
 		{
