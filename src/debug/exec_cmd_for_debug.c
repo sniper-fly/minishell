@@ -1,6 +1,3 @@
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/wait.h>
 #include "execute.h"
 #include "struct/process.h"
 
