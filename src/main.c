@@ -25,7 +25,7 @@ int		main(int argc, char **argv, char **envp)
 			continue ;
 		str_procs = convert_line2str_procs(line);
 		exec_cmd(str_procs); //失敗したらstr_procsをfreeし忘れないように
-		free_str_procs();
+		free_str_procs(str_procs);
 	}
 	free(line);
 	(void)argc; (void)argv; (void)envp;
