@@ -14,11 +14,12 @@ void	exec_cmd(char ***str_procs)
 	i = 0;
 	while (str_procs[i]) //行のループ
 	{
-		procs = parse(str_procs[i]);
-		create_empty_file();
+		procs = NULL;	// TODO:後で消す
+		// TODO:procs = parse(str_procs[i]);
+		// TODO:create_empty_file();
 		// TODO:ビルトインを実行するかどうかのチェック(前後が番兵かi.e.コマンドが単一かどうか)
 		exec_pipes(procs); //パイプのwhileループ(列のループ)
-		free_procs(procs);
+		// TODO:free_procs(procs);
 		++i;
 	}
 }
