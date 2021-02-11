@@ -10,7 +10,7 @@
 #include "read_cmd_line.h"
 #include "libft.h"
 
-int g_status;
+extern int g_status;
 
 int main(void)
 {
@@ -43,7 +43,7 @@ int main(void)
 #include "constants.h"
 #include "read_cmd_line.h"
 
-int g_status;
+extern int g_status;
 
 int main(int argc, char *argv[], char *envp[])
 {
