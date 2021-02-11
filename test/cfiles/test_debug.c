@@ -64,6 +64,7 @@ int		main(void)
 #include <sys/wait.h>
 #include "execute.h"
 #include "main.h"
+#include "utils.h"
 #include "parse.h"
 #include "utils.h"
 #include "debug.h"
@@ -74,23 +75,39 @@ int		main(void)
 
 int g_status;
 
+void	test_exec_cmd(char *cmd_line)
+{
+	t_process **cmd_proc;
+
+	cmd_proc = generate_simple_procs(cmd_line);
+	ft_putstr_fd("===============\n", STD_OUT);
+	exec_cmd_for_debug(cmd_proc);
+	ft_putstr_fd("status:", STD_OUT);
+	ft_putnbr_fd(WEXITSTATUS(g_status), STD_OUT);
+	pendl();
+}
+
 int main(int argc, char *argv[], char *envp[])
 {
-	char cmd_line[ARG_MAX + 1];
-	t_process **cmd_procs;
-
 	argc += 1;
 	argv[0][0] = 'a';
 	create_env_list(envp);
-	while(TRUE)
-	{
-		print_prompt();
-		read_cmd_line(cmd_line);
-		cmd_procs = generate_simple_procs(cmd_line);
-		exec_cmd_for_debug(cmd_procs);
-		ft_putnbr_fd(WEXITSTATUS(g_status), 1);
-		pendl();
-	}
+
+	char cmd0[] = "echo hello world";
+	char cmd1[] = "/bin/ls -l | wc -l";
+	char cmd2[] = "du -a | wc -l ; echo fin";
+	char cmd3[] = "echo hello | /bin";
+	char cmd4[] = "noexist";
+	char cmd5[] = "/bin/noexist";
+	char cmd6[] = "echo hogehoge | noexist";
+
+	test_exec_cmd(cmd0);
+	test_exec_cmd(cmd1);
+	test_exec_cmd(cmd2);
+	test_exec_cmd(cmd3);
+	test_exec_cmd(cmd4);
+	test_exec_cmd(cmd5);
+	test_exec_cmd(cmd6);
 }
 
 #endif
