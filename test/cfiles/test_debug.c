@@ -96,18 +96,28 @@ int main(int argc, char *argv[], char *envp[])
 	char cmd0[] = "echo hello world";
 	char cmd1[] = "/bin/ls -l | wc -l";
 	// char cmd2[] = "du -a | wc -l ; echo fin";
-	char cmd3[] = "echo hello | /bin";
-	char cmd4[] = "noexist";
-	char cmd5[] = "/bin/noexist";
-	char cmd6[] = "echo hogehoge | noexist";
+	char cmd2[] = "echo hello | /bin";
+	char cmd3[] = "noexist";
+	char cmd4[] = "/bin/noexist";
+	char cmd5[] = "echo hogehoge | noexist";
+	char cmd6[] = "echo cmd6 | cat ; echo 2kaime";
+	char cmd7[] = "/root/noright ; /root/ ; /bin/ ; notexist";
+	char cmd8[] = "cat notexist | echo cmd8";
+	char cmd9[] = "cat notexist ; echo cmd9";
+	char cmd10[] = "/root/status_check";
 
 	test_exec_cmd(cmd0);
 	test_exec_cmd(cmd1);
 	// test_exec_cmd(cmd2);
+	test_exec_cmd(cmd2);
 	test_exec_cmd(cmd3);
 	test_exec_cmd(cmd4);
 	test_exec_cmd(cmd5);
 	test_exec_cmd(cmd6);
+	test_exec_cmd(cmd7);
+	test_exec_cmd(cmd8);
+	test_exec_cmd(cmd9);
+	test_exec_cmd(cmd10);
 }
 
 #endif
