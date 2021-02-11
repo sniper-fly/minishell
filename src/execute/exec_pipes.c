@@ -96,7 +96,6 @@ void		exec_pipes(t_process *procs)
 			close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
 			// execvp(procs[i].cmd[0], procs[i].cmd);	// TODO: use my_execve
 			my_execve(procs[i].cmd);
-			exit(SUCCEEDED);	// TODO: exitステータスの修正
 		}
 		else if (i > 0)
 		{
