@@ -1,6 +1,16 @@
 #include <stdlib.h>
-#include "validation.h"
+#include "utils.h"
+#include "libft.h"
+#include "constants.h"
 #include "struct/t_bool.h"
+
+void put_syntax_error_message(char *msg)
+{
+	ft_putstr_fd("minishell: syntax error ", STD_ERR);
+	ft_putstr_fd(msg, STD_ERR);
+	pendl();
+}
+
 
 t_bool is_meta_char(char c)
 {
