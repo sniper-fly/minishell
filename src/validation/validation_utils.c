@@ -14,7 +14,7 @@ void put_syntax_error_message(char *msg)
 
 t_bool is_meta_char(char c)
 {
-	if(c == '|' || c == ',' || c == ';')
+	if(c == '|' || c == ';')
 		return TRUE;
 	return FALSE;
 }
