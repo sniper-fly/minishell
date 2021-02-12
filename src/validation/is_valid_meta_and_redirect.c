@@ -34,10 +34,10 @@ static t_bool is_single_redirect(char **cmd_line)
 	return TRUE;
 }
 
-static t_bool is_valid_meta(char **cmd_line, int redirect_flag)
+static t_bool is_valid_meta(char **cmd_line, t_bool is_redirect)
 {
 	// リダイレクト後メタ
-	if(redirect_flag)	// TODO:エラー出力
+	if(is_redirect)	// TODO:エラー出力
 		return FALSE;
 	++(*cmd_line);
 	skip_space(cmd_line);
@@ -49,7 +49,7 @@ static t_bool is_valid_meta(char **cmd_line, int redirect_flag)
 
 t_bool is_valid_meta_and_redirect(char *cmd_line)
 {
-	int redirect_flag;
+	t_bool is_redirect;
 
 	skip_space(&cmd_line);
 	// 初手メタ
@@ -57,23 +57,23 @@ t_bool is_valid_meta_and_redirect(char *cmd_line)
 		return FALSE;
 	while(*cmd_line)
 	{
-		redirect_flag = 0;
+		is_redirect = FALSE;
 		// 関係ない文字をスキップ
 		skip_normal_char(&cmd_line);
 		if(is_redirect_char(*cmd_line))
 		{
-			redirect_flag = 1;
+			is_redirect = TRUE;
 			if(!is_single_redirect(&cmd_line))
 				return FALSE;
 		}
 		if(is_meta_char(*cmd_line))
 		{
-			if(!is_valid_meta(&cmd_line, redirect_flag))
+			if(!is_valid_meta(&cmd_line, is_redirect))
 				return FALSE;
 		}
 		skip_space(&cmd_line);
 		// 最後リダイレクト
-		if(redirect_flag && !(*cmd_line))
+		if(is_redirect && !(*cmd_line))
 			return FALSE;
 	}
 	return TRUE;
