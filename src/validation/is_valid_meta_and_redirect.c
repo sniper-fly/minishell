@@ -17,7 +17,7 @@ static void skip_normal_char(char **cmd_line)
 	}
 }
 
-static t_bool is_valid_redirect(char **cmd_line)
+static t_bool is_single_redirect(char **cmd_line)
 {
 	if(**cmd_line == '<')
 		++(*cmd_line);
@@ -63,7 +63,7 @@ t_bool is_valid_meta_and_redirect(char *cmd_line)
 		if(is_redirect_char(*cmd_line))
 		{
 			redirect_flag = 1;
-			if(!is_valid_redirect(&cmd_line))
+			if(!is_single_redirect(&cmd_line))
 				return FALSE;
 		}
 		if(is_meta_char(*cmd_line))
