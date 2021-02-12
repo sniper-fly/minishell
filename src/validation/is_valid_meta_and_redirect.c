@@ -10,11 +10,11 @@ static void skip_space(char **cmd_line)
 
 static void skip_normal_char(char **cmd_line)
 {
-	// null文字でない かつ ((メタ文字でない かつ リダイレクトでない) または 空白)
-	// (メタ文字でない かつ リダイレクトでない)の条件でド・モルガンの法則を使用
-	while(**cmd_line
-	&& (!(is_meta_char(**cmd_line) || is_redirect_char(**cmd_line)) || is_space(**cmd_line)))
+	while(**cmd_line){
+		if(is_meta_char(**cmd_line) || is_redirect_char(**cmd_line))
+			break;
 		++(*cmd_line);
+	}
 }
 
 static t_bool is_valid_redirect(char **cmd_line)
