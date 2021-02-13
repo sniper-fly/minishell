@@ -26,10 +26,16 @@ t_bool is_redirect_char(char c)
 	return FALSE;
 }
 
-t_bool is_space(char c)
+static t_bool is_space(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n'
 	|| c == '\v' || c == '\f' || c == '\r')
 		return TRUE;
 	return FALSE;
+}
+
+void skip_space(char **cmd_line)
+{
+	while(is_space(**cmd_line))
+		++(*cmd_line);
 }

@@ -2,12 +2,6 @@
 #include "validation.h"
 #include "struct/t_bool.h"
 
-static void skip_space(char **cmd_line)
-{
-	while(is_space(**cmd_line))
-		++(*cmd_line);
-}
-
 // 関係ない文字をスキップ
 static void skip_normal_char(char **cmd_line)
 {
@@ -27,40 +21,6 @@ static t_bool is_started_with_meta(char *cmd_line)
 		return FALSE;
 }
 
-// リダイレクト後リダイレクト
-static t_bool is_single_redirect(char **cmd_line)
-{
-	if(**cmd_line == '<')
-		++(*cmd_line);
-	else if (**cmd_line == '>')
-	{
-		++(*cmd_line);
-		if(**cmd_line == '>')
-			++(*cmd_line);
-	}
-	skip_space(cmd_line);
-	if(is_redirect_char(**cmd_line))	// TODO:エラー出力
-		return FALSE;
-	return TRUE;
-}
-
-// リダイレクト後メタ
-static t_bool is_meta_following_redirect(t_bool is_redirect)
-{
-	if(is_redirect)	// TODO:エラー出力
-		return TRUE;
-	else
-		return FALSE;
-}
-
-// メタ後メタ
-static t_bool is_meta_following_meta(char *cmd_line)
-{
-	if(is_meta_char(*cmd_line))	// TODO: エラー出力
-		return TRUE;
-	else
-		return FALSE;
-}
 
 // 最後リダイレクト
 static t_bool is_terminated_with_redirect(char *cmd_line, t_bool is_redicrect)
@@ -68,31 +28,6 @@ static t_bool is_terminated_with_redirect(char *cmd_line, t_bool is_redicrect)
 	if(is_redicrect && !(*cmd_line))	// TODO: エラー出力
 		return TRUE;
 	return FALSE;
-}
-
-t_bool is_valid_redirect(char **cmd_line, t_bool *is_redirect)
-{
-	if(is_redirect_char(**cmd_line))
-	{
-		*is_redirect = TRUE;
-		if(!is_single_redirect(cmd_line))
-			return FALSE;
-	}
-	return TRUE;
-}
-
-t_bool is_valid_meta(char **cmd_line, t_bool is_redirect)
-{
-	if(is_meta_char(**cmd_line))
-	{
-		if(is_meta_following_redirect(is_redirect))
-			return FALSE;
-		++(*cmd_line);
-		skip_space(cmd_line);
-		if(is_meta_following_meta(*cmd_line))
-			return FALSE;
-	}
-	return TRUE;
 }
 
 t_bool is_valid_meta_and_redirect(char *cmd_line)
