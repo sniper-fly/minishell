@@ -68,21 +68,27 @@ int main(void)
 	"echo hello > a > b",
 	"echo hello < a < b",
 	"echo hello > a > b > c >> d < e < f",
-	"echo hello > a < b < c > d < e >> f"
+	"echo hello > a < b < c > d < e >> f",
+	"   ",
+	"\t   ",
+	"",
+	">a"
 	};
 
 	// 初手メタ
 	char *cmds1[] =
 	{
 	"| wc",
-	"; echo hello"
+	"; echo hello",
+	"   \t; echo hello"
 	};
 
 	// メタ後メタ
 	char *cmds2[] =
 	{
 	"echo hello |  | wc",
-	"echo hello | ; ls"
+	"echo hello | ; ls",
+	"echo hello|\t;ls"
 	};
 
 	// 対象外のリダイレクト
@@ -92,7 +98,8 @@ int main(void)
 	char *cmds3[] =
 	{
 	"echo hello > |",
-	"echo hello < |"
+	"echo hello < |",
+	"<|",
 	};
 
 	// リダイレクト後リダイレクト
@@ -135,12 +142,12 @@ int main(void)
 		test_valid_meta(cmds1[i]);
 
 	// cmds2
-	ft_putstr_fd("\nMeta following redirect ====================\n", STD_OUT);
+	ft_putstr_fd("\nMeta following meta ========================\n", STD_OUT);
 	for(size_t i = 0; i < sizeof(cmds2) / sizeof(char *); ++i)
 		test_valid_meta(cmds2[i]);
 
 	// cmds3
-	ft_putstr_fd("\nMeta following meta ========================\n", STD_OUT);
+	ft_putstr_fd("\nMeta following redirect ====================\n", STD_OUT);
 	for(size_t i = 0; i < sizeof(cmds3) / sizeof(char *); ++i)
 		test_valid_meta(cmds3[i]);
 
