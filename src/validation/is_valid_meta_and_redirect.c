@@ -8,6 +8,7 @@ static void skip_space(char **cmd_line)
 		++(*cmd_line);
 }
 
+// 関係ない文字をスキップ
 static void skip_normal_char(char **cmd_line)
 {
 	while(**cmd_line){
@@ -17,6 +18,16 @@ static void skip_normal_char(char **cmd_line)
 	}
 }
 
+// 初手メタ
+static t_bool is_started_with_meta(char *cmd_line)
+{
+	if(is_meta_char(*cmd_line))	// エラー出力
+		return TRUE;
+	else
+		return FALSE;
+}
+
+// リダイレクト後リダイレクト
 static t_bool is_single_redirect(char **cmd_line)
 {
 	if(**cmd_line == '<')
@@ -28,22 +39,59 @@ static t_bool is_single_redirect(char **cmd_line)
 			++(*cmd_line);
 	}
 	skip_space(cmd_line);
-	// リダイレクト後リダイレクト
 	if(is_redirect_char(**cmd_line))	// TODO:エラー出力
 		return FALSE;
 	return TRUE;
 }
 
-static t_bool is_valid_meta(char **cmd_line, t_bool is_redirect)
+// リダイレクト後メタ
+static t_bool is_meta_following_redirect(t_bool is_redirect)
 {
-	// リダイレクト後メタ
 	if(is_redirect)	// TODO:エラー出力
+		return TRUE;
+	else
 		return FALSE;
-	++(*cmd_line);
-	skip_space(cmd_line);
-	// メタ後メタ
-	if(is_meta_char(**cmd_line))	// TODO:エラー出力
+}
+
+// メタ後メタ
+static t_bool is_meta_following_meta(char *cmd_line)
+{
+	if(is_meta_char(*cmd_line))	// TODO: エラー出力
+		return TRUE;
+	else
 		return FALSE;
+}
+
+// 最後リダイレクト
+static t_bool is_terminated_with_redirect(char *cmd_line, t_bool is_redicrect)
+{
+	if(is_redicrect && !(*cmd_line))	// TODO: エラー出力
+		return TRUE;
+	return FALSE;
+}
+
+t_bool is_valid_redirect(char **cmd_line, t_bool *is_redirect)
+{
+	if(is_redirect_char(**cmd_line))
+	{
+		*is_redirect = TRUE;
+		if(!is_single_redirect(cmd_line))
+			return FALSE;
+	}
+	return TRUE;
+}
+
+t_bool is_valid_meta(char **cmd_line, t_bool is_redirect)
+{
+	if(is_meta_char(**cmd_line))
+	{
+		if(is_meta_following_redirect(is_redirect))
+			return FALSE;
+		++(*cmd_line);
+		skip_space(cmd_line);
+		if(is_meta_following_meta(*cmd_line))
+			return FALSE;
+	}
 	return TRUE;
 }
 
@@ -52,28 +100,18 @@ t_bool is_valid_meta_and_redirect(char *cmd_line)
 	t_bool is_redirect;
 
 	skip_space(&cmd_line);
-	// 初手メタ
-	if(is_meta_char(*cmd_line) == TRUE)
+	if(is_started_with_meta(cmd_line))
 		return FALSE;
 	while(*cmd_line)
 	{
 		is_redirect = FALSE;
-		// 関係ない文字をスキップ
 		skip_normal_char(&cmd_line);
-		if(is_redirect_char(*cmd_line))
-		{
-			is_redirect = TRUE;
-			if(!is_single_redirect(&cmd_line))
-				return FALSE;
-		}
-		if(is_meta_char(*cmd_line))
-		{
-			if(!is_valid_meta(&cmd_line, is_redirect))
-				return FALSE;
-		}
+		if(!is_valid_redirect(&cmd_line, &is_redirect))
+			return FALSE;
+		if(!is_valid_meta(&cmd_line, is_redirect))
+			return FALSE;
 		skip_space(&cmd_line);
-		// 最後リダイレクト
-		if(is_redirect && !(*cmd_line))
+		if(is_terminated_with_redirect(cmd_line, is_redirect))
 			return FALSE;
 	}
 	return TRUE;
