@@ -34,7 +34,7 @@ int main(void)
 
 #endif
 
-#ifdef IS_VALID_META_C
+#ifdef IS_VALID_META_AND_REDIRECT_C
 
 #include <stdio.h>
 #include "libft.h"
