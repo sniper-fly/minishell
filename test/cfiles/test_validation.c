@@ -1,3 +1,59 @@
+#ifdef IS_VALID_QUOTE_C
+
+#include <stdlib.h>
+#include "libft.h"
+#include "validation.h"
+#include "constants.h"
+#include "struct/t_bool.h"
+
+static void test_quote(char *cmd_line)
+{
+	t_bool ret_bool;
+
+	ret_bool = is_valid_quote(cmd_line);
+	if(ret_bool == TRUE)
+		ft_putstr_fd("\x1b[32mVALID\x1b[m", STD_OUT);
+	else
+		ft_putstr_fd("\x1b[31mINVALID\x1b[m", STD_OUT);
+	ft_putstr_fd(" : ", STD_OUT);
+	ft_putendl_fd(cmd_line, STD_OUT);
+}
+
+int main(void)
+{
+	char *valid_cmds[] =
+	{
+		"echo \"hello\"",
+		"echo \'hello\'",
+		"echo \"hell\\\"o\"",
+		"echo \"\"",
+		"echo \"hello\'\'world\""
+	};
+
+	char *invalid_cmds[] =
+	{
+		"echo \"hello",
+		"ehco \'hello",
+		"ehco \"hello\'",
+		"echo \'hello\"",
+		"echo \'hell\\\'o\'",
+		"echo \"h\'e\"l\'l\"o\"",
+		"echo \"\"\"",
+		"echo \"\"\"\"\"\"\""
+	};
+
+	ft_putstr_fd("Valid commands ==========\n", STD_OUT);
+	for(size_t i = 0; i < sizeof(valid_cmds) / sizeof(char *); ++i)
+		test_quote(valid_cmds[i]);
+
+	ft_putstr_fd("\nInvalid commands ========\n", STD_OUT);
+	for(size_t i = 0; i < sizeof(invalid_cmds) / sizeof(char *); ++i)
+		test_quote(invalid_cmds[i]);
+}
+
+#endif
+
+
 #ifdef IS_VALID_CHAR_CODE_C
 
 #include "libft.h"
