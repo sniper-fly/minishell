@@ -6,7 +6,7 @@
 #include "libft.h"
 #include "constants.h"
 
-t_env_list *g_env_list;
+extern t_env_list *g_env_list;
 
 void test_search_env_node(char *key)
 {
