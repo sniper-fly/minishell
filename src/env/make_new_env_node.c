@@ -20,6 +20,9 @@ t_env_list *make_new_env_node(char *raw_env_var)
 		new->value = ft_strdup(val_ptr);	// TODO:エラー処理
 	}
 	else
-		new->key = NULL;
+	{
+		new->key = ft_strdup(key_ptr);
+		new->value = NULL;
+	}
 	return new;
 }
