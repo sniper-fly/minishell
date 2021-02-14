@@ -11,8 +11,7 @@ void		free_string_arr(char **strings);
 void		pendl(void);
 int			count_procs(t_process *procs);
 void		free_procs(t_process **procs);
-
-t_env_list *make_new_env_node(char *envp_i);
+int			ft_strcmp(char *s1, char *s2);
 
 
 #endif
