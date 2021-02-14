@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "libft.h"
+#include "utils.h"
 #include "struct/env_list.h"
 
 char **get_path_array(void)
@@ -9,7 +10,7 @@ char **get_path_array(void)
 
 	tmp = g_env_list->next;
 	while(tmp->key){
-		if(!ft_strncmp(tmp->key, "PATH", ft_strlen(tmp->key)))
+		if(!ft_strcmp(tmp->key, "PATH"))
 			break;
 		tmp = tmp->next;
 	}
