@@ -9,6 +9,7 @@ static t_bool	is_quote(char c)
 
 static t_bool	is_closed_quote(char **cmd_line, char kind_of_quote)
 {
+	++(*cmd_line);
 	while (TRUE)
 	{
 		if (!(**cmd_line))	// TODO:エラー出力
@@ -16,7 +17,9 @@ static t_bool	is_closed_quote(char **cmd_line, char kind_of_quote)
 		if (**cmd_line == '\\')
 		{
 			++(*cmd_line);
-			if(**cmd_line == '\"')
+			if (!(**cmd_line))
+				return (FALSE);
+			if (**cmd_line == '\"')
 			{
 				++(*cmd_line);
 				continue;
@@ -35,11 +38,9 @@ t_bool			is_valid_quote(char *cmd_line)
 
 	while (*cmd_line)
 	{
-		kind_of_quote = 0;
 		if(is_quote(*cmd_line))
 		{
 			kind_of_quote = *cmd_line;
-			++cmd_line;
 			if (!is_closed_quote(&cmd_line, kind_of_quote))
 				return (FALSE);
 		}
