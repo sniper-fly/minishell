@@ -28,6 +28,11 @@ int main(void)
 		"echo \"hell\\\"o\"",
 		"echo \"\"",
 		"echo \"hello\'\'world\""
+		"echo \"a\\\"a\" ", //   "a\"a"
+		"echo \'a\\\"a\' ", //   'a\"a'
+		"echo \'a\\\' ", //   'a\'
+		"echo \'a\"a\' ", //   'a"a'
+		"echo \"h\'e\"l\'l\"o\'",
 	};
 
 	char *invalid_cmds[] =
@@ -40,6 +45,9 @@ int main(void)
 		"echo \"h\'e\"l\'l\"o\"",
 		"echo \"\"\"",
 		"echo \"\"\"\"\"\"\""
+		"echo \'a\\\'a\'", //   'a\'a'
+		"echo \'a\\\'\' ", //   'a\''
+		"echo \"\\", //この例だとセグフォする可能性がある
 	};
 
 	ft_putstr_fd("Valid commands ==========\n", STD_OUT);
