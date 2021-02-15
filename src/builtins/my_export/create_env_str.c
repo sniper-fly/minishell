@@ -9,7 +9,7 @@ static int count_bk_slsh_should_insert_into_value(char *value)
 	bk_slsh_count = 0;
 	while (*value)
 	{
-		if (*value == '\\' || *value == '$')
+		if (*value == '\\' || *value == '$' || *value == '\"')
 			++bk_slsh_count;
 		++value;
 	}
@@ -27,7 +27,7 @@ static char *insert_back_slash(char *value)
 	i = 0;
 	while (*value)
 	{
-		if (*value == '\\' || *value == '$')
+		if (*value == '\\' || *value == '$' || *value == '\"')
 		{
 			value_inserted_bk_slsh[i] = '\\';
 			++i;
@@ -51,7 +51,8 @@ char *create_env_str(t_env_list *env_node)
 	else
 	{
 		env_str = ft_strjoin(env_node->key, "=\"");	// TODO:エラー処理
-		if (ft_strchr(env_node->value, '\\') || ft_strchr(env_node->value, '$'))
+		if (ft_strchr(env_node->value, '\\') || ft_strchr(env_node->value, '$')
+		|| ft_strchr(env_node->value, '\"'))
 		{
 			value_inserted_bk_slsh = insert_back_slash(env_node->value);
 			tmp = ft_strjoin(env_str, value_inserted_bk_slsh);
