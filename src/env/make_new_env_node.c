@@ -9,7 +9,7 @@ static t_bool is_valid_env_key(char *key)
 		return (FALSE);
 	while (*key)
 	{
-		if(!ft_isalnum(*key))
+		if(!ft_isalnum(*key) && *key != '_')
 			return FALSE;
 		++key;
 	}
