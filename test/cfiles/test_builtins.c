@@ -19,7 +19,7 @@ void test_my_export(char **args, int n)
 	pendl();
 	ft_putnbr_fd(n, STD_OUT);
 	ft_putstr_fd(" ====================\n", STD_OUT);
-	allocated_arg = malloc(sizeof(char*)*count_string_arr_row(args));
+	allocated_arg = ft_calloc(sizeof(char*), count_string_arr_row(args) + 1);
 	for(i = 0; args[i]; ++i)
 		allocated_arg[i] = ft_strdup(args[i]);
 	allocated_arg[i] = NULL;
