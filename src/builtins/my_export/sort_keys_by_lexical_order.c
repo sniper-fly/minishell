@@ -1,14 +1,25 @@
 #include <stdlib.h>
+#include "utils.h"
 #include "libft.h"
 
-static size_t	comapre_key_len(char *env1, char *env2)
+static int	comapre_keys(char *env1, char *env2)
 {
-	size_t	env1_key_len;
-	size_t	env2_key_len;
+	int cmp_result;
+	char *env1_key;
+	char *env2_key;
+	char *env1_eq_ptr;
+	char *env2_eq_ptr;
 
-	env1_key_len = (ft_strchr(env1, '=') - env1)/sizeof(char);
-	env2_key_len = (ft_strchr(env2, '=') - env2)/sizeof(char);
-	return (env1_key_len > env2_key_len ? env1_key_len : env2_key_len);
+	if(!(env1_eq_ptr = ft_strchr(env1, '=')))
+		env1_eq_ptr = env1 + ft_strlen(env1);
+	if(!(env2_eq_ptr = ft_strchr(env2, '=')))
+		env2_eq_ptr = env2 + ft_strlen(env2);
+	env1_key = ft_substr(env1, 0, (size_t)(env1_eq_ptr - env1));	// note:エラー処理
+	env2_key = ft_substr(env2, 0, (size_t)(env2_eq_ptr - env2));	// note:エラー処理
+	cmp_result = ft_strcmp(env1_key, env2_key);
+	free(env1_key);
+	free(env2_key);
+	return (cmp_result);
 }
 
 // keyを辞書順でソート
@@ -17,7 +28,6 @@ void			sort_keys_by_lexical_order(char **env_str_arr)
 	int		i;
 	int		j;
 	char	*tmp;
-	size_t	comp_len;	
 
 	i = 1;
 	while (env_str_arr[i])
@@ -25,11 +35,10 @@ void			sort_keys_by_lexical_order(char **env_str_arr)
 		j = 1;
 		while (env_str_arr[j])
 		{
-			comp_len = comapre_key_len(env_str_arr[j-1], env_str_arr[j]);
-			if (0 < ft_strncmp(env_str_arr[j-1], env_str_arr[j], comp_len))
+			if (0 < comapre_keys(env_str_arr[j - 1], env_str_arr[j]))
 			{
-				tmp = env_str_arr[j-1];
-				env_str_arr[j-1] = env_str_arr[j];
+				tmp = env_str_arr[j - 1];
+				env_str_arr[j - 1] = env_str_arr[j];
 				env_str_arr[j] = tmp;
 			}
 			++j;
