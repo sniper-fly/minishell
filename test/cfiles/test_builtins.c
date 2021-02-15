@@ -19,7 +19,7 @@ void test_my_export(char **args, int n)
 	pendl();
 	ft_putnbr_fd(n, STD_OUT);
 	ft_putstr_fd(" ====================\n", STD_OUT);
-	allocated_arg = malloc(sizeof(args));
+	allocated_arg = malloc(sizeof(char*)*count_string_arr_row(args));
 	for(i = 0; args[i]; ++i)
 		allocated_arg[i] = ft_strdup(args[i]);
 	allocated_arg[i] = NULL;
@@ -41,6 +41,10 @@ int main(int argc, char *argv[], char *envp[])
 	char *args13[] = {"export", "hoge=hoge13", NULL};
 	char *args14[] = {"export", "hoge", NULL};
 
+	// 不当なkey
+	char *args21[] = {"export", "$=dollar", NULL};
+	char *args22[] = {"export", "aaa$=aaa", NULL};
+
 
 	argc += 1;
 	argv[0][0] = 'a';
@@ -56,6 +60,13 @@ int main(int argc, char *argv[], char *envp[])
 	test_my_export(args12, 12);
 	test_my_export(args13, 13);
 	test_my_export(args14, 14);
+
+	test_my_export(args21, 21);
+	test_my_export(args22, 22);
+	// test_my_export(args21, 21);
+	// test_my_export(args21, 21);
+	// test_my_export(args21, 21);
+
 }
 
 #endif
