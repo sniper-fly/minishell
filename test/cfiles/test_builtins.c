@@ -31,13 +31,8 @@ int main(int argc, char *argv[], char *envp[])
 	char *args1[] = {"export", "foo=foo1", NULL};
 	char *args2[] = {"export", "hoge=hoge", NULL};
 	char *args3[] = {"export", "foo=foo3", NULL};
-	char *args4[] = {"export", "foo=foo4$hoge", NULL};
 	char *args5[] = {"export", "foo=foo5", "hoge=hoge5", NULL};
-	char *args6[] = {"export", "foo=foo6$hoge", NULL};
 	char *args7[] = {"export", "hoge=hoge", "foo=$hoge:foo", NULL};
-
-	// $で指定した環境変数が存在しない
-	char *args10[] = {"export", "foo=foo7$ava$hoge", NULL};
 
 	char *args11[] = {"export", "ava=", NULL};
 	char *args12[] = {"export", "ava", NULL};
