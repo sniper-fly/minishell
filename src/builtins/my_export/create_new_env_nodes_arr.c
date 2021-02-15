@@ -2,6 +2,7 @@
 #include "libft.h"
 #include "utils.h"
 #include "env_ctrl.h"
+#include "constants.h"
 #include "struct/env_list.h"
 
 extern t_env_list *g_env_list;
@@ -88,7 +89,12 @@ t_env_list **create_new_env_nodes_arr(char **args)
 	i = 0;
 	while (args[i + 1])
 	{
-		new_env_nodes[i] = make_new_env_node(args[i + 1]);
+		if(!(new_env_nodes[i] = make_new_env_node(args[i + 1])))
+		{
+			ft_putstr_fd("minishell: export: \'", STD_ERR);
+			ft_putstr_fd(args[i + 1], STD_ERR);
+			ft_putstr_fd("\': not a valid identifier\n", STD_ERR);
+		}
 		// if (new_env_nodes[i]->value && ft_strchr(new_env_nodes[i]->value, '$'))
 		// 	replace_env_var_with_its_value(new_env_nodes[i]);	// $で指定された環境変数をその値と置換
 		++i;

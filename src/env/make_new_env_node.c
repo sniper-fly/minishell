@@ -1,6 +1,20 @@
 #include <stdlib.h>
 #include "libft.h"
+#include "struct/t_bool.h"
 #include "struct/env_list.h"
+
+static t_bool is_valid_env_key(char *key)
+{
+	if ('0' <= *key && *key <= '9')
+		return (FALSE);
+	while (*key)
+	{
+		if(!ft_isalnum(*key))
+			return FALSE;
+		++key;
+	}
+	return (TRUE);
+}
 
 t_env_list *make_new_env_node(char *raw_env_var)
 {
@@ -19,6 +33,8 @@ t_env_list *make_new_env_node(char *raw_env_var)
 	}
 	else
 		new->value = NULL;
+	if(!is_valid_env_key(key_ptr))
+		return NULL;
 	new->key = ft_strdup(key_ptr);	// TODO?エラー処理
 	return new;
 }
