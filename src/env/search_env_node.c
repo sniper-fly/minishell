@@ -1,3 +1,4 @@
+#include "utils.h"
 #include "env_ctrl.h"
 #include "struct/env_list.h"
 
