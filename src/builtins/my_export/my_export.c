@@ -14,8 +14,7 @@ void	my_export(char **args)
 		i = 0;
 		while(new_env_nodes[i])
 		{
-			if(new_env_nodes[i]->value)	// valueが指定されているときだけリストを変更
-				add_new_env_var_to_list(new_env_nodes[i]);
+			add_new_env_var_to_list(new_env_nodes[i]);
 			++i;
 		}
 		// should free new_env_nodes
