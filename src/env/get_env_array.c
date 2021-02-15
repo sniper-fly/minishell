@@ -3,6 +3,8 @@
 #include "struct/env_list.h"
 #include <stdlib.h>
 
+extern t_env_list *g_env_list;
+
 static int count_env_list(void)
 {
 	int count;
