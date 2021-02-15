@@ -41,10 +41,12 @@ int main(int argc, char *argv[], char *envp[])
 	char *args13[] = {"export", "hoge=hoge13", NULL};
 	char *args14[] = {"export", "hoge", NULL};
 
+	// =が複数の時
+	char *args15[] = {"export", "a=a=a", NULL};
+
 	// 不当なkey
 	char *args21[] = {"export", "$=dollar", NULL};
 	char *args22[] = {"export", "aaa$=aaa", NULL};
-
 	char *args23[] = {"export", "==a", NULL}; //error出力
 	char *args24[] = {"export", "\"=a", NULL}; //error出力
 	char *args25[] = {"export", "'=a", NULL}; //error出力
@@ -52,7 +54,6 @@ int main(int argc, char *argv[], char *envp[])
 	char *args27[] = {"export", "a =a", NULL}; //error出力
 	char *args28[] = {"export", " a=a", NULL}; //error出力
 	char *args29[] = {"export", "]=a", NULL}; //error出力
-	char *args30[] = {"export", "a=a=a", NULL}; //error出力
 	char *args31[] = {"export", "=a=a", NULL}; //error出力
 
 
@@ -71,6 +72,8 @@ int main(int argc, char *argv[], char *envp[])
 	test_my_export(args13, 13);
 	test_my_export(args14, 14);
 
+	test_my_export(args15, 30);
+
 	test_my_export(args21, 21);
 	test_my_export(args22, 22);
 
@@ -81,7 +84,6 @@ int main(int argc, char *argv[], char *envp[])
 	test_my_export(args27, 27);
 	test_my_export(args28, 28);
 	test_my_export(args29, 29);
-	test_my_export(args30, 30);
 	test_my_export(args31, 31);
 }
 
