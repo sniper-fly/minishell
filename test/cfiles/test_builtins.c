@@ -14,7 +14,7 @@ void test_my_export(char **args, int n)
 {
 	int i;
 	char **allocated_arg;
-	char *simple_export[] = {"export", NULL};
+	// char *simple_export[] = {"export", NULL};
 
 	pendl();
 	ft_putnbr_fd(n, STD_OUT);
@@ -24,7 +24,7 @@ void test_my_export(char **args, int n)
 		allocated_arg[i] = ft_strdup(args[i]);
 	allocated_arg[i] = NULL;
 	my_export(allocated_arg);
-	my_export(simple_export);
+	// my_export(simple_export);
 }
 
 int main(int argc, char *argv[], char *envp[])
@@ -45,6 +45,16 @@ int main(int argc, char *argv[], char *envp[])
 	char *args21[] = {"export", "$=dollar", NULL};
 	char *args22[] = {"export", "aaa$=aaa", NULL};
 
+	char *args23[] = {"export", "==a", NULL}; //error出力
+	char *args24[] = {"export", "\"=a", NULL}; //error出力
+	char *args25[] = {"export", "'=a", NULL}; //error出力
+	char *args26[] = {"export", "$=a", NULL}; //error出力
+	char *args27[] = {"export", "a =a", NULL}; //error出力
+	char *args28[] = {"export", " a=a", NULL}; //error出力
+	char *args29[] = {"export", "]=a", NULL}; //error出力
+	char *args30[] = {"export", "a=a=a", NULL}; //error出力
+	char *args31[] = {"export", "=a=a", NULL}; //error出力
+
 
 	argc += 1;
 	argv[0][0] = 'a';
@@ -63,10 +73,16 @@ int main(int argc, char *argv[], char *envp[])
 
 	test_my_export(args21, 21);
 	test_my_export(args22, 22);
-	// test_my_export(args21, 21);
-	// test_my_export(args21, 21);
-	// test_my_export(args21, 21);
 
+	test_my_export(args23, 23);
+	test_my_export(args24, 24);
+	test_my_export(args25, 25);
+	test_my_export(args26, 26);
+	test_my_export(args27, 27);
+	test_my_export(args28, 28);
+	test_my_export(args29, 29);
+	test_my_export(args30, 30);
+	test_my_export(args31, 31);
 }
 
 #endif
