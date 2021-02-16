@@ -35,6 +35,9 @@ int main(int argc, char *argv[], char *envp[])
 	char *args1[] = {"unset", "foo", NULL};
 	char *args2[] = {"unset", "foo", "hoge", "ava", NULL};
 	char *args3[] = {"unset", "hello", NULL};
+	char *args4[] = {"unset", "num1", NULL};
+	char *args5[] = {"unset", "_", NULL};
+	char *args6[] = {"unset", "a_a", NULL};
 
 	char *args10[] = {"unset", "foo=foo", NULL};
 	char *args11[] = {"unset", "1foo", NULL};
@@ -48,11 +51,15 @@ int main(int argc, char *argv[], char *envp[])
 	test_my_unset(args1, 1);
 	test_my_unset(args2, 2);
 	test_my_unset(args3, 3);
+	test_my_unset(args4, 4);
+	test_my_unset(args5, 5);
+	test_my_unset(args6, 6);
 
 
 	test_my_unset(args10, 10);
 	test_my_unset(args11, 11);
 	test_my_unset(args12, 12);
+	test_my_unset(args13, 13);
 }
 
 #endif
