@@ -25,7 +25,7 @@ static void fix_pwd_env(char *save_oldpwd)
 	free(pwd_node->value);
 	pwd_node->value = ft_strdup(old_pwd_node->value);
 	free(old_pwd_node->value);
-	old_pwd_node->value = save_oldpwd;
+	old_pwd_node->value = ft_strdup(save_oldpwd);
 }
 
 static void test_my_cd(char **args, int n)
@@ -52,6 +52,7 @@ static void test_my_cd(char **args, int n)
 		chdir(search_env_node("OLDPWD")->value);
 		fix_pwd_env(save_oldpwd);
 	}
+	free(save_oldpwd);
 }
 
 int main(int argc, char *argv[], char *envp[])
