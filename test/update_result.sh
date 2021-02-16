@@ -30,3 +30,4 @@ function update_each_file() {
 # update_each_file CHECK_EXIT_STATUS_OF_MY_EXECVE_C
 # update_each_file CONVERT_LINE2TASKS_C
 # update_each_file EXEC_CMD_FOR_DEBUG_C
+# update_each_file AUTO_RESIZE_CPY_C
