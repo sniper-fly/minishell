@@ -7,4 +7,6 @@ minishell
 libft.a
 
 test/answer/memleak_log/
+
 test/latest/memleak_log/
+test/latest/result/
