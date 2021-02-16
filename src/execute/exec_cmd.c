@@ -15,7 +15,7 @@ void	exec_cmd(char ***tasks)
 	while (tasks[i]) //行のループ
 	{
 		procs = NULL;	// TODO:後で消す
-		procs = parse(tasks[i]);
+		// procs = parse(tasks[i]);
 		// TODO:procs = parse(tasks[i]);
 		// TODO:create_empty_file();
 		// TODO:ビルトインを実行するかどうかのチェック(前後が番兵かi.e.コマンドが単一かどうか)
