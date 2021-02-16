@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "libft.h"
+#include "env_ctrl.h"
 #include "struct/t_bool.h"
 #include "struct/env_list.h"
 
@@ -18,28 +19,47 @@ static t_bool is_valid_env_key(char *key)
 	return (TRUE);
 }
 
-t_env_list *make_new_env_node(char *arg)
+static char *get_new_env_value(char *replica_of_arg)
 {
-	char *raw_env_var;
-	char		*equal_ptr;
-	char		*key_ptr;
-	char		*val_ptr;
-	t_env_list	*new;
+	char *value;
+	char *equal_ptr;
 
-	raw_env_var = ft_strdup(arg);	// TODO:malloc
-	new = malloc(sizeof(t_env_list));	// TODO:mallocエラー処理
-	key_ptr = raw_env_var;
-	if((equal_ptr = ft_strchr(raw_env_var, '=')))
+	if((equal_ptr = ft_strchr(replica_of_arg, '=')))
 	{
-		*equal_ptr = '\0';
-		val_ptr = equal_ptr + 1;
-		new->value = ft_strdup(val_ptr);	// TODO:エラー処理
+		value = ft_strdup(equal_ptr + 1);	// TODO:エラー処理
 	}
 	else
-		new->value = NULL;
-	if(!is_valid_env_key(key_ptr))
+		value = NULL;
+	return (value);
+}
+
+static char *get_new_env_key(char *arg)
+{
+	char	*key;
+	char	*equal_ptr;
+
+	if((equal_ptr = ft_strchr(arg, '=')))
+	{
+		key = ft_substr(arg, 0, (size_t)(equal_ptr - arg));	// TODO:エラー処理
+	}
+	else
+	{
+		key = ft_strdup(arg);	// TODO:エラー処理
+	}
+	return (key);
+}
+
+t_env_list *make_new_env_node(char *arg)
+{
+	t_env_list	*new;
+
+	new = malloc(sizeof(t_env_list));	// TODO:mallocエラー処理
+	new->key = get_new_env_key(arg);
+	new->value = get_new_env_value(arg);
+	if(!is_valid_env_key(new->key))
+	{
+		free_env_node(new);
 		return NULL;
-	new->key = ft_strdup(key_ptr);	// TODO?エラー処理
-	free(raw_env_var);
+	}
 	return new;
 }

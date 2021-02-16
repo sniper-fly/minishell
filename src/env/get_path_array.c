@@ -3,6 +3,8 @@
 #include "utils.h"
 #include "struct/env_list.h"
 
+extern t_env_list *g_env_list;
+
 char **get_path_array(void)
 {
 	char **path;

@@ -34,7 +34,7 @@ static char **create_env_str_arr_from_env_list(int node_count)
 
 	i = 0;
 	env_node = g_env_list->next;
-	env_str_arr = malloc(sizeof(char *)*(node_count+1));	// TODO:エラー処理 // +1不要?
+	env_str_arr = malloc(sizeof(char *)*(node_count+1));	// TODO:エラー処理
 	while (i < node_count)
 	{
 		if (ft_strcmp(env_node->key, "_"))	// _を表示しないため
@@ -44,7 +44,7 @@ static char **create_env_str_arr_from_env_list(int node_count)
 		}
 		env_node = env_node->next;
 	}
-	env_str_arr[i] = NULL;	// 不要?
+	env_str_arr[i] = NULL;
 	return env_str_arr;
 }
 

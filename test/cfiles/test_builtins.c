@@ -25,6 +25,7 @@ void test_my_export(char **args, int n)
 	allocated_arg[i] = NULL;
 	my_export(allocated_arg);
 	// my_export(simple_export);
+	free_string_arr(allocated_arg);
 }
 
 int main(int argc, char *argv[], char *envp[])
