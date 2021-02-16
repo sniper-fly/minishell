@@ -1,3 +1,46 @@
+
+#ifdef AUTO_RESIZE_CPY_C
+#include <stdlib.h>
+#include "parse.h"
+#include <stdio.h>
+#include "libft.h"
+
+static void leak_test_func1(void)
+{
+	char	*dst;
+	char	src[] = "hello wo";
+	int		buf_size;
+
+	buf_size = 10;
+	dst = malloc(sizeof(char) * buf_size);
+	for (int i = 0; src[i]; i++)
+		dst = auto_resize_cpy(dst, i, &buf_size, src[i]);
+	ft_putendl_fd(dst, 1);
+	free(dst);
+}
+
+static void leak_test_func2(void)
+{
+	char	*dst;
+	char	src[] = "hello world hoge hey foo bar baz";
+	int		buf_size;
+
+	buf_size = 10;
+	dst = malloc(sizeof(char) * buf_size);
+	for (int i = 0; src[i]; i++)
+		dst = auto_resize_cpy(dst, i, &buf_size, src[i]);
+	ft_putendl_fd(dst, 1);
+	free(dst);
+}
+
+int		main(void)
+{
+	leak_test_func1();
+	leak_test_func2();
+}
+
+#endif
+
 #ifdef CONVERT_LINE2TASKS_C
 
 #include <stdio.h>
