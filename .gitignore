@@ -6,4 +6,5 @@ minishell
 .gdb_history
 libft.a
 
-test/memleak_log/
+test/answer/memleak_log/
+test/latest/memleak_log/
