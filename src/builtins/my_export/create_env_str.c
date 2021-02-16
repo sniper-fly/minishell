@@ -55,7 +55,7 @@ char *create_env_str(t_env_list *env_node)
 		|| ft_strchr(env_node->value, '\"'))
 		{
 			value_inserted_bk_slsh = insert_back_slash(env_node->value);
-			tmp = ft_strjoin(env_str, value_inserted_bk_slsh);
+			tmp = ft_strjoin(env_str, value_inserted_bk_slsh);	// TOOD:エラー処理
 			free(value_inserted_bk_slsh);
 		}
 		else
