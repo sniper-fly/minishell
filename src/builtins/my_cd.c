@@ -35,7 +35,7 @@ static char *replace_homedir_to_path(char *arg)
 	char *homedir_path;
 
 	homedir_path = search_env_node("HOME")->value;
-	if(!arg || arg[0] == '#')
+	if(!arg)
 	{
 		path = ft_strdup(homedir_path);	// TODO:エラー処理
 	}
@@ -55,7 +55,7 @@ void my_cd(char **args)
 		ft_putendl_fd("minishell: cd: too many arguments", STD_ERR);
 		return ;
 	}
-	if(!args[1] || args[1][0] == '~' || args[1][0] == '#')
+	if(!args[1] || args[1][0] == '~')
 		path = replace_homedir_to_path(args[1]);
 	else
 		path = ft_strdup(args[1]);	// TODO:エラー処理
