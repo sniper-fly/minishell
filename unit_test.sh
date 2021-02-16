@@ -24,16 +24,16 @@ function test_unit() {
 		printf "${ESC}[31m%s${ESC}[m\n" 'FAILURE'
 	fi
 
-	echo "---valgrind test---"
-	# valgrindの一列目はprocess IDが入ってしまって比較の邪魔なのでawkで消している
-	valgrind --undef-value-errors=no ./minishell 2>&1 |
-	awk -F" " '{$1=""; print}' > ./test/latest/memleak_log/$1
-	diff ./test/latest/memleak_log/$1 ./test/answer/memleak_log/$1
-	if [ $? -eq 0 ] ; then
-		printf "\033[32m%s\033[m\n" 'SUCCESS'
-	else
-		printf "${ESC}[31m%s${ESC}[m\n" 'FAILURE'
-	fi
+	# echo "---valgrind test---"
+	# # valgrindの一列目はprocess IDが入ってしまって比較の邪魔なのでawkで消している
+	# valgrind --undef-value-errors=no ./minishell 2>&1 |
+	# awk -F" " '{$1=""; print}' > ./test/latest/memleak_log/$1
+	# diff ./test/latest/memleak_log/$1 ./test/answer/memleak_log/$1
+	# if [ $? -eq 0 ] ; then
+	# 	printf "\033[32m%s\033[m\n" 'SUCCESS'
+	# else
+	# 	printf "${ESC}[31m%s${ESC}[m\n" 'FAILURE'
+	# fi
 
 	echo "==================================="
 }
