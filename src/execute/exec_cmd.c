@@ -6,16 +6,17 @@
 
 extern int	g_status;
 
-void	exec_cmd(char ***str_procs)
+void	exec_cmd(char ***tasks)
 {
 	int i;
 	t_process *procs;
 
 	i = 0;
-	while (str_procs[i]) //行のループ
+	while (tasks[i]) //行のループ
 	{
 		procs = NULL;	// TODO:後で消す
-		// TODO:procs = parse(str_procs[i]);
+		procs = parse(tasks[i]);
+		// TODO:procs = parse(tasks[i]);
 		// TODO:create_empty_file();
 		// TODO:ビルトインを実行するかどうかのチェック(前後が番兵かi.e.コマンドが単一かどうか)
 		exec_pipes(procs); //パイプのwhileループ(列のループ)

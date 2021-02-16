@@ -1,14 +1,14 @@
 #include "utils.h"
 #include "debug.h"
 
-void		show_str_procs(char ***str_procs)
+void		show_tasks(char ***tasks)
 {
 	int		i;
 
 	i = 0;
-	while (str_procs[i])
+	while (tasks[i])
 	{
-		show_string_arr(str_procs[i]);
+		show_string_arr(tasks[i]);
 		pendl();
 		i++;
 	}

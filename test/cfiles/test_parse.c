@@ -9,14 +9,14 @@
 
 static void	p_test(char *line, int i)
 {
-	char		***str_procs;
+	char		***tasks;
 
-	str_procs = convert_line2str_procs(line);
+	tasks = convert_line2tasks(line);
 	ft_putstr_fd("line", STD_OUT);
 	ft_putnbr_fd(i, STD_OUT);
 	pendl();
-	show_str_procs(str_procs);
-	free_str_procs(str_procs);
+	show_tasks(tasks);
+	free_tasks(tasks);
 	ft_putstr_fd("=======================\n", STD_OUT);
 }
 
