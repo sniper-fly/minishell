@@ -7,15 +7,16 @@
 #include "env_ctrl.h"
 #include "builtins/builtins.h"
 
-static void put_error_msg(char *file_path, char *msg)
+static void put_error_msg(char *file_path)
 {
 	ft_putstr_fd("minishell: cd: ", STD_ERR);
-	if(file_path)
-	{
-		ft_putstr_fd(file_path, STD_ERR);
-		ft_putstr_fd(": ", STD_ERR);
-	}
-	ft_putendl_fd(msg, STD_ERR);
+	// if(file_path)
+	// {
+	// 	ft_putstr_fd(file_path, STD_ERR);
+	// 	ft_putstr_fd(": ", STD_ERR);
+	// }
+	ft_perror(file_path);
+	// ft_putendl_fd(msg, STD_ERR);
 }
 
 static void change_env_vars(void)
@@ -57,7 +58,7 @@ void my_cd(char **args)
 
 	if(2 < count_string_arr_row(args))
 	{
-		put_error_msg(NULL, "too many arguments");
+		ft_putendl_fd("minishell: cd: too many arguments", STD_ERR);
 		return ;
 	}
 	if(!args[1] || args[1][0] == '~' || args[1][0] == '#')
@@ -66,12 +67,13 @@ void my_cd(char **args)
 		path = ft_strdup(args[1]);	// TODO:エラー処理
 	if(chdir(path) == -1)
 	{
-		if(errno == EACCES)
-			put_error_msg(args[1], "Permission denied");
-		if(errno == ENOTDIR)
-			put_error_msg(args[1], "Not a directory");
-		if(errno == ENOENT)
-			put_error_msg(args[1], "No such file or directory");
+		put_error_msg(args[1]);
+		// if(errno == EACCES)
+		// 	put_error_msg(args[1], "Permission denied");
+		// if(errno == ENOTDIR)
+		// 	put_error_msg(args[1], "Not a directory");
+		// if(errno == ENOENT)
+		// 	put_error_msg(args[1], "No such file or directory");
 		free(path);
 		return ;
 	}
