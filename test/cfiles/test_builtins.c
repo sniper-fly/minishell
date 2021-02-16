@@ -68,6 +68,14 @@ int main(int argc, char *argv[], char *envp[])
 	char *args21[] = {"cd", "test/test/test", NULL};	// Permission deniedのテスト
 	char *args22[] = {"cd", "src", "study", NULL};
 
+	char *args23[] = {"cd", "/root/", NULL};
+
+	char *args24[] = {"cd", "/../../../../../../home", NULL};
+	char *args25[] = {"cd", "/../../../../../../home/../home/../home", NULL};
+	char *args26[] = {"cd", "~/.ssh", NULL};
+	char *args27[] = {"cd", "~/../~/.ssh", NULL}; //error表示が異なる
+	char *args28[] = {"cd", "~/notexist", NULL}; //error表示が異なる
+
 	argc += 1;
 	argv[0][0] = 'a';
 	create_env_list(envp);
@@ -84,6 +92,14 @@ int main(int argc, char *argv[], char *envp[])
 	test_my_cd(args20, 20);
 	test_my_cd(args21, 21);
 	test_my_cd(args22, 22);
+	test_my_cd(args23, 23);
+
+	//additional test
+	test_my_cd(args24, 24);
+	test_my_cd(args25, 25);
+	test_my_cd(args26, 26);
+	test_my_cd(args27, 27);
+	test_my_cd(args28, 28);
 }
 
 #endif
