@@ -8,5 +8,6 @@
 char		***convert_line2tasks(char *line);
 void		replace_meta_with_divider(char *line, char rplced_ch);
 void		free_tasks(char ***tasks);
+t_process	*parse_each_task(char **str_procs);
 
 #endif
