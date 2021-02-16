@@ -4,6 +4,7 @@ include
 intermediate_files
 lib
 minishell
+share
 src
 study
 test
@@ -14,6 +15,7 @@ include
 intermediate_files
 lib
 minishell
+share
 src
 study
 test
