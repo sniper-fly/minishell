@@ -34,7 +34,7 @@ function test_unit() {
 	# else
 	# 	printf "${ESC}[31m%s${ESC}[m\n" 'FAILURE'
 	# fi
-	valgrind ./minishell 2>&1 > ./test/latest/memleak_log/$1
+	valgrind ./minishell > ./test/latest/memleak_log/$1 2>&1
 
 	echo "==================================="
 }

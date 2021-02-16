@@ -16,7 +16,7 @@ function update_each_file() {
 	# valgrindの一列目はprocess IDが入ってしまって比較の邪魔なのでawkで消している
 	# valgrind --undef-value-errors=no ./minishell 2>&1 |
 	# awk -F" " '{$1=""; print}' > ./test/answer/memleak_log/$1
-	valgrind ./minishell 2>&1 > ./test/answer/memleak_log/$1
+	valgrind ./minishell > ./test/answer/memleak_log/$1 2>&1
 	echo "==================================="
 }
 
