@@ -1,5 +1,111 @@
 #include "builtins/builtins.h"
 
+#ifdef MY_CD_C
+
+#include <errno.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include "libft.h"
+#include "utils.h"
+#include "env_ctrl.h"
+#include "constants.h"
+#include "struct/env_list.h"
+#include "builtins/builtins.h"
+#include "builtins/my_export.h"
+
+extern t_env_list *g_env_list;
+
+static void fix_pwd_env(char *save_oldpwd)
+{
+	t_env_list *pwd_node;
+	t_env_list *old_pwd_node;
+
+	pwd_node = search_env_node("PWD");
+	old_pwd_node = search_env_node("OLDPWD");
+	free(pwd_node->value);
+	pwd_node->value = ft_strdup(old_pwd_node->value);
+	free(old_pwd_node->value);
+	old_pwd_node->value = ft_strdup(save_oldpwd);
+}
+
+static void test_my_cd(char **args, int n)
+{
+	char *save_oldpwd;
+	char *pwd_str;
+	char *old_pwd_str;
+
+	errno = 0;
+	ft_putnbr_fd(n, STD_OUT);
+	ft_putendl_fd(" ==========", STD_OUT);
+	save_oldpwd = ft_strdup(search_env_node("OLDPWD")->value);
+	my_cd(args);
+	pwd_str = create_env_str(search_env_node("PWD"));
+	old_pwd_str = create_env_str(search_env_node("OLDPWD"));
+	ft_putendl_fd(old_pwd_str, STD_OUT);
+	ft_putendl_fd(pwd_str, STD_OUT);
+	free(pwd_str);
+	free(old_pwd_str);
+	pendl();
+	// my_cd実行前の状態に戻す
+	if(n < 20)
+	{
+		chdir(search_env_node("OLDPWD")->value);
+		fix_pwd_env(save_oldpwd);
+	}
+	free(save_oldpwd);
+}
+
+int main(int argc, char *argv[], char *envp[])
+{
+	char *args1[] = {"cd", "src", NULL};
+	char *args2[] = {"cd", "..", NULL};
+	char *args3[] = {"cd", NULL};
+	char *args4[] = {"cd", "~", NULL};
+	char *args5[] = {"cd", "/", NULL};
+	char *args6[] = {"cd", ".", NULL};
+
+	char *args20[] = {"cd", "Makefile", NULL};
+	char *args21[] = {"cd", "test/test/test", NULL};	// Permission deniedのテスト
+	char *args22[] = {"cd", "src", "study", NULL};
+
+	char *args23[] = {"cd", "/root/", NULL};
+
+	char *args24[] = {"cd", "/../../../../../../home", NULL};
+	char *args25[] = {"cd", "/../../../../../../home/../home/../home", NULL};
+	char *args26[] = {"cd", "~/.ssh", NULL};
+	char *args27[] = {"cd", "~/../~/.ssh", NULL}; //error表示が異なる
+	char *args28[] = {"cd", "~/notexist", NULL}; //error表示が異なる
+
+	argc += 1;
+	argv[0][0] = 'a';
+	create_env_list(envp);
+
+	test_my_cd(args1, 1);
+	test_my_cd(args2, 2);
+	test_my_cd(args3, 3);
+	test_my_cd(args4, 4);
+	test_my_cd(args5, 5);
+	test_my_cd(args6, 6);
+
+
+	// エラー
+	test_my_cd(args20, 20);
+	test_my_cd(args21, 21);
+	test_my_cd(args22, 22);
+	test_my_cd(args23, 23);
+
+	//additional test
+	test_my_cd(args24, 24);
+	test_my_cd(args25, 25);
+	test_my_cd(args26, 26);
+	test_my_cd(args27, 27);
+	test_my_cd(args28, 28);
+}
+
+#endif
+
+
+
 #ifdef MY_EXPORT_C
 
 #include <stdio.h>
