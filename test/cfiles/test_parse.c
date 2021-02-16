@@ -1,4 +1,4 @@
-#ifdef CONVERT_LINE2STR_PROCS_C
+#ifdef CONVERT_LINE2TASKS_C
 
 #include <stdio.h>
 #include "debug.h"
