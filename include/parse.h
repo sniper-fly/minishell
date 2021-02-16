@@ -5,8 +5,8 @@
 
 # define DIVIDER -3
 
-char		***convert_line2str_procs(char *line);
+char		***convert_line2tasks(char *line);
 void		replace_meta_with_divider(char *line, char rplced_ch);
-void		free_str_procs(char ***str_procs);
+void		free_tasks(char ***tasks);
 
 #endif

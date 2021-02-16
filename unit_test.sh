@@ -16,22 +16,25 @@ function test_unit() {
 	make -s debug ARG=$1
 
 	echo "---output test result---"
-	diff <(./minishell 2>&1) ./test/result/$1
+	./minishell > ./test/latest/result/$1 2>&1
+	diff ./test/latest/result/$1 ./test/answer/result/$1
 	if [ $? -eq 0 ] ; then
 		printf "\033[32m%s\033[m\n" 'SUCCESS'
 	else
 		printf "${ESC}[31m%s${ESC}[m\n" 'FAILURE'
 	fi
 
-	echo "---valgrind test---"
-	# valgrindの一列目はprocess IDが入ってしまって比較の邪魔なのでawkで消している
-	diff <(valgrind --undef-value-errors=no ./minishell 2>&1 |
-	awk -F" " '{$1=""; print}') ./test/memleak_log/$1
-	if [ $? -eq 0 ] ; then
-		printf "\033[32m%s\033[m\n" 'SUCCESS'
-	else
-		printf "${ESC}[31m%s${ESC}[m\n" 'FAILURE'
-	fi
+	# echo "---valgrind test---"
+	# # valgrindの一列目はprocess IDが入ってしまって比較の邪魔なのでawkで消している
+	# valgrind --undef-value-errors=no ./minishell 2>&1 |
+	# awk -F" " '{$1=""; print}' > ./test/latest/memleak_log/$1
+	# diff ./test/latest/memleak_log/$1 ./test/answer/memleak_log/$1
+	# if [ $? -eq 0 ] ; then
+	# 	printf "\033[32m%s\033[m\n" 'SUCCESS'
+	# else
+	# 	printf "${ESC}[31m%s${ESC}[m\n" 'FAILURE'
+	# fi
+	valgrind ./minishell > ./test/latest/memleak_log/$1 2>&1
 
 	echo "==================================="
 }
@@ -42,5 +45,5 @@ test_unit CHECK_EXIT_STATUS_OF_MY_EXECVE_C
 test_unit FREE_PROCS_C
 test_unit SHOW_STRING_ARR_C
 test_unit FT_PERROR_C
-test_unit CONVERT_LINE2STR_PROCS_C
+test_unit CONVERT_LINE2TASKS_C
 test_unit EXEC_CMD_FOR_DEBUG_C

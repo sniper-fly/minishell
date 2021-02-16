@@ -13,7 +13,7 @@ int			g_status;
 int		main(int argc, char **argv, char **envp)
 {
 	char		*line;
-	char		***str_procs;
+	char		***tasks;
 	int			status;
 
 	setup_signal();
@@ -23,9 +23,9 @@ int		main(int argc, char **argv, char **envp)
 		read_cmd_line(line);
 		if (!is_syntax_valid(line)) //lineは再利用するのでfreeしない
 			continue ;
-		str_procs = convert_line2str_procs(line);
-		exec_cmd(str_procs); //失敗したらstr_procsをfreeし忘れないように
-		free_str_procs(str_procs);
+		tasks = convert_line2tasks(line);
+		exec_cmd(tasks); //失敗したらtasksをfreeし忘れないように
+		free_tasks(tasks);
 	}
 	free(line);
 	(void)argc; (void)argv; (void)envp;

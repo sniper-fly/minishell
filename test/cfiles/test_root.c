@@ -30,7 +30,7 @@ int		main(void)
 	{
 		print_prompt();
 		read_cmd_line(line);
-		procs = convert_line2str_procs(line, &status);
+		procs = convert_line2tasks(line, &status);
 		show_procs(procs);
 	}
 }
