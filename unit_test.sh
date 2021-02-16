@@ -16,7 +16,8 @@ function test_unit() {
 	make -s debug ARG=$1
 
 	echo "---output test result---"
-	diff <(./minishell 2>&1) ./test/result/$1
+	./minishell > ./test/latest/result/$1 2>&1
+	diff ./test/latest/result/$1 ./test/answer/result/$1
 	if [ $? -eq 0 ] ; then
 		printf "\033[32m%s\033[m\n" 'SUCCESS'
 	else
@@ -25,8 +26,9 @@ function test_unit() {
 
 	echo "---valgrind test---"
 	# valgrindの一列目はprocess IDが入ってしまって比較の邪魔なのでawkで消している
-	diff <(valgrind --undef-value-errors=no ./minishell 2>&1 |
-	awk -F" " '{$1=""; print}') ./test/memleak_log/$1
+	valgrind --undef-value-errors=no ./minishell 2>&1 |
+	awk -F" " '{$1=""; print}' > ./test/latest/memleak_log/$1
+	diff ./test/latest/memleak_log/$1 ./test/answer/memleak_log/$1
 	if [ $? -eq 0 ] ; then
 		printf "\033[32m%s\033[m\n" 'SUCCESS'
 	else
