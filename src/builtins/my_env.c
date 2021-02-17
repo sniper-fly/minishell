@@ -14,9 +14,12 @@ static void print_env_at_my_env(void)
 	env_node = g_env_list->next;
 	while(env_node != nil)
 	{
-		ft_putstr_fd(env_node->key, STD_OUT);
-		ft_putstr_fd("=", STD_OUT);
-		ft_putendl_fd(env_node->value, STD_OUT);
+		if (env_node->value)
+		{
+			ft_putstr_fd(env_node->key, STD_OUT);
+			ft_putstr_fd("=", STD_OUT);
+			ft_putendl_fd(env_node->value, STD_OUT);
+		}
 		env_node = env_node->next;
 	}
 }
