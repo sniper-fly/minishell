@@ -39,7 +39,8 @@ void exec_tasks_in_args(char **args)
 		return ;
 	}
 	tasks = convert_line2tasks(cmd_line);
-	exec_tasks(tasks);
+	// exec_tasks(tasks);
+	ft_putstr_fd("comming soon ...", 1);
 	free_tasks(tasks);
 	free(cmd_line);
 }
