@@ -79,7 +79,7 @@ static void free_pipe_fd_array(int **pipe_fd, t_process *procs)
 	free(pipe_fd);
 }
 
-void		exec_pipes(t_process *procs)
+void		exec_cmds(t_process *procs)
 {
 	int i;
 	pid_t pid;
