@@ -48,7 +48,7 @@ static char **create_env_str_arr_from_env_list(int node_count)
 	return env_str_arr;
 }
 
-void	print_env(void)
+void	print_env_at_my_export(void)
 {
 	int		i;
 	char	**env_str_arr;
