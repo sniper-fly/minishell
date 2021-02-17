@@ -44,7 +44,7 @@ t_bool			is_valid_quote(char *cmd_line)
 			kind_of_quote = *cmd_line;
 			if (!is_closed_quote(&cmd_line, kind_of_quote))
 			{
-				put_syntax_error_message("doesn't closed a quotation");
+				put_syntax_error_message("quotation is not closed");
 				return (FALSE);
 			}
 		}

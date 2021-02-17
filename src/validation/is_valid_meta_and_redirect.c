@@ -18,7 +18,7 @@ static t_bool	is_started_with_meta(char *cmd_line)
 {
 	if (is_meta_char(*cmd_line))
 	{
-		put_syntax_error_message("invalid a metacharacter");
+		put_syntax_error_message("invalid token");
 		return (TRUE);
 	}
 	else
@@ -31,7 +31,7 @@ static t_bool	is_terminated_with_redirect(char *cmd_line, t_bool is_redicrect)
 {
 	if (is_redicrect && !(*cmd_line))	// TODO: エラー出力
 	{
-		put_syntax_error_message("invalid a redirect");
+		put_syntax_error_message("invalid redirect");
 		return (TRUE);
 	}
 	return (FALSE);
