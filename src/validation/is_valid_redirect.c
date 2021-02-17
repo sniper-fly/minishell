@@ -24,7 +24,10 @@ t_bool			is_valid_redirect(char **cmd_line, t_bool *is_redirect)
 	{
 		*is_redirect = TRUE;
 		if (!is_single_redirect(cmd_line))
+		{
+			put_syntax_error_message("invalid redirect");
 			return (FALSE);
+		}
 	}
 	return (TRUE);
 }
