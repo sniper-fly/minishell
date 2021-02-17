@@ -31,3 +31,4 @@ function update_each_file() {
 # update_each_file CONVERT_LINE2TASKS_C
 # update_each_file EXEC_CMD_FOR_DEBUG_C
 # update_each_file AUTO_RESIZE_CPY_C
+# update_each_file GET_SINGLE_ENV_KEY_C

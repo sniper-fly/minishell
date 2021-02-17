@@ -48,3 +48,4 @@ test_unit FT_PERROR_C
 test_unit CONVERT_LINE2TASKS_C
 test_unit EXEC_CMD_FOR_DEBUG_C
 test_unit AUTO_RESIZE_CPY_C
+test_unit GET_SINGLE_ENV_KEY_C
