@@ -22,8 +22,10 @@ int main(int argc, char *argv[], char *envp[])
 	char *args1[] = {"env", NULL};
 	char *args2[] = {"env", "foo=foo2", NULL};
 	char *args3[] = {"env", "foo=foo3", "hoge=hoge3", NULL};
+	char *args4[] = {"env", "foo=foo4", "echo", "hello", NULL};
+	char *args5[] = {"env", "echo", "hello", NULL};
 
-	char *args4[] = {"env", "echo", "\"hello", NULL};
+	char *args20[] = {"env", "echo", "\"hello", NULL};
 
 	argc += 1;
 	argv[0][0] = 'a';
@@ -33,8 +35,11 @@ int main(int argc, char *argv[], char *envp[])
 	test_my_env(args2, 2);
 	test_my_env(args1, 1);	// args2でセットした環境変数が消えていることを確認
 	test_my_env(args3, 3);
-
 	test_my_env(args4, 4);
+	test_my_env(args5, 5);
+
+
+	test_my_env(args20, 20);
 
 }
 
