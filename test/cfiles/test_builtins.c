@@ -1,5 +1,45 @@
 #include "builtins/builtins.h"
 
+#ifdef MY_ENV_C
+
+#include "libft.h"
+#include "utils.h"
+#include "env_ctrl.h"
+#include "constants.h"
+#include "struct/env_list.h"
+
+static void test_my_env(char **args, int n)
+{
+	ft_putnbr_fd(n, STD_OUT);
+	ft_putendl_fd(" ==========", STD_OUT);
+
+	my_env(args);
+	pendl();
+}
+
+int main(int argc, char *argv[], char *envp[])
+{
+	char *args1[] = {"env", NULL};
+	char *args2[] = {"env", "foo=foo2", NULL};
+	char *args3[] = {"env", "foo=foo3", "hoge=hoge3", NULL};
+
+	char *args4[] = {"env", "echo", "\"hello", NULL};
+
+	argc += 1;
+	argv[0][0] = 'a';
+	create_env_list(envp);
+
+	test_my_env(args1, 1);
+	test_my_env(args2, 2);
+	test_my_env(args1, 1);	// args2でセットした環境変数が消えていることを確認
+	test_my_env(args3, 3);
+
+	test_my_env(args4, 4);
+
+}
+
+#endif
+
 #ifdef MY_UNSET_C
 
 #include <stdlib.h>
