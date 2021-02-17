@@ -3,7 +3,8 @@
 
 #include "struct/process.h"
 
-void	exec_pipes(t_process *procs);
+void	exec_cmds(t_process *procs);
 void	my_execve(char **cmd);
+void	exec_tasks(char ***tasks);
 
 #endif
