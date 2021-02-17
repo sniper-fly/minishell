@@ -1,3 +1,4 @@
+#include "validation.h"
 #include "struct/t_bool.h"
 
 static t_bool	is_quote(char c)
@@ -12,7 +13,7 @@ static t_bool	is_closed_quote(char **cmd_line, char kind_of_quote)
 	++(*cmd_line);
 	while (TRUE)
 	{
-		if (!(**cmd_line))	// TODO:エラー出力
+		if (!(**cmd_line))
 			return (FALSE);
 		if (**cmd_line == '\\')
 		{
@@ -42,7 +43,10 @@ t_bool			is_valid_quote(char *cmd_line)
 		{
 			kind_of_quote = *cmd_line;
 			if (!is_closed_quote(&cmd_line, kind_of_quote))
+			{
+				put_syntax_error_message("doesn't closed a quotation");
 				return (FALSE);
+			}
 		}
 		++cmd_line;
 	}
