@@ -31,11 +31,11 @@ static void check_if_the_full_path_is_valid(char *cmd_path)
 		ft_putstr_fd(": ", STD_ERR);
 		ft_putendl_fd(strerror(errno), STD_ERR);
 		if(errno == EISDIR)
-			exit(IS_DIR);
+			exit(COMMAND_CANNOT_EXECUTE);
 		else if(errno == ENOENT)
 			exit(COMMAND_NOT_FOUND);
 		else
-			exit(FAILED);
+			exit(GENERAL_ERROROS);
 	}
 }
 
@@ -55,9 +55,9 @@ static void do_execve(char *cmd_path, char **cmd, char **envp)
 		ft_putstr_fd("minishell: ", STD_ERR);
 		ft_perror(cmd_path);
 		if(errno == EACCES)
-			exit(PERMISSION_DENIED);
+			exit(COMMAND_CANNOT_EXECUTE);
 		else
-			exit(FAILED);	// TODO: exitのステータス要検証
+			exit(GENERAL_ERROROS);	// TODO: exitのステータス要検証
 	}
 }
 
