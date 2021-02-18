@@ -1,0 +1,50 @@
+
+1 ====================
+
+2 ====================
+
+3 ====================
+
+4 ====================
+
+5 ====================
+
+11 ====================
+
+12 ====================
+
+13 ====================
+
+14 ====================
+
+30 ====================
+
+21 ====================
+minishell: export: '$=dollar': not a valid identifier
+
+22 ====================
+minishell: export: 'aaa$=aaa': not a valid identifier
+
+23 ====================
+minishell: export: '==a': not a valid identifier
+
+24 ====================
+minishell: export: '"=a': not a valid identifier
+
+25 ====================
+minishell: export: ''=a': not a valid identifier
+
+26 ====================
+minishell: export: '$=a': not a valid identifier
+
+27 ====================
+minishell: export: 'a =a': not a valid identifier
+
+28 ====================
+minishell: export: ' a=a': not a valid identifier
+
+29 ====================
+minishell: export: ']=a': not a valid identifier
+
+31 ====================
+minishell: export: '=a=a': not a valid identifier
