@@ -19,8 +19,7 @@ static void test_my_exit(char **args, int n)
 	{
 		waitpid(pid, &status, 0);
 		ft_putstr_fd("status: ", 1);
-		// printf("%d\n", status);
-		ft_putnbr_fd(status, 1);
+		ft_putnbr_fd(WEXITSTATUS(status), 1);
 		pendl();
 		pendl();
 	}
