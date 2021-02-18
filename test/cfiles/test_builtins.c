@@ -331,6 +331,7 @@ int main(int argc, char *argv[], char *envp[])
 #endif
 
 #ifdef MY_ECHO_C 
+#include <stddef.h>
 
 int main(void)
 {
