@@ -1,11 +1,56 @@
-// #ifdef EXPAND_ENV_VAR_STR_C
+#ifdef EXPAND_ENV_VAR_STR_C
 #include "parse.h"
 #include "env_ctrl.h"
-#
+#include "builtins/builtins.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+extern char	**environ;
+extern int g_status;
+
+static void	print_result(char *str, int i)
+{
+	char	*expanded;
+
+	expanded = expand_env_var_str(str);
+	printf("[%d]:%s:%s\n", i, str, expanded);
+	free(expanded);
+}
+
+static void	leak_test(void)
+{
+	char*	tests[] = {
+		"normal char",
+		"[$ ]",
+		"[$\\]",
+		"[$}]",
+		"$",
+		"$$$",
+		"$\\$$",
+		"hello $name !",
+		"$name$name",
+		"$name\\aaa$foo",
+		"notexistence$notexist",
+		"$foo$notexist",
+		"$\"foo\"$notexist",
+		"$'foo'$notexist",
+		"$?aa",
+		"$?aa$?",
+		"$$foo",
+	};
+	char*	env_to_add1[] = {"export", "name=nop", NULL};
+	char*	env_to_add2[] = {"export", "foo=bar", NULL};
+	create_env_list(environ);
+	my_export(env_to_add1);
+	my_export(env_to_add2);
+	g_status = 42;
+	for (unsigned int i = 0; i < sizeof(tests) / sizeof(char*); i++)
+		print_result(tests[i], i);
+}
 
 int		main(void)
 {
-	char*	
+	leak_test();
 }
 
 #endif
