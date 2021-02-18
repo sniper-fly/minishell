@@ -1,5 +1,30 @@
 #include "builtins/builtins.h"
 
+#ifdef MY_PWD_C
+
+#include "libft.h"
+#include "env_ctrl.h"
+#include "struct/env_list.h"
+
+extern t_env_list *g_env_list;
+
+int main(int argc, char *argv[], char *envp[])
+{
+	char *pwd_args[] = {"pwd", NULL};
+	char *cd_args[] = {"cd", "src", NULL};
+
+	argc += 1;
+	argv[0][0] = 'a';
+
+	create_env_list(envp);
+
+	my_pwd(pwd_args);
+	my_cd(cd_args);
+	my_pwd(pwd_args);
+}
+
+#endif
+
 #ifdef MY_ENV_C
 
 #include "libft.h"
@@ -306,6 +331,7 @@ int main(int argc, char *argv[], char *envp[])
 #endif
 
 #ifdef MY_ECHO_C 
+#include <stddef.h>
 
 int main(void)
 {
