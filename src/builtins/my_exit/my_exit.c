@@ -2,7 +2,10 @@
 #include "libft.h"
 #include "utils.h"
 #include "constants.h"
+#include "exit_status.h"
 #include "builtins/my_exit.h"
+
+extern int g_status;
 
 static long int ft_abs(long int n)
 {
@@ -33,7 +36,7 @@ static int get_exit_status(char **args)
 	long int	arg_status;
 
 	if(!args[1])
-		exit_status = 0;
+		exit_status = g_status;
 	else
 	{
 		arg_status = ft_atol(args[1]);
@@ -44,9 +47,7 @@ static int get_exit_status(char **args)
 			exit_status = 256 - exit_status;
 		}
 		else
-		{
 			exit_status = arg_status % 256;
-		}
 	}
 	return (exit_status);
 }
@@ -59,14 +60,14 @@ void my_exit(char **args)
 	if (2 < count_string_arr_row(args))
 	{
 		ft_putendl_fd("minishell: exit: too many arguments\n", STD_ERR);
-		exit(1);
+		exit(GENERAL_ERROROS);
 	}
 	if (20 <= count_digit(args[1]))
 	{
 		ft_putstr_fd("minishell: exit: ", STD_ERR);
 		ft_putstr_fd(args[1], STD_ERR);
 		ft_putendl_fd(": numeric argument required", STD_ERR);
-		exit(2);
+		exit(MISUSE_OF_SHELL_BUILTINS);
 	}
 	exit_status = get_exit_status(args);
 	exit(exit_status);
