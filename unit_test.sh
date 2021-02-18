@@ -47,3 +47,11 @@ test_unit SHOW_STRING_ARR_C
 test_unit FT_PERROR_C
 test_unit CONVERT_LINE2TASKS_C
 test_unit EXEC_CMD_FOR_DEBUG_C
+
+# builtins
+test_unit MY_ECHO_C
+test_unit MY_EXPORT_C
+test_unit MY_CD_C
+test_unit MY_UNSET_C
+test_unit MY_ENV_C
+test_unit MY_PWD_C
