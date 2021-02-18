@@ -1,3 +1,15 @@
+// #ifdef EXPAND_ENV_VAR_STR_C
+#include "parse.h"
+#include "env_ctrl.h"
+#
+
+int		main(void)
+{
+	char*	
+}
+
+#endif
+
 
 #ifdef GET_SINGLE_ENV_KEY_C
 #include "parse.h"
