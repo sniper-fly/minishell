@@ -19,20 +19,22 @@ static t_bool	is_env_end_char(char ch)
 */
 char			*get_single_env_key(char *str, int idx)
 {
-	char	*single_env_var;
+	char	*single_envkey;
 	int		buf_size;
 	int		i;
 
+	if (str[idx] == '?')
+		return (ft_strdup("?"));
 	buf_size = BUF_LEN;
-	single_env_var = ft_calloc(sizeof(char), buf_size); //TODO:
+	single_envkey = ft_calloc(sizeof(char), buf_size); //TODO:
 	// if (str[idx] == '{')の場合は余裕があったらやる
 	i = 0;
 	while (!is_env_end_char(str[idx]))
 	{
-		single_env_var =
-			auto_resize_cpy(single_env_var, i, &buf_size, str[idx]);
+		single_envkey =
+			auto_resize_cpy(single_envkey, i, &buf_size, str[idx]);
 		idx++;
 		i++;
 	}
-	return (single_env_var);
+	return (single_envkey);
 }
