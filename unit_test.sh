@@ -51,7 +51,7 @@ test_unit EXEC_CMD_FOR_DEBUG_C
 # builtins
 test_unit MY_ECHO_C
 test_unit MY_EXPORT_C
-test_unit MY_CD_C
+# test_unit MY_CD_C
 test_unit MY_UNSET_C
 test_unit MY_ENV_C
 test_unit MY_PWD_C

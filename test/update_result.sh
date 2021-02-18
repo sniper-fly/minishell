@@ -33,7 +33,6 @@ function update_each_file() {
 
 # update_each_file MY_ECHO_C
 # update_each_file MY_EXPORT_C
-# update_each_file MY_CD_C
 # update_each_file MY_UNSET_C
 # update_each_file MY_ENV_C
 # update_each_file MY_PWD_C
