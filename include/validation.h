@@ -12,5 +12,6 @@ t_bool	is_valid_meta(char **cmd_line, t_bool is_redirect);
 t_bool	is_valid_redirect(char **cmd_line, t_bool *is_redirect);
 t_bool	is_valid_meta_and_redirect(char *cmd_line);
 t_bool is_valid_quote(char *cmd_line);
+t_bool is_valid_command_line(char *cmd_line);
 
 #endif
