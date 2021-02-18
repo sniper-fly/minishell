@@ -4,5 +4,7 @@
 void my_echo(char **args);
 void my_export(char **args);
 void my_cd(char **args);
+void my_unset(char **args);
+void my_env(char **args); 
 
 #endif

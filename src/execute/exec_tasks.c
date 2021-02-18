@@ -6,7 +6,7 @@
 
 extern int	g_status;
 
-void	exec_cmd(char ***tasks)
+void	exec_tasks(char ***tasks)
 {
 	int i;
 	t_process *procs;
@@ -19,7 +19,7 @@ void	exec_cmd(char ***tasks)
 		// TODO:procs = parse(tasks[i]);
 		// TODO:create_empty_file();
 		// TODO:ビルトインを実行するかどうかのチェック(前後が番兵かi.e.コマンドが単一かどうか)
-		exec_pipes(procs); //パイプのwhileループ(列のループ)
+		exec_cmds(procs); //パイプのwhileループ(列のループ)
 		// TODO:free_procs(procs);
 		++i;
 	}

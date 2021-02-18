@@ -4,21 +4,6 @@
 #include "struct/t_bool.h"
 #include "struct/env_list.h"
 
-static t_bool is_valid_env_key(char *key)
-{
-	if (!ft_strlen(key))
-		return (FALSE);
-	if ('0' <= *key && *key <= '9')
-		return (FALSE);
-	while (*key)
-	{
-		if(!ft_isalnum(*key) && *key != '_')
-			return FALSE;
-		++key;
-	}
-	return (TRUE);
-}
-
 static char *get_new_env_value(char *replica_of_arg)
 {
 	char *value;

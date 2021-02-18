@@ -9,7 +9,7 @@ void	my_export(char **args)
 	t_env_list	**new_env_nodes;
 
 	if (!args[1])
-		print_env();
+		print_env_at_my_export();
 	else
 	{
 		new_env_nodes = create_new_env_nodes_arr(args);

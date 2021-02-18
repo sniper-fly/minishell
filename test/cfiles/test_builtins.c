@@ -1,5 +1,114 @@
 #include "builtins/builtins.h"
 
+#ifdef MY_ENV_C
+
+#include "libft.h"
+#include "utils.h"
+#include "env_ctrl.h"
+#include "constants.h"
+#include "struct/env_list.h"
+
+static void test_my_env(char **args, int n)
+{
+	ft_putnbr_fd(n, STD_OUT);
+	ft_putendl_fd(" ==========", STD_OUT);
+
+	my_env(args);
+	pendl();
+}
+
+int main(int argc, char *argv[], char *envp[])
+{
+	char *args1[] = {"env", NULL};
+	char *args2[] = {"env", "foo=foo2", NULL};
+	char *args3[] = {"env", "foo=foo3", "hoge=hoge3", NULL};
+	char *args4[] = {"env", "foo=foo4", "echo", "hello", NULL};
+	char *args5[] = {"env", "echo", "hello", NULL};
+
+	char *args20[] = {"env", "echo", "\"hello", NULL};
+
+	argc += 1;
+	argv[0][0] = 'a';
+	create_env_list(envp);
+
+	test_my_env(args1, 1);
+	test_my_env(args2, 2);
+	test_my_env(args1, 1);	// args2でセットした環境変数が消えていることを確認
+	test_my_env(args3, 3);
+	test_my_env(args4, 4);
+	test_my_env(args5, 5);
+
+
+	test_my_env(args20, 20);
+
+}
+
+#endif
+
+#ifdef MY_UNSET_C
+
+#include <stdlib.h>
+#include "libft.h"
+#include "utils.h"
+#include "env_ctrl.h"
+#include "constants.h"
+#include "struct/env_list.h"
+#include "builtins/builtins.h"
+
+extern t_env_list *g_env_list;
+
+static void test_my_unset(char **args, int n)
+{
+	char *foo[] = {"export", "foo=foo", NULL};
+	char *hoge[] = {"export", "hoge=hoge", NULL};
+	char *ava[] = {"export", "ava=ava", NULL};
+	char *simple_export[] = {"export", NULL};
+	my_export(foo);
+	my_export(hoge);
+	my_export(ava);	
+
+	ft_putnbr_fd(n, STD_OUT);
+	ft_putendl_fd(" ==========", STD_OUT);
+	my_unset(args);
+
+	my_export(simple_export);
+	pendl();
+}
+
+int main(int argc, char *argv[], char *envp[])
+{
+	char *args1[] = {"unset", "foo", NULL};
+	char *args2[] = {"unset", "foo", "hoge", "ava", NULL};
+	char *args3[] = {"unset", "hello", NULL};
+	char *args4[] = {"unset", "num1", NULL};
+	char *args5[] = {"unset", "_", NULL};
+	char *args6[] = {"unset", "a_a", NULL};
+
+	char *args10[] = {"unset", "foo=foo", NULL};
+	char *args11[] = {"unset", "1foo", NULL};
+	char *args12[] = {"unset", "a=a=a", NULL};
+	char *args13[] = {"unset", "   foo", NULL};
+
+	argc += 1;
+	argv[0][0] = 'a';
+	create_env_list(envp);
+
+	test_my_unset(args1, 1);
+	test_my_unset(args2, 2);
+	test_my_unset(args3, 3);
+	test_my_unset(args4, 4);
+	test_my_unset(args5, 5);
+	test_my_unset(args6, 6);
+
+
+	test_my_unset(args10, 10);
+	test_my_unset(args11, 11);
+	test_my_unset(args12, 12);
+	test_my_unset(args13, 13);
+}
+
+#endif
+
 #ifdef MY_CD_C
 
 #include <errno.h>
