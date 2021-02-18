@@ -30,3 +30,10 @@ function update_each_file() {
 # update_each_file CHECK_EXIT_STATUS_OF_MY_EXECVE_C
 # update_each_file CONVERT_LINE2TASKS_C
 # update_each_file EXEC_CMD_FOR_DEBUG_C
+
+# update_each_file MY_ECHO_C
+# update_each_file MY_EXPORT_C
+# update_each_file MY_CD_C
+# update_each_file MY_UNSET_C
+# update_each_file MY_ENV_C
+# update_each_file MY_PWD_C
