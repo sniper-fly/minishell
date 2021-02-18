@@ -1,5 +1,61 @@
 #include "builtins/builtins.h"
 
+#ifdef MY_EXIT_C
+
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdio.h>
+#include "utils.h"
+#include "libft.h"
+
+static void test_my_exit(char **args, int n)
+{
+	int pid;
+	int status;
+
+	ft_putnbr_fd(n, 1);
+	ft_putendl_fd(" ==========", 1);
+	if((pid = fork()))
+	{
+		waitpid(pid, &status, 0);
+		ft_putstr_fd("status: ", 1);
+		// printf("%d\n", status);
+		ft_putnbr_fd(status, 1);
+		pendl();
+		pendl();
+	}
+	else
+		my_exit(args);
+}
+
+int main(void)
+{
+	char *args1[] = {"exit", "0", NULL};
+	char *args2[] = {"exit", "1", NULL};
+	char *args3[] = {"exit", "1000", NULL};
+	char *args4[] = {"exit", "-1", NULL};
+	char *args5[] = {"exit", "-500", NULL};
+	char *args6[] = {"exit", NULL};
+	char *args7[] = {"exit", "1111111111111111111", NULL};	// 19ケタ
+
+	char *args10[] = {"exit", "1", "2", "3", NULL};
+	char *args11[] = {"exit", "11111111111111111111", NULL};	// 20ケタ
+
+	test_my_exit(args1, 1);
+	test_my_exit(args2, 2);
+	test_my_exit(args3, 3);
+	test_my_exit(args4, 4);
+	test_my_exit(args5, 5);
+	test_my_exit(args6, 6);
+	test_my_exit(args7, 7);
+
+	test_my_exit(args10, 10);
+	test_my_exit(args11, 11);
+}
+
+
+#endif
+
 #ifdef MY_PWD_C
 
 #include "libft.h"
