@@ -7,7 +7,7 @@ void my_pwd(char **args)
 {
 	char *pwd;
 
-	args[1] = NULL;	// ?
+	(void)args;
 	pwd = getcwd(NULL, 0);	// note:エラー処理
 	ft_putendl_fd(pwd, STD_OUT);
 	free(pwd);
