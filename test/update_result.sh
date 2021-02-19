@@ -34,6 +34,7 @@ function update_each_file() {
 ## parse
 # update_each_file AUTO_RESIZE_CPY_C
 # update_each_file GET_SINGLE_ENV_KEY_C
+# update_each_file EXPAND_ENV_VAR_STR_C
 
 ## builtins
 # update_each_file MY_ECHO_C

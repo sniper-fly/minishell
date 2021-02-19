@@ -51,6 +51,7 @@ test_unit EXEC_CMD_FOR_DEBUG_C
 ## parse
 test_unit AUTO_RESIZE_CPY_C
 test_unit GET_SINGLE_ENV_KEY_C
+test_unit EXPAND_ENV_VAR_STR_C
 
 ## builtins
 test_unit MY_ECHO_C

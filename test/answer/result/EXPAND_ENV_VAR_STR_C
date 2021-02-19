@@ -1,0 +1,21 @@
+[0] : normal char : normal char
+[1] : [$ ] : [$ ]
+[2] : [$\] : [$\]
+[3] : [$}] : [$}]
+[4] : $ : $
+[5] : $$$ : $$$
+[6] : $\$$ : $\$$
+[7] : hello $name ! : hello nop !
+[8] : $name$name : nopnop
+[9] : $name\aaa$foo : nop\aaabar
+[10] : notexist$notexist : notexist
+[11] : $foo$notexist : bar
+[12] : $"foo"$notexist : "foo"
+[13] : $'foo'$notexist : 'foo'
+[14] : $?aa : 42aa
+[15] : $?aa$? : 42aa42
+[16] : $$foo : $bar
+[17] : "$foo"$name : "bar"nop
+[18] : '$foo'$name : '$foo'nop
+[19] : foo\$foo : foo\$foo
+[20] : $$$$$foo : $$$$bar
