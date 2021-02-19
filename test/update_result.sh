@@ -30,5 +30,15 @@ function update_each_file() {
 # update_each_file CHECK_EXIT_STATUS_OF_MY_EXECVE_C
 # update_each_file CONVERT_LINE2TASKS_C
 # update_each_file EXEC_CMD_FOR_DEBUG_C
+
+## parse
 # update_each_file AUTO_RESIZE_CPY_C
 # update_each_file GET_SINGLE_ENV_KEY_C
+
+## builtins
+# update_each_file MY_ECHO_C
+# update_each_file MY_EXPORT_C
+# update_each_file MY_UNSET_C
+# update_each_file MY_ENV_C
+# update_each_file MY_PWD_C
+# update_each_file MY_EXIT_C
