@@ -44,7 +44,8 @@ static void	leak_test(void)
 		"\"$foo\"$name",	"\"bar\"nop",
 		"'$foo'$name",		"'$foo'nop",
 		"foo\\$foo",		"foo\\$foo",
-		"$$$$$foo",			"$$$$bar"
+		"$$$$$foo",			"$$$$bar",
+		"\"\\\"'$foo'\\\"\"","\"'var'\""
 	};
 	char*	env_to_add1[] = {"export", "name=nop", NULL};
 	char*	env_to_add2[] = {"export", "foo=bar", NULL};
