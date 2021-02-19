@@ -4,39 +4,47 @@
 #include "builtins/builtins.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 extern char	**environ;
 extern int g_status;
 
-static void	print_result(char *str, int i)
+static void	print_result(char *str, char *answer, int i)
 {
 	char	*expanded;
 
 	expanded = expand_env_var_str(str);
-	printf("[%d]:%s:%s\n", i, str, expanded);
+	printf("[%d] : %s : %s\n", i / 2, str, expanded);
+	if (strcmp(expanded, answer) != 0)
+		printf("!!not expected result at %d\n\n", i / 2);
 	free(expanded);
 }
 
 static void	leak_test(void)
 {
+	//左が変換前、右が変換後の想定文字列
 	char*	tests[] = {
-		"normal char",
-		"[$ ]",
-		"[$\\]",
-		"[$}]",
-		"$",
-		"$$$",
-		"$\\$$",
-		"hello $name !",
-		"$name$name",
-		"$name\\aaa$foo",
-		"notexistence$notexist",
-		"$foo$notexist",
-		"$\"foo\"$notexist",
-		"$'foo'$notexist",
-		"$?aa",
-		"$?aa$?",
-		"$$foo",
+		"normal char", 		"normal char",
+		"[$ ]",				"[$ ]",
+		"[$\\]\0",			"[$\\]", //""で囲まれた文字列はヌル終端してないので、明示的に書く必要がある
+		"[$}]",				"[$}]",
+		"$", 				"$",
+		"$$$", 				"$$$",
+		"$\\$$", 			"$\\$$",
+		"hello $name !", 	"hello nop !",
+		"$name$name",		"nopnop",
+		"$name\\aaa$foo", 	"nop\\aaabar",
+		"notexist$notexist","notexist",
+		"$foo$notexist",	"bar",
+		"$\"foo\"$notexist","\"foo\"",
+		"$'foo'$notexist", 	"'foo'",
+		"$?aa", 			"42aa",
+		"$?aa$?", 			"42aa42",
+		"$$foo",			"$bar",
+		"\"$foo\"$name",	"\"bar\"nop",
+		"'$foo'$name",		"'$foo'nop",
+		"foo\\$foo",		"foo\\$foo",
+		"$$$$$foo",			"$$$$bar"
 	};
 	char*	env_to_add1[] = {"export", "name=nop", NULL};
 	char*	env_to_add2[] = {"export", "foo=bar", NULL};
@@ -44,8 +52,8 @@ static void	leak_test(void)
 	my_export(env_to_add1);
 	my_export(env_to_add2);
 	g_status = 42;
-	for (unsigned int i = 0; i < sizeof(tests) / sizeof(char*); i++)
-		print_result(tests[i], i);
+	for (unsigned int i = 0; i < sizeof(tests) / sizeof(char*); i += 2)
+		print_result(tests[i], tests[i + 1], i);
 }
 
 int		main(void)

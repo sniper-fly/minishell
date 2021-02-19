@@ -17,6 +17,27 @@ static t_bool	should_interpret_as_envvar(char *str, int i)
 	return (FALSE);
 }
 
+static void		handle_escape(
+	char *expanded_str, int *buflen, char *str, int *i)
+{
+	if (str[*i] == BACK_SLASH)
+	{
+		expanded_str = auto_resize_join(expanded_str, buflen, str[*i]);
+		expanded_str = auto_resize_join(expanded_str, buflen, str[*i + 1]);
+		*i += 2;
+		return ;
+	}
+	expanded_str = auto_resize_join(expanded_str, buflen, str[*i]);
+	(*i)++;
+	while (str[*i] != SINGLE_QUOTE)
+	{
+		expanded_str = auto_resize_join(expanded_str, buflen, str[*i]);
+		(*i)++;
+	}
+	expanded_str = auto_resize_join(expanded_str, buflen, str[*i]);
+	(*i)++;
+}
+
 char			*expand_env_var_str(char *str)
 {
 	char	*expanded_str;
@@ -29,6 +50,8 @@ char			*expand_env_var_str(char *str)
 	i = 0;
 	while (str[i])
 	{
+		if (str[i] == SINGLE_QUOTE || str[i] == BACK_SLASH)
+			handle_escape(expanded_str, &buflen, str, &i);
 		if (should_interpret_as_envvar(str, i))
 		{
 			i++; //$をスキップする
