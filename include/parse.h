@@ -27,9 +27,6 @@ char		*get_single_env_key(char *str, int idx);
 char		*join_env_value(char *expanded_str, int *buflen, char *env_key);
 char		*auto_resize_join(char *dst, int *buflen, char ch);
 
-char		*handle_backslash(char *expanded_str, int *buflen, char *str, int *i);
-char		*handle_double_quote(char *expanded_str, int *buflen, char *str, int *i);
-char		*handle_single_quote(char *expanded_str, int *buflen, char *str, int *i);
 char		*handle_escape( char *expanded_str, int *buflen, char *str, int *i);
 
 char		*interpret_envvar( char *expanded_str, int *buflen, char *str, int *i);
