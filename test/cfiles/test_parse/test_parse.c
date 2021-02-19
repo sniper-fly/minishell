@@ -26,7 +26,7 @@ static void	leak_test(void)
 	char*	tests[] = {
 		"normal char", 		"normal char",
 		"[$ ]",				"[$ ]",
-		"[$\\]\0",			"[$\\]", //""で囲まれた文字列はヌル終端してないので、明示的に書く必要がある
+		"[$\\]",			"[$\\]",
 		"[$}]",				"[$}]",
 		"$", 				"$",
 		"$$$", 				"$$$",
@@ -45,7 +45,8 @@ static void	leak_test(void)
 		"'$foo'$name",		"'$foo'nop",
 		"foo\\$foo",		"foo\\$foo",
 		"$$$$$foo",			"$$$$bar",
-		"\"\\\"'$foo'\\\"\"","\"'var'\""
+		"\"'$foo'\"",		"\"'bar'\"",
+		"\"\\\"'$foo'\\\"\"\0",	"\"\\\"'bar'\\\"\"\0" //"\"'$foo'\""
 	};
 	char*	env_to_add1[] = {"export", "name=nop", NULL};
 	char*	env_to_add2[] = {"export", "foo=bar", NULL};
