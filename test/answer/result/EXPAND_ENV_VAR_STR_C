@@ -19,3 +19,5 @@
 [18] : '$foo'$name : '$foo'nop
 [19] : foo\$foo : foo\$foo
 [20] : $$$$$foo : $$$$bar
+[21] : "'$foo'" : "'bar'"
+[22] : "\"'$foo'\"" : "\"'bar'\""
