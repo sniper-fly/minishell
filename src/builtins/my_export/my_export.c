@@ -1,7 +1,10 @@
 #include <stdlib.h>
 #include "env_ctrl.h"
+#include "exit_status.h"
 #include "struct/env_list.h"
 #include "builtins/my_export.h"
+
+extern int g_status;
 
 void	my_export(char **args)
 {
@@ -22,4 +25,6 @@ void	my_export(char **args)
 		// should free new_env_nodes
 		free(new_env_nodes);
 	}
+	if (g_status != GENERAL_ERROROS)
+		g_status = SUCCEEDED;
 }
