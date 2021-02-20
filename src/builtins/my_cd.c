@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "utils.h"
-#include "constants.h"
 #include "env_ctrl.h"
+#include "constants.h"
+#include "exit_status.h"
 #include "builtins/builtins.h"
 
 static void put_error_msg(char *file_path)
@@ -46,14 +47,14 @@ static char *replace_homedir_to_path(char *arg)
 	return (path);
 }
 
-void my_cd(char **args)
+int my_cd(char **args)
 {
 	char *path;
 
 	if(2 < count_string_arr_row(args))
 	{
 		ft_putendl_fd("minishell: cd: too many arguments", STD_ERR);
-		return ;
+		return (GENERAL_ERRORS);
 	}
 	if(!args[1] || args[1][0] == '~')
 		path = replace_homedir_to_path(args[1]);
@@ -63,8 +64,9 @@ void my_cd(char **args)
 	{
 		put_error_msg(path);
 		free(path);
-		return ;
+		return (GENERAL_ERRORS);
 	}
 	free(path);
 	change_env_vars();
+	return (SUCCEEDED);
 }

@@ -1,6 +1,7 @@
 #include "libft.h"
 #include "utils.h"
 #include "constants.h"
+#include "exit_status.h"
 #include "struct/env_list.h"
 
 extern t_env_list *g_env_list;
@@ -24,8 +25,9 @@ static void print_env_at_my_env(void)
 	}
 }
 
-void my_env(char **args)
+int my_env(char **args)
 {
 	if(!ft_strcmp(args[0], "env"))
 		print_env_at_my_env();
+	return (SUCCEEDED);
 }

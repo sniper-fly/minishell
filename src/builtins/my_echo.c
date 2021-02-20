@@ -1,5 +1,6 @@
 #include "libft.h"
 #include "constants.h"
+#include "exit_status.h"
 
 void set_idx_and_endline_flag(char **args, int *idx, int *endline_flag)
 {
@@ -22,7 +23,7 @@ void set_idx_and_endline_flag(char **args, int *idx, int *endline_flag)
 	}
 }
 
-void my_echo(char **args)
+int my_echo(char **args)
 {
 	int idx;
 	int endline_flag;	// 行末に改行を入れるかどうかのフラグ
@@ -41,4 +42,5 @@ void my_echo(char **args)
 	}
 	if(endline_flag)
 		ft_putstr_fd("\n", STD_OUT);
+	return (SUCCEEDED);
 }

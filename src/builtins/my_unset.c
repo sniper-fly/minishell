@@ -1,16 +1,19 @@
 #include "libft.h"
 #include "env_ctrl.h"
 #include "constants.h"
+#include "exit_status.h"
 #include "struct/env_list.h"
 
 extern t_env_list *g_env_list;
 
-void my_unset(char **args)
+int my_unset(char **args)
 {
 	int i;
+	int exit_status;
 	t_env_list *delete_node;
 
 	i = 1;
+	exit_status = SUCCEEDED;
 	while (args[i])
 	{
 		if (!is_valid_env_key(args[i]))
@@ -19,6 +22,7 @@ void my_unset(char **args)
 			ft_putstr_fd(args[i], STD_ERR);
 			ft_putstr_fd("\': not a valid identifier\n", STD_ERR);
 			++i;
+			exit_status = GENERAL_ERRORS;
 			continue;
 		}
 		if ((delete_node = search_env_node(args[i])) == g_env_list)
@@ -31,4 +35,5 @@ void my_unset(char **args)
 		free_env_node(delete_node);
 		++i;
 	}
+	return (exit_status);
 }

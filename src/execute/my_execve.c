@@ -35,7 +35,7 @@ static void check_if_the_full_path_is_valid(char *cmd_path)
 		else if(errno == ENOENT)
 			exit(COMMAND_NOT_FOUND);
 		else
-			exit(GENERAL_ERROROS);
+			exit(GENERAL_ERRORS);
 	}
 }
 
@@ -57,7 +57,7 @@ static void do_execve(char *cmd_path, char **cmd, char **envp)
 		if(errno == EACCES)
 			exit(COMMAND_CANNOT_EXECUTE);
 		else
-			exit(GENERAL_ERROROS);	// TODO: exitのステータス要検証
+			exit(GENERAL_ERRORS);	// TODO: exitのステータス要検証
 	}
 }
 

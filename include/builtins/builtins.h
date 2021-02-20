@@ -1,13 +1,14 @@
 #ifndef BUILTINS_H
 #define BUILTINS_H
 
-void my_echo(char **args);
-void my_export(char **args);
-void my_cd(char **args);
-void my_unset(char **args);
-void my_env(char **args); 
-void my_pwd(char **args);
-void my_exit(char **args);
+int my_echo(char **args);
+int my_export(char **args);
+int my_cd(char **args);
+int my_unset(char **args);
+int my_env(char **args); 
+int my_pwd(char **args);
+int my_exit(char **args);
+void exec_builtins(char **args);
 
 
 #endif
