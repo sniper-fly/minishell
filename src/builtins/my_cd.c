@@ -8,8 +8,6 @@
 #include "exit_status.h"
 #include "builtins/builtins.h"
 
-extern int g_status;
-
 static void put_error_msg(char *file_path)
 {
 	ft_putstr_fd("minishell: cd: ", STD_ERR);
@@ -49,15 +47,14 @@ static char *replace_homedir_to_path(char *arg)
 	return (path);
 }
 
-void my_cd(char **args)
+int my_cd(char **args)
 {
 	char *path;
 
 	if(2 < count_string_arr_row(args))
 	{
 		ft_putendl_fd("minishell: cd: too many arguments", STD_ERR);
-		g_status = GENERAL_ERROROS;
-		return ;
+		return (GENERAL_ERRORS);
 	}
 	if(!args[1] || args[1][0] == '~')
 		path = replace_homedir_to_path(args[1]);
@@ -67,10 +64,9 @@ void my_cd(char **args)
 	{
 		put_error_msg(path);
 		free(path);
-		g_status = GENERAL_ERROROS;
-		return ;
+		return (GENERAL_ERRORS);
 	}
 	free(path);
 	change_env_vars();
-	g_status = SUCCEEDED;
+	return (SUCCEEDED);
 }

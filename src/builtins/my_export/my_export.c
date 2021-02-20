@@ -6,16 +6,17 @@
 
 extern int g_status;
 
-void	my_export(char **args)
+int	my_export(char **args)
 {
 	int			i;
 	t_env_list	**new_env_nodes;
 
+	g_status = SUCCEEDED;
 	if (!args[1])
 		print_env_at_my_export();
 	else
 	{
-		new_env_nodes = create_new_env_nodes_arr(args);
+		new_env_nodes = create_new_env_nodes_arr(args);	// ここでエラーが起こるかも
 		i = 0;
 		while(new_env_nodes[i])
 		{
@@ -25,6 +26,5 @@ void	my_export(char **args)
 		// should free new_env_nodes
 		free(new_env_nodes);
 	}
-	if (g_status != GENERAL_ERROROS)
-		g_status = SUCCEEDED;
+	return (g_status);
 }
