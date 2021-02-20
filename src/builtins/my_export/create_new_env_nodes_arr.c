@@ -7,7 +7,6 @@
 #include "struct/env_list.h"
 
 extern t_env_list *g_env_list;
-extern int g_status;
 
 /*
 static void	set_ptr_at_doll_and_ptr_after_key
@@ -81,7 +80,7 @@ static void	replace_env_var_with_its_value(t_env_list *env_node)
 }
 */
 
-t_env_list **create_new_env_nodes_arr(char **args)
+t_env_list **create_new_env_nodes_arr(char **args, int *exit_status)
 {
 	int			i;
 	t_env_list	**new_env_nodes;
@@ -96,7 +95,7 @@ t_env_list **create_new_env_nodes_arr(char **args)
 			ft_putstr_fd("minishell: export: \'", STD_ERR);
 			ft_putstr_fd(args[i + 1], STD_ERR);
 			ft_putstr_fd("\': not a valid identifier\n", STD_ERR);
-			g_status = GENERAL_ERRORS;
+			*exit_status = GENERAL_ERRORS;
 		}
 		// if (new_env_nodes[i]->value && ft_strchr(new_env_nodes[i]->value, '$'))
 		// 	replace_env_var_with_its_value(new_env_nodes[i]);	// $で指定された環境変数をその値と置換
