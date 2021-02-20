@@ -3,9 +3,12 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "utils.h"
-#include "constants.h"
 #include "env_ctrl.h"
+#include "constants.h"
+#include "exit_status.h"
 #include "builtins/builtins.h"
+
+extern int g_status;
 
 static void put_error_msg(char *file_path)
 {
@@ -53,6 +56,7 @@ void my_cd(char **args)
 	if(2 < count_string_arr_row(args))
 	{
 		ft_putendl_fd("minishell: cd: too many arguments", STD_ERR);
+		g_status = GENERAL_ERROROS;
 		return ;
 	}
 	if(!args[1] || args[1][0] == '~')
@@ -63,8 +67,10 @@ void my_cd(char **args)
 	{
 		put_error_msg(path);
 		free(path);
+		g_status = GENERAL_ERROROS;
 		return ;
 	}
 	free(path);
 	change_env_vars();
+	g_status = SUCCEEDED;
 }
