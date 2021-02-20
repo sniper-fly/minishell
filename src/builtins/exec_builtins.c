@@ -1,6 +1,4 @@
-#include "libft.h"	//
 #include "utils.h"
-#include "constants.h"	//
 #include "struct/t_bool.h"
 #include "builtins/builtins.h"
 
