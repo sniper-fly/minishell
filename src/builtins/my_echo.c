@@ -1,5 +1,8 @@
 #include "libft.h"
 #include "constants.h"
+#include "exit_status.h"
+
+extern int g_status;
 
 void set_idx_and_endline_flag(char **args, int *idx, int *endline_flag)
 {
@@ -41,4 +44,5 @@ void my_echo(char **args)
 	}
 	if(endline_flag)
 		ft_putstr_fd("\n", STD_OUT);
+	g_status = SUCCEEDED;
 }
