@@ -46,11 +46,11 @@ int main(int argc, char *argv[], char *envp[])
 
 	test_exec_builtins(args1, 1);
 	test_exec_builtins(args2, 2);
-	test_exec_builtins(args3, 3);
-	test_exec_builtins(args4, 4);
+	// test_exec_builtins(args3, 3);
+	// test_exec_builtins(args4, 4);
 	test_exec_builtins(args5, 5);
 	test_exec_builtins(args6, 6);
-	test_exec_builtins(args7, 7);
+	// test_exec_builtins(args7, 7);
 	test_exec_builtins(args8, 8);
 
 	test_exec_builtins(args10, 10);
