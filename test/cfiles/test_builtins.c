@@ -1,5 +1,65 @@
 #include "builtins/builtins.h"
 
+#ifdef EXEC_BUILTINS_C
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include "utils.h"
+#include "libft.h"
+#include "env_ctrl.h"
+#include "constants.h"
+#include "struct/t_bool.h"
+#include "struct/env_list.h"
+
+static void test_exec_builtins(char **args, int n)
+{
+	pendl();
+	ft_putnbr_fd(n, STD_OUT);
+	ft_putendl_fd(" ==============================", STD_OUT);
+	if(fork())
+		wait(NULL);
+	else
+	{
+		exec_builtins(args);
+		exit(0);
+	}
+}
+
+int main(int argc, char *argv[], char *envp[])
+{
+	char *args1[] = {"export", "foo=foo", NULL};
+	char *args2[] = {"echo", "hello", "world", NULL};
+	// char *args3[] = {"pwd", NULL};
+	// char *args4[] = {"env", NULL};
+	char *args5[] = {"cd", "src", NULL};
+	char *args6[] = {"unset", "foo", NULL};
+	// char *args7[] = {"export", NULL};
+	char *args8[] = {"exit", "1", NULL};
+
+	char *args10[] = {"noexist", NULL};
+	char *args11[] = {"valgrind", NULL};
+
+	argc += 1;
+	argv[0][0] = 'a';
+	create_env_list(envp);
+
+	test_exec_builtins(args1, 1);
+	test_exec_builtins(args2, 2);
+	// test_exec_builtins(args3, 3);
+	// test_exec_builtins(args4, 4);
+	test_exec_builtins(args5, 5);
+	test_exec_builtins(args6, 6);
+	// test_exec_builtins(args7, 7);
+	test_exec_builtins(args8, 8);
+
+	test_exec_builtins(args10, 10);
+	test_exec_builtins(args11, 11);
+
+}
+
+#endif
+
 #ifdef MY_EXIT_C
 
 #include <unistd.h>
@@ -51,7 +111,6 @@ int main(void)
 	test_my_exit(args10, 10);
 	test_my_exit(args11, 11);
 }
-
 
 #endif
 
