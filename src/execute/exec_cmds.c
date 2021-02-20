@@ -3,9 +3,11 @@
 #include <sys/wait.h>
 #include "utils.h"
 #include "constants.h"
+#include "execute.h"
 #include "my_execve.h"
 #include "exit_status.h"
 #include "struct/process.h"
+#include "builtins/builtins.h"
 
 extern int	g_status;
 
@@ -93,8 +95,12 @@ void		exec_cmds(t_process *procs)
 			pipe(pipe_fd[i]);
 		if ((pid = fork()) == 0)
 		{
+			if (is_builtin_func(procs[i].cmd[0]))
+			{
+				exec_builtins(procs[i].cmd);
+				exit(SUCCEEDED);
+			}
 			close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
-			// execvp(procs[i].cmd[0], procs[i].cmd);	// TODO: use my_execve
 			my_execve(procs[i].cmd);
 		}
 		else if (i > 0)
