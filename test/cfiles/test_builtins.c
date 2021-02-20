@@ -14,8 +14,6 @@
 
 static void test_exec_builtins(char **args, int n)
 {
-	t_bool rv;
-
 	pendl();
 	ft_putnbr_fd(n, STD_OUT);
 	ft_putendl_fd(" ==============================", STD_OUT);
@@ -23,13 +21,7 @@ static void test_exec_builtins(char **args, int n)
 		wait(NULL);
 	else
 	{
-		rv = exec_builtins(args);
-		if(rv == TRUE)
-			ft_putstr_fd("\x1b[32mTRUE\x1b[m", STD_OUT);
-		else
-			ft_putstr_fd("\x1b[31mFALSE\x1b[m", STD_OUT);
-		ft_putstr_fd(" : ", STD_OUT);
-		ft_putendl_fd(args[0], STD_OUT);
+		exec_builtins(args);
 		exit(0);
 	}
 }
