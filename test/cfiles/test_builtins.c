@@ -30,11 +30,11 @@ int main(int argc, char *argv[], char *envp[])
 {
 	char *args1[] = {"export", "foo=foo", NULL};
 	char *args2[] = {"echo", "hello", "world", NULL};
-	char *args3[] = {"pwd", NULL};
-	char *args4[] = {"env", NULL};
+	// char *args3[] = {"pwd", NULL};
+	// char *args4[] = {"env", NULL};
 	char *args5[] = {"cd", "src", NULL};
 	char *args6[] = {"unset", "foo", NULL};
-	char *args7[] = {"export", NULL};
+	// char *args7[] = {"export", NULL};
 	char *args8[] = {"exit", "1", NULL};
 
 	char *args10[] = {"noexist", NULL};
