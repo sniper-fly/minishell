@@ -2,6 +2,8 @@
 #include "struct/t_bool.h"
 #include "builtins/builtins.h"
 
+extern int g_status;
+
 const char *g_builtin_func_names[] =
 {
 	"echo",
@@ -13,7 +15,7 @@ const char *g_builtin_func_names[] =
 	"exit"
 };
 
-void (*g_builtin_func_ptrs[])(char **) =
+int (*g_builtin_func_ptrs[])(char **) =
 {
 	&my_echo,
 	&my_cd,
@@ -33,7 +35,7 @@ void exec_builtins(char **args)
 	{
 		if(!ft_strcmp(args[0], (char *)g_builtin_func_names[i]))
 		{
-			g_builtin_func_ptrs[i](args);
+			g_status = g_builtin_func_ptrs[i](args);
 		}
 		++i;
 	}
