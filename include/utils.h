@@ -12,6 +12,6 @@ void		pendl(void);
 int			count_procs(t_process *procs);
 void		free_procs(t_process **procs);
 int			ft_strcmp(char *s1, char *s2);
-
+int			ft_isspace(char ch);
 
 #endif
