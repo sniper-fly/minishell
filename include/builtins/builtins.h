@@ -8,7 +8,7 @@ int my_unset(char **args);
 int my_env(char **args); 
 int my_pwd(char **args);
 int my_exit(char **args);
-int exec_builtins(char **args);
+void exec_builtins(char **args);
 
 
 #endif
