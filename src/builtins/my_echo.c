@@ -23,7 +23,7 @@ void set_idx_and_endline_flag(char **args, int *idx, int *endline_flag)
 	}
 }
 
-void my_echo(char **args)
+int my_echo(char **args)
 {
 	int idx;
 	int endline_flag;	// 行末に改行を入れるかどうかのフラグ
