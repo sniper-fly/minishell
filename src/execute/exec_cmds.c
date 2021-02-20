@@ -98,7 +98,7 @@ void		exec_cmds(t_process *procs)
 			if (is_builtin_func(procs[i].cmd[0]))
 			{
 				exec_builtins(procs[i].cmd);
-				exit(SUCCEEDED);
+				exit(g_status);
 			}
 			close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
 			my_execve(procs[i].cmd);
