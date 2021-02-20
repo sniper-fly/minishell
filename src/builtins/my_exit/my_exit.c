@@ -60,6 +60,7 @@ void my_exit(char **args)
 	if (2 < count_string_arr_row(args))
 	{
 		ft_putendl_fd("minishell: exit: too many arguments\n", STD_ERR);
+		g_status = GENERAL_ERROROS;
 		exit(GENERAL_ERROROS);
 	}
 	if (20 <= count_digit(args[1]))
@@ -67,8 +68,10 @@ void my_exit(char **args)
 		ft_putstr_fd("minishell: exit: ", STD_ERR);
 		ft_putstr_fd(args[1], STD_ERR);
 		ft_putendl_fd(": numeric argument required", STD_ERR);
+		g_status = MISUSE_OF_SHELL_BUILTINS;
 		exit(MISUSE_OF_SHELL_BUILTINS);
 	}
 	exit_status = get_exit_status(args);
+	g_status = exit_status;
 	exit(exit_status);
 }
