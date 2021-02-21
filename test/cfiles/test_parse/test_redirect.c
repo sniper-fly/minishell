@@ -51,15 +51,15 @@ int		main(void)
 	};
 	char*	badfd[] = {
 		///// bad fd below
-		"112>",
-		"1<",
-		"2<",
-		"10<",
-		"3>",
-		"3>>",
-		"11>>",
-		"12>>",
-		"02>", // 本家では2として出力されるが、エラーとして処理する
+		"112>",		"112",
+		"1<",		"1",
+		"2<",		"2",
+		"10<",		"10",
+		"3>",		"3",
+		"3>>",		"3",
+		"11>>",		"11",
+		"12>>",		"12",
+		"02>", 		"02"// 本家では2として出力されるが、エラーとして処理する
 	};
 
 	for (size_t i = 0; i < sizeof(out1) / sizeof(char*); i++)
@@ -104,10 +104,12 @@ int		main(void)
 			printf("append failure at %ld\n", i);
 		free(redir_mode.fd_str);
 	}
-	for (size_t i = 0; i < sizeof(badfd) / sizeof(char*); i++)
+	for (size_t i = 0; i < sizeof(badfd) / sizeof(char*); i += 2)
 	{
 		test_get_redmode(badfd[i], &redir_mode);
-		printf("err msg = %s\n", redir_mode.fd_str);
+		// printf("%s : %s \n", redir_mode.fd_str, badfd[i + 1]);
+		if (strcmp(redir_mode.fd_str, badfd[i + 1]))
+			printf("invalid result at %ld\n", i / 2);
 		if (! (redir_mode.mode_bit & REDIR_BAD_FD))
 			printf("badfd failure at %ld\n", i);
 		free(redir_mode.fd_str);
