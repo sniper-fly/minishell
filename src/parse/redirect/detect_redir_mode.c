@@ -27,6 +27,7 @@ static void		set_redir_fd_str(char *str_proc, int i, t_redir_mode *redir_mode)
 	{
 		if (ft_isdigit(str_proc[0]))
 			redir_mode->fd_str = ft_substr(str_proc, 0, fd_len);
+		return ;
 	}
 	if (ft_isspace(str_proc[i]) && ft_isdigit(str_proc[i + 1]))
 		redir_mode->fd_str = ft_substr(str_proc, i + 1, fd_len);
