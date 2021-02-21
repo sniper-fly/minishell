@@ -26,7 +26,7 @@ static int	interpret_as_redir(
 	raw_redir_file = get_redirect_file(str_proc, i);
 	fill_space(str_proc, i, redir_mode, raw_redir_file);
 	redir_expanded = expand_env_var_str(raw_redir_file);
-	if (is_ambigous_error(redir_expanded))
+	if (is_ambiguous_error(redir_expanded))
 	{
 		return (p_redir_err(raw_redir_file, redir_expanded));
 	}
