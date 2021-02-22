@@ -3,58 +3,63 @@
 #include "utils.h"
 #include "env_ctrl.h"
 #include "constants.h"
+#include "exit_status.h"
 #include "struct/env_list.h"
 #include "builtins/my_export.h"
 
 extern t_env_list *g_env_list;
 
-static int count_env_node(void)
+static int	count_env_node(void)
 {
-	int node_count;
-	t_env_list *nil;
-	t_env_list *env_node;
+	int			node_count;
+	t_env_list	*nil;
+	t_env_list	*env_node;
 
 	node_count = 0;
 	nil = g_env_list;
 	env_node = g_env_list->next;
 	while (env_node != nil)
 	{
-		if (ft_strcmp(env_node->key, "_"))	// _を表示しないため
+		if (ft_strcmp(env_node->key, "_"))
 			++node_count;
 		env_node = env_node->next;
 	}
 	return (node_count);
 }
 
-static char **create_env_str_arr_from_env_list(int node_count)
+static char	**create_env_str_arr_from_env_list(int node_count)
 {
-	int i;
-	char **env_str_arr;
-	t_env_list *env_node;
+	int			i;
+	char		**env_str_arr;
+	t_env_list	*env_node;
 
 	i = 0;
 	env_node = g_env_list->next;
-	env_str_arr = malloc(sizeof(char *)*(node_count+1));	// TODO:エラー処理
+	if (!(env_str_arr = malloc(sizeof(char *) * (node_count + 1))))
+		return (NULL);
 	while (i < node_count)
 	{
-		if (ft_strcmp(env_node->key, "_"))	// _を表示しないため
+		if (ft_strcmp(env_node->key, "_"))
 		{
-			env_str_arr[i] = create_env_str(env_node);
+			if (!(env_str_arr[i] = create_env_str(env_node)))
+				return (NULL);
 			++i;
 		}
 		env_node = env_node->next;
 	}
 	env_str_arr[i] = NULL;
-	return env_str_arr;
+	return (env_str_arr);
 }
 
-void	print_env_at_my_export(void)
+int			print_env_at_my_export(void)
 {
 	int		i;
 	char	**env_str_arr;
 
-	env_str_arr = create_env_str_arr_from_env_list(count_env_node());
-	sort_keys_by_lexical_order(env_str_arr);
+	if (!(env_str_arr = create_env_str_arr_from_env_list(count_env_node())))
+		return (malloc_error());
+	if (sort_keys_by_lexical_order(env_str_arr) < 0)
+		return (malloc_error());
 	i = 0;
 	while (env_str_arr[i])
 	{
@@ -63,4 +68,5 @@ void	print_env_at_my_export(void)
 		++i;
 	}
 	free_string_arr(env_str_arr);
+	return (SUCCEEDED);
 }
