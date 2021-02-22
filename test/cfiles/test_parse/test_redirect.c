@@ -1,3 +1,49 @@
+
+
+#ifdef GET_REDIRECT_FILE_C
+#include <string.h>
+#include "parse.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+int		main(void)
+{
+	char *raw_redir_filename;
+	char* examples1[] = {
+		">ThisIs",			"example",
+		">hoge",			"hoge",
+		">  hoge  ",		"hoge",
+		"> hoge>a",			"hoge",
+		">hoge<a",			"hoge",
+		"<hoge<a",			"hoge",
+		"< \"hoge\"",		"\"hoge\"",
+		"<hoge\t",			"hoge",
+		"<\t\thoge\t",		"hoge",
+	};
+	char* examples2[] = {
+		">>hoge",			"hoge",
+		">>  hoge  ",		"hoge",
+		">> hoge>a",		"hoge",
+		">>hoge<a",			"hoge",
+	};
+	for (unsigned int i = 0; i < sizeof(examples1) / sizeof(char*); i += 2)
+	{
+		raw_redir_filename = get_redirect_file(examples1[i], 0, REDIR_OUT | REDIR_IN);
+		if (strcmp(raw_redir_filename, examples1[i + 1]))
+			printf("ex1 result differs at %d [%s : %s]\n", i / 2, raw_redir_filename, examples1[i + 1]);
+		free(raw_redir_filename);
+	}
+	for (unsigned int i = 0; i < sizeof(examples2) / sizeof(char*); i += 2)
+	{
+		raw_redir_filename = get_redirect_file(examples2[i], 0, REDIR_OUT | REDIR_APPEND);
+		if (strcmp(raw_redir_filename, examples2[i + 1]))
+			printf("ex2 result differs at %d [%s : %s]\n", i / 2, raw_redir_filename, examples2[i + 1]);
+		free(raw_redir_filename);
+	}
+}
+
+#endif
+
 #ifdef DETECT_REDIR_MODE_C
 #include "struct/redir_mode.h"
 #include "parse.h"
