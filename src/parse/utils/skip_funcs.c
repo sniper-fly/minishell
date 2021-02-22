@@ -35,12 +35,12 @@ void		skip_until_end_double_quote(char *line, int *idx)
 	(*idx)++;
 }
 
-void		skip_escape_seq(char *trimmed, int *i)
+void		skip_escape_seq(char *str, int *i)
 {
-	if (trimmed[*i] == SINGLE_QUOTE)
-		skip_until_end_single_quote(trimmed, i);
-	else if (trimmed[*i] == DOUBLE_QUOTE)
-		skip_until_end_double_quote(trimmed, i);
-	else if (trimmed[*i] == BACK_SLASH)
+	if (str[*i] == SINGLE_QUOTE)
+		skip_until_end_single_quote(str, i);
+	else if (str[*i] == DOUBLE_QUOTE)
+		skip_until_end_double_quote(str, i);
+	else if (str[*i] == BACK_SLASH)
 		(*i) += 2;
 }
