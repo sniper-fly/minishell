@@ -22,15 +22,15 @@ static int	change_env_vars(void)
 	char	**args_to_my_export;
 
 	if (!(args_to_my_export = malloc(sizeof(char *) * 4)))
-		return (-1);
+		return (ERROR);
 	if (!(args_to_my_export[0] = ft_strdup("export")))
-		return (-1);
+		return (ERROR);
 	if (!(args_to_my_export[1] =
 	ft_strjoin("OLDPWD=", search_env_node("PWD")->value)))
-		return (-1);
+		return (ERROR);
 	pwd = getcwd(NULL, 0);
 	if (!(args_to_my_export[2] = ft_strjoin("PWD=", pwd)))
-		return (-1);
+		return (ERROR);
 	args_to_my_export[3] = NULL;
 	my_export(args_to_my_export);
 	free(pwd);
@@ -97,7 +97,7 @@ int			my_cd(char **args)
 		return (GENERAL_ERRORS);
 	}
 	free(path);
-	if (change_env_vars() < 0)
+	if (change_env_vars() == ERROR)
 		return (malloc_error());
 	return (SUCCEEDED);
 }
