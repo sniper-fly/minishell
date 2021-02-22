@@ -43,4 +43,6 @@ function update_each_file() {
 # update_each_file MY_ENV_C
 # update_each_file MY_PWD_C
 # update_each_file MY_EXIT_C
-update_each_file EXEC_BUILTINS_C
+# update_each_file EXEC_BUILTINS_C
+
+update_each_file DETECT_REDIR_MODE_C

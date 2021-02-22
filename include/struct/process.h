@@ -1,13 +1,16 @@
 #ifndef PROCESS_H
-#define PROCESS_H
+# define PROCESS_H
 
+# include "struct/t_bool.h"
 typedef struct	s_process
 {
 	char		**cmd;
 	char		*red_in_file_name;
 	char		*red_out_file_name;
-	int			red_out_mode; //APPEND, OVERWRITEフラグで管理する
-	int			is_end; //列の最後を表す。列の終わりのみTRUE
+	char		*red_err_file_name;
+	int			red_out_mode; // O_TRUNK or O_APPEND | O_CREATE | O_WRONLY
+	int			red_err_mode; // O_TRUNK or O_APPEND | O_CREATE | O_WRONLY
+	t_bool		is_end; //列の最後を表す。列の終わりのみTRUE
 }				t_process;
 
 // "cat aaa | ls -l ; echo hello"

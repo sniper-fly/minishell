@@ -39,7 +39,7 @@ t_process			*parse_each_task(char **str_procs)
 	i = 0;
 	while (str_procs[i])
 	{
-		parse_redirect_and_fill_space(str_procs[i], &(procs[i]));
+		parse_redirect(str_procs[i], &(procs[i]));
 		i++;
 	}
 	procs = parse_cmd(str_procs, procs);

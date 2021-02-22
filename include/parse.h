@@ -3,6 +3,7 @@
 
 # include "struct/process.h"
 # include "struct/t_bool.h"
+# include "struct/redir_mode.h"
 
 # define DIVIDER -3
 
@@ -31,5 +32,7 @@ char		*handle_escape( char *expanded_str, int *buflen, char *str, int *i);
 
 char		*interpret_envvar( char *expanded_str, int *buflen, char *str, int *i);
 t_bool		should_interpret_as_envvar(char *str, int i);
+
+void		detect_redir_mode(char *str_proc, int i, t_redir_mode *redir_mode);
 
 #endif

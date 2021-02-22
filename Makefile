@@ -4,7 +4,7 @@
 NAME = minishell
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I./include -g
+CFLAGS =  -I./include -g -Wall -Wextra -Werror
 
 #SRCS += の形式でディレクトリを追加。コメントアウトで特定ディレクトリ除外可能
 SRCS  = $(shell find ./src -maxdepth 1 -type f -name "*.c")
