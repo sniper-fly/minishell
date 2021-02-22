@@ -1,3 +1,141 @@
+#ifdef IS_JUDGE_FUNCS_C
+#include <stdio.h>
+#include "parse.h"
+
+
+int		main(void)
+{
+	char*	correct[] = {
+		"  aaaa  ",
+		"aaa",
+		"\"  hoge  \"",
+		"  ' a a a '  ",
+		"  aa\" \\\" a a \"aa  ",
+		"  aa\\ a\\a\\ a  ",
+	};
+	char*	wrong[] = {
+		"a a",
+		"    a a    ",
+		"   a\ta  ",
+		"  \"\" ''",
+	};
+	for (unsigned int i = 0; i < sizeof(correct) / sizeof(char*); i++)
+	{
+		printf("%d: result[%d]\n", i, is_ambiguous_err(correct[i]));
+		if (is_ambiguous_err(correct[i]))
+			printf("unexpected result at %d\n", i);
+	}
+	for (unsigned int i = 0; i < sizeof(wrong) / sizeof(char*); i++)
+	{
+		printf("%d: result[%d]\n", i, is_ambiguous_err(wrong[i]));
+		if (!is_ambiguous_err(wrong[i]))
+			printf("unexpected result at %d\n", i);
+	}
+}
+
+#endif
+
+#ifdef FILL_SPACE_C
+#include "parse.h"
+#include "libft.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+int		main(void)
+{
+	char* examples1[] = {
+		">a this is",							"example",
+		"left  >hoge  right",				"left         right",
+		">  hoge  ",						"         ",
+		"> hoge>a",							"      >a",
+		"2>hoge<a",							"      <a",
+		"1<hoge<a",							"      <a",
+		"< \"hoge\" a",						"         a",
+		"left 0<hoge\tright",				"left       \tright",
+		"left<\t\thoge\tright",				"left \t\t    \tright",	
+		"left<'   hoge   ' right",			"left              right",
+		"left0<\"'   hoge   '\" right",		"left0                right",
+		"left< hoge\\ a right",				"left          right",
+		"left<\" hoge\\\" a\" right",		"left             right",
+		"a 2>>hoge<hoge",					"a        <hoge",
+		"left>>  hoge  right",				"left          right",
+		"left 1>> hoge>rigth",				"left         >rigth",
+		"left>>hoge<a",						"left      <a",
+	};
+	char *raw_redir_filename;
+	char *str_proc;
+	t_redir_mode	redir_mode;
+
+	for (unsigned int i = 0; i < sizeof(examples1) / sizeof(char*); i += 2)
+	{
+		int redir_idx;
+		for (redir_idx = 0; examples1[i][redir_idx] != '<' && examples1[i][redir_idx] != '>'; redir_idx++) {;}
+
+		str_proc = ft_strdup(examples1[i]);
+		detect_redir_mode(str_proc, redir_idx, &redir_mode);
+		raw_redir_filename =
+			get_redirect_file(examples1[i], redir_idx, redir_mode.mode_bit);
+		fill_space(str_proc, redir_idx, &redir_mode, raw_redir_filename);
+
+		printf("%d [%s] : [%s]\n", i / 2, str_proc, examples1[i + 1]);
+		if (strcmp(str_proc, examples1[i + 1]))
+			printf("result differs at %d\n\n", i / 2);
+		free(redir_mode.fd_str);
+		free(str_proc);
+		free(raw_redir_filename);
+	}
+}
+
+#endif
+
+#ifdef GET_REDIRECT_FILE_C
+#include <string.h>
+#include "parse.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+int		main(void)
+{
+	char *raw_redir_filename;
+	char* examples1[] = {
+		">ThisIs",				"example",
+		">hoge",				"hoge",
+		">  hoge  ",			"hoge",
+		"> hoge>a",				"hoge",
+		">hoge<a",				"hoge",
+		"<hoge<a",				"hoge",
+		"< \"hoge\"",			"\"hoge\"",
+		"<hoge\t",				"hoge",
+		"<\t\thoge\t",			"hoge",
+		"<'   hoge   '",		"'   hoge   '",
+		"<\"'   hoge   '\"",	"\"'   hoge   '\"",
+		"< hoge\\ a",			"hoge\\ a",
+		"<\" hoge\\\" a\"",		"\" hoge\\\" a\"",
+	};
+	char* examples2[] = {
+		">>hoge",			"hoge",
+		">>  hoge  ",		"hoge",
+		">> hoge>a",		"hoge",
+		">>hoge<a",			"hoge",
+	};
+	for (unsigned int i = 0; i < sizeof(examples1) / sizeof(char*); i += 2)
+	{
+		raw_redir_filename = get_redirect_file(examples1[i], 0, REDIR_OUT | REDIR_IN);
+		if (strcmp(raw_redir_filename, examples1[i + 1]))
+			printf("ex1 result differs at %d [%s : %s]\n", i / 2, raw_redir_filename, examples1[i + 1]);
+		free(raw_redir_filename);
+	}
+	for (unsigned int i = 0; i < sizeof(examples2) / sizeof(char*); i += 2)
+	{
+		raw_redir_filename = get_redirect_file(examples2[i], 0, REDIR_OUT | REDIR_APPEND);
+		if (strcmp(raw_redir_filename, examples2[i + 1]))
+			printf("ex2 result differs at %d [%s : %s]\n", i / 2, raw_redir_filename, examples2[i + 1]);
+		free(raw_redir_filename);
+	}
+}
+
+#endif
+
 #ifdef DETECT_REDIR_MODE_C
 #include "struct/redir_mode.h"
 #include "parse.h"

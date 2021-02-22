@@ -11,27 +11,26 @@
 static int	interpret_as_redir(
 	char *str_proc, int i, t_process *proc, t_process *redir_config)
 {
-	char		*raw_redir_file;
-	char		*redir_expanded;
-	char		*redir_filename;
+	char			*raw_redir_file;
+	char			*redir_expanded;
+	char			*redir_filename;
 	t_redir_mode	redir_mode;
-	int			strlen_has_read;
+	int				strlen_has_read;
 
 	detect_redir_mode(str_proc, i, &redir_mode);
-	if (is_bad_fd(&redir_mode))
+	if (redir_mode.mode_bit & REDIR_BAD_FD)
 	{
-		return (p_bad_fd_err(&redir_mode));
+		return (p_bad_fd_err(redir_mode.fd_str));
 	}
-	skip_space(str_proc, &i);
-	raw_redir_file = get_redirect_file(str_proc, i);
-	fill_space(str_proc, i, redir_mode, raw_redir_file);
+	raw_redir_file = get_redirect_file(str_proc, i, redir_mode.mode_bit); //TODO:
+	fill_space(str_proc, i, &redir_mode, raw_redir_file);
 	redir_expanded = expand_env_var_str(raw_redir_file);
 	if (is_ambiguous_error(redir_expanded))
 	{
-		return (p_redir_err(raw_redir_file, redir_expanded));
+		return (p_ambiguous_err(raw_redir_file, redir_expanded));
 	}
 	redir_filename = cut_modifier(redir_expanded);
-	if (!can_open(redir_filename, &redir_mode))
+	if (open_redir_file(redir_filename, &redir_mode) == ERROR)
 	{
 		return (p_open_err(raw_redir_file, redir_expanded, redir_filename));
 	}

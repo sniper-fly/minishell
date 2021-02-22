@@ -45,4 +45,7 @@ function update_each_file() {
 # update_each_file MY_EXIT_C
 # update_each_file EXEC_BUILTINS_C
 
-update_each_file DETECT_REDIR_MODE_C
+# update_each_file DETECT_REDIR_MODE_C
+# update_each_file IS_JUDGE_FUNCS_C
+# update_each_file FILL_SPACE_C
+# update_each_file GET_REDIRECT_FILE_C

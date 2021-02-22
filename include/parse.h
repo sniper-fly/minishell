@@ -20,7 +20,7 @@ void		free_tasks(char ***tasks);
 
 t_process	*parse_each_task(char **str_procs);
 
-void		parse_redirect_and_fill_space(char *str_proc, t_process *proc);
+void		parse_redirect(char *str_proc, t_process *proc);
 
 char		*expand_env_var_str(char *str);
 char		*auto_resize_cpy(char *dst, int idx, int *buf_size, char src_ch);
@@ -34,5 +34,16 @@ char		*interpret_envvar( char *expanded_str, int *buflen, char *str, int *i);
 t_bool		should_interpret_as_envvar(char *str, int i);
 
 void		detect_redir_mode(char *str_proc, int i, t_redir_mode *redir_mode);
+char		*get_redirect_file(char *str, int i, int mode_bit);
+
+void		skip_space_idx(char *str, int *i);
+void		skip_until_end_single_quote(char *line, int *idx);
+void		skip_until_end_double_quote(char *line, int *idx);
+void		skip_escape_seq(char *str, int *i);
+
+void		fill_space(char *str_proc, int i, t_redir_mode *redir_mode, char *raw_redir);
+
+t_bool		is_ambiguous_err(char *redir_expanded);
+t_bool		is_escape(char ch);
 
 #endif
