@@ -14,6 +14,7 @@ int	my_pwd(char **args)
 	{
 		ft_putstr_fd("minishell: pwd: ", STD_ERR);
 		ft_perror(NULL);
+		return (GENERAL_ERRORS);
 	}
 	ft_putendl_fd(pwd, STD_OUT);
 	free(pwd);
