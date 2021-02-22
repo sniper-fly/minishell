@@ -35,6 +35,9 @@ t_bool		should_interpret_as_envvar(char *str, int i);
 
 void		detect_redir_mode(char *str_proc, int i, t_redir_mode *redir_mode);
 char		*get_redirect_file(char *str, int i, int mode_bit);
+
 void		skip_space_idx(char *str, int *i);
+void		skip_until_end_single_quote(char *line, int *idx);
+void		skip_until_end_double_quote(char *line, int *idx);
 
 #endif
