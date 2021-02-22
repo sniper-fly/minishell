@@ -6,14 +6,14 @@
 
 extern t_env_list *g_env_list;
 
-static void print_env_at_my_env(void)
+static void	print_env_at_my_env(void)
 {
 	t_env_list *nil;
 	t_env_list *env_node;
 
 	nil = g_env_list;
 	env_node = g_env_list->next;
-	while(env_node != nil)
+	while (env_node != nil)
 	{
 		if (env_node->value)
 		{
@@ -25,9 +25,9 @@ static void print_env_at_my_env(void)
 	}
 }
 
-int my_env(char **args)
+int			my_env(char **args)
 {
-	if(!ft_strcmp(args[0], "env"))
+	if (!ft_strcmp(args[0], "env"))
 		print_env_at_my_env();
 	return (SUCCEEDED);
 }
