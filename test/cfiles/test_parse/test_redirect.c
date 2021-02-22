@@ -1,4 +1,4 @@
-#ifdef IS_JUDGEMENTS_C
+#ifdef IS_JUDGE_FUNCS_C
 #include <stdio.h>
 #include "parse.h"
 
