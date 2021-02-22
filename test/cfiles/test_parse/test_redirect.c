@@ -1,5 +1,3 @@
-
-
 #ifdef GET_REDIRECT_FILE_C
 #include <string.h>
 #include "parse.h"
@@ -10,15 +8,19 @@ int		main(void)
 {
 	char *raw_redir_filename;
 	char* examples1[] = {
-		">ThisIs",			"example",
-		">hoge",			"hoge",
-		">  hoge  ",		"hoge",
-		"> hoge>a",			"hoge",
-		">hoge<a",			"hoge",
-		"<hoge<a",			"hoge",
-		"< \"hoge\"",		"\"hoge\"",
-		"<hoge\t",			"hoge",
-		"<\t\thoge\t",		"hoge",
+		">ThisIs",				"example",
+		">hoge",				"hoge",
+		">  hoge  ",			"hoge",
+		"> hoge>a",				"hoge",
+		">hoge<a",				"hoge",
+		"<hoge<a",				"hoge",
+		"< \"hoge\"",			"\"hoge\"",
+		"<hoge\t",				"hoge",
+		"<\t\thoge\t",			"hoge",
+		"<'   hoge   '",		"'   hoge   '",
+		"<\"'   hoge   '\"",	"\"'   hoge   '\"",
+		"< hoge\\ a",			"hoge\\ a",
+		"<\" hoge\\\" a\"",		"\" hoge\\\" a\"",
 	};
 	char* examples2[] = {
 		">>hoge",			"hoge",
