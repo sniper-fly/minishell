@@ -6,11 +6,25 @@
 
 extern t_env_list *g_env_list;
 
-int my_unset(char **args)
+static void	put_invalid_env_key_error(char *key)
 {
-	int i;
-	int exit_status;
-	t_env_list *delete_node;
+	ft_putstr_fd("minishell: unset: \'", STD_ERR);
+	ft_putstr_fd(key, STD_ERR);
+	ft_putstr_fd("\': not a valid identifier\n", STD_ERR);
+}
+
+static void	unset_env_node(t_env_list *delete_node)
+{
+	delete_node->prev->next = delete_node->next;
+	delete_node->next->prev = delete_node->prev;
+	free_env_node(delete_node);
+}
+
+int			my_unset(char **args)
+{
+	int			i;
+	int			exit_status;
+	t_env_list	*delete_node;
 
 	i = 1;
 	exit_status = SUCCEEDED;
@@ -18,9 +32,7 @@ int my_unset(char **args)
 	{
 		if (!is_valid_env_key(args[i]))
 		{
-			ft_putstr_fd("minishell: unset: \'", STD_ERR);
-			ft_putstr_fd(args[i], STD_ERR);
-			ft_putstr_fd("\': not a valid identifier\n", STD_ERR);
+			put_invalid_env_key_error(args[i]);
 			++i;
 			exit_status = GENERAL_ERRORS;
 			continue;
@@ -30,9 +42,7 @@ int my_unset(char **args)
 			++i;
 			continue;
 		}
-		delete_node->prev->next = delete_node->next;
-		delete_node->next->prev = delete_node->prev;
-		free_env_node(delete_node);
+		unset_env_node(delete_node);
 		++i;
 	}
 	return (exit_status);
