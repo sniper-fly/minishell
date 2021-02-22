@@ -8,65 +8,96 @@
 #include "exit_status.h"
 #include "builtins/builtins.h"
 
-static void put_error_msg(char *file_path)
+extern t_env_list *g_env_list;
+
+static void	put_error_msg(char *file_path)
 {
 	ft_putstr_fd("minishell: cd: ", STD_ERR);
 	ft_perror(file_path);
 }
 
-static void change_env_vars(void)
+static int	change_env_vars(void)
 {
-	char *pwd;
-	char **args_to_my_export;
+	char	*pwd;
+	char	**args_to_my_export;
 
-	args_to_my_export = malloc(sizeof(char *) * 4);	// TODO:エラー処理
-	args_to_my_export[0] = ft_strdup("export");	// TODO:エラー処理
-	args_to_my_export[1] = ft_strjoin("OLDPWD=", search_env_node("PWD")->value);	// TODO:エラー処理
-	pwd = getcwd(NULL, 0);	// エラー処理
-	args_to_my_export[2] = ft_strjoin("PWD=", pwd);	// TODO:エラー処理
+	if (!(args_to_my_export = malloc(sizeof(char *) * 4)))
+		return (ERROR);
+	if (!(args_to_my_export[0] = ft_strdup("export")))
+		return (ERROR);
+	if (!(args_to_my_export[1] =
+	ft_strjoin("OLDPWD=", search_env_node("PWD")->value)))
+		return (ERROR);
+	pwd = getcwd(NULL, 0);
+	if (!(args_to_my_export[2] = ft_strjoin("PWD=", pwd)))
+		return (ERROR);
 	args_to_my_export[3] = NULL;
 	my_export(args_to_my_export);
 	free(pwd);
 	free_string_arr(args_to_my_export);
+	return (0);
 }
 
-static char *replace_homedir_to_path(char *arg)
+static char	*replace_homedir_to_path(char *arg)
 {
-	char *path;
-	char *homedir_path;
+	char	*path;
+	char	*homedir_path;
 
 	homedir_path = search_env_node("HOME")->value;
-	if(!arg)
+	if (!arg)
 	{
-		path = ft_strdup(homedir_path);	// TODO:エラー処理
+		if (!(path = ft_strdup(homedir_path)))
+			return (NULL);
 	}
 	else
 	{
-		path = ft_strjoin(homedir_path, &arg[1]);
+		if (!(path = ft_strjoin(homedir_path, &arg[1])))
+			return (NULL);
 	}
 	return (path);
 }
 
-int my_cd(char **args)
+static char	*set_path(char *arg)
+{
+	char	*path;
+
+	if (!arg || arg[0] == '~')
+	{
+		if (!(path = replace_homedir_to_path(arg)))
+			return (NULL);
+	}
+	else
+	{
+		if (!(path = ft_strdup(arg)))
+			return (NULL);
+	}
+	return (path);
+}
+
+int			my_cd(char **args)
 {
 	char *path;
 
-	if(2 < count_string_arr_row(args))
+	if (2 < count_string_arr_row(args))
 	{
 		ft_putendl_fd("minishell: cd: too many arguments", STD_ERR);
 		return (GENERAL_ERRORS);
 	}
-	if(!args[1] || args[1][0] == '~')
-		path = replace_homedir_to_path(args[1]);
-	else
-		path = ft_strdup(args[1]);	// TODO:エラー処理
-	if(chdir(path) == -1)
+	if (!args[1] && search_env_node("HOME") == g_env_list)
+	{
+		ft_putendl_fd("minishell: cd: HOME not set", STD_ERR);
+		return (GENERAL_ERRORS);
+	}
+	if (!(path = set_path(args[1])))
+		return (malloc_error());
+	if (chdir(path) == -1)
 	{
 		put_error_msg(path);
 		free(path);
 		return (GENERAL_ERRORS);
 	}
 	free(path);
-	change_env_vars();
+	if (change_env_vars() == ERROR)
+		return (malloc_error());
 	return (SUCCEEDED);
 }

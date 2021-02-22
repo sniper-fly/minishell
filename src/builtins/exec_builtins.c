@@ -26,14 +26,14 @@ int (*g_builtin_func_ptrs[])(char **) =
 	&my_exit
 };
 
-void exec_builtins(char **args)
+void	exec_builtins(char **args)
 {
 	int i;
 
 	i = 0;
-	while(i < 7)
+	while (i < 7)
 	{
-		if(!ft_strcmp(args[0], (char *)g_builtin_func_names[i]))
+		if (!ft_strcmp(args[0], (char *)g_builtin_func_names[i]))
 		{
 			g_status = g_builtin_func_ptrs[i](args);
 		}
