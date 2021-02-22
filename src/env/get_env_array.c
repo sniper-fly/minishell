@@ -1,41 +1,63 @@
-#include <stdio.h>
-#include "libft.h"
-#include "struct/env_list.h"
 #include <stdlib.h>
+#include "libft.h"
+#include "utils.h"
+#include "constants.h"
+#include "struct/env_list.h"
 
-extern t_env_list *g_env_list;
+extern int			g_status;
+extern t_env_list	*g_env_list;
 
-static int count_env_list(void)
+static int	count_env_list(void)
 {
-	int count;
-	t_env_list *env_var;
+	int			count;
+	t_env_list	*env_var;
 
 	count = 0;
 	env_var = g_env_list->next;
-	while(env_var->key){
+	while (env_var->key)
+	{
 		++count;
 		env_var = env_var->next;
 	}
-	return count;
+	return (count);
 }
 
-char **get_env_array(void)
+static int	set_env_vars(char **env)
 {
-	int i;
-	char **env;
-	char *tmp;
-	t_env_list *env_var;
+	int			i;
+	char		*tmp;
+	t_env_list	*env_var;
 
-	i = 0;
-	env = malloc(sizeof(char *)*(count_env_list()+1));	// TODO:エラー処理
 	env_var = g_env_list->next;
-	while(env_var->key){
-		tmp = ft_strjoin(env_var->key, "=");	// TODO:エラー処理
-		env[i] = ft_strjoin(tmp, env_var->value);	// TODO:エラー処理
+	while (env_var->key)
+	{
+		if (!(tmp = ft_strjoin(env_var->key, "=")))
+		{
+			env[i] = NULL;
+			free_string_arr(env);
+			return (ERROR);
+		}
+		if (!(env[i] = ft_strjoin(tmp, env_var->value)))
+		{
+			free(tmp);
+			free_string_arr(env);
+			return (ERROR);
+		}
 		free(tmp);
 		++i;
 		env_var = env_var->next;
 	}
 	env[i] = NULL;
-	return env;
+	return (SUCCESS);
+}
+
+char		**get_env_array(void)
+{
+	char **env;
+
+	if (!(env = malloc(sizeof(char *) * (count_env_list() + 1))))
+		return (NULL);
+	if (set_env_vars(env) == ERROR)
+		return (NULL);
+	return (env);
 }
