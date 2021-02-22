@@ -1,3 +1,40 @@
+#ifdef IS_JUDGEMENTS_C
+#include <stdio.h>
+#include "parse.h"
+
+
+int		main(void)
+{
+	char*	correct[] = {
+		"  aaaa  ",
+		"aaa",
+		"\"  hoge  \"",
+		"  ' a a a '  ",
+		"  aa\" \\\" a a \"aa  ",
+		"  aa\\ a\\a\\ a  ",
+	};
+	char*	wrong[] = {
+		"a a",
+		"    a a    ",
+		"   a\ta  ",
+		"  \"\" ''",
+	};
+	for (unsigned int i = 0; i < sizeof(correct) / sizeof(char*); i++)
+	{
+		printf("%d: result[%d]\n", i, is_ambiguous_err(correct[i]));
+		if (is_ambiguous_err(correct[i]))
+			printf("unexpected result at %d\n", i);
+	}
+	for (unsigned int i = 0; i < sizeof(wrong) / sizeof(char*); i++)
+	{
+		printf("%d: result[%d]\n", i, is_ambiguous_err(wrong[i]));
+		if (!is_ambiguous_err(wrong[i]))
+			printf("unexpected result at %d\n", i);
+	}
+}
+
+#endif
+
 #ifdef FILL_SPACE_C
 #include "parse.h"
 #include "libft.h"
