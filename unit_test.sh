@@ -64,3 +64,6 @@ test_unit MY_EXIT_C
 test_unit EXEC_BUILTINS_C
 
 test_unit DETECT_REDIR_MODE_C
+test_unit IS_JUDGE_FUNCS_C
+test_unit FILL_SPACE_C
+test_unit GET_REDIRECT_FILE_C
