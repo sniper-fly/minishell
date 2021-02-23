@@ -50,4 +50,8 @@ char		*cut_modifier(char *src);
 int			open_redir_file(char *redir_filename, t_process *redir_config);
 void		update_redir_config(t_process *redir_config, char *redir_filename, t_redir_mode *redir_mode);
 
+int			p_bad_fd_err(char *fd_str);
+int			p_ambiguous_err(char *str_to_free, char *redir_expanded);
+int			p_open_err(char *str_to_free1, char *str_to_free2, char *filename, int err_number);
+
 #endif
