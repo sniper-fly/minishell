@@ -8,8 +8,8 @@ typedef struct	s_process
 	char		*red_in_file_name;
 	char		*red_out_file_name;
 	char		*red_err_file_name;
-	int			red_out_mode; // O_TRUNK or O_APPEND | O_CREATE | O_WRONLY
-	int			red_err_mode; // O_TRUNK or O_APPEND | O_CREATE | O_WRONLY
+	int			red_out_mode; // O_TRUNC or O_APPEND | O_CREATE | O_WRONLY
+	int			red_err_mode; // O_TRUNC or O_APPEND | O_CREATE | O_WRONLY
 	t_bool		is_end; //列の最後を表す。列の終わりのみTRUE
 }				t_process;
 
@@ -24,13 +24,8 @@ typedef struct	s_process
 // D E
 // F
 
-typedef struct	s_cmd_list
-{
-	char				*arg;
-	struct s_cmd_list	*next;
-}				t_cmd_list;
+# endif
 
-#endif
 // //リストの列
 // typedef struct	s_process_list
 // {
