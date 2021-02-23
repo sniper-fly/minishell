@@ -13,9 +13,9 @@ void		update_redir_config(
 		return ;
 	}
 	if (redir_mode->mode_bit & REDIR_APPEND)
-		red_flag_bit = O_APPEND | O_CREAT | O_WRONLY; 
+		red_flag_bit = O_APPEND | O_CREAT | O_RDWR;
 	else
-		red_flag_bit = O_TRUNC | O_CREAT | O_WRONLY; 
+		red_flag_bit = O_TRUNC | O_CREAT | O_RDWR;
 	if (redir_mode->mode_bit & REDIR_OUT)
 	{
 		redir_config->red_out_file_name = redir_filename;
