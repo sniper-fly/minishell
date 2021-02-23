@@ -41,6 +41,10 @@ int main(int argc, char *argv[], char *envp[])
 
 #ifdef CREATE_ENV_LIST_C
 
+#include <stdio.h>
+
+extern t_env_list *g_env_list;
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_env_list *env_node;
@@ -62,6 +66,7 @@ int	main(int argc, char *argv[], char *envp[])
 #ifdef 	MAKE_NEW_ENV_NODE_C
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(void)
 {

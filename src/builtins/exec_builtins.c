@@ -33,9 +33,10 @@ void	exec_builtins(char **args)
 	i = 0;
 	while (i < 7)
 	{
-		if (!ft_strcmp(args[0], (char *)g_builtin_func_names[i]))
+		if (!ft_strcmp((char *)g_builtin_func_names[i], args[0]))
 		{
 			g_status = g_builtin_func_ptrs[i](args);
+			return ;
 		}
 		++i;
 	}
