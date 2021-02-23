@@ -20,7 +20,7 @@ void		free_tasks(char ***tasks);
 
 t_process	*parse_each_task(char **str_procs);
 
-void		parse_redirect(char *str_proc, t_process *proc);
+int			parse_redirect(char *str_proc, t_process *proc);
 
 char		*expand_env_var_str(char *str);
 char		*auto_resize_cpy(char *dst, int idx, int *buf_size, char src_ch);
