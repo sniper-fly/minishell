@@ -95,12 +95,12 @@ void		exec_cmds(t_process *procs)
 			pipe(pipe_fd[i]);
 		if ((pid = fork()) == 0)
 		{
+			close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
 			if (is_builtin_func(procs[i].cmd[0]))
 			{
 				exec_builtins(procs[i].cmd);
 				exit(g_status);
 			}
-			close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
 			my_execve(procs[i].cmd);
 		}
 		else if (i > 0)
