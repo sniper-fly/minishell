@@ -46,4 +46,6 @@ void		fill_space(char *str_proc, int i, t_redir_mode *redir_mode, char *raw_redi
 t_bool		is_ambiguous_err(char *redir_expanded);
 t_bool		is_escape(char ch);
 
+char		*cut_modifier(char *src);
+
 #endif
