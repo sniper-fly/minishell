@@ -1,5 +1,6 @@
 #include "struct/process.h"
 #include "libft.h"
+#include <errno.h>
 #include <stdlib.h>
 #include "parse.h"
 #include "constants.h"
@@ -7,6 +8,13 @@
 #include "struct/redir_mode.h"
 
 #ifndef DEBUG ///////////////////////////////////NOTE: 消す
+
+static void	free_redir(char *str1, char *str2, char *str3)
+{
+	free(str1);
+	free(str2);
+	free(str3);
+}
 
 static int	interpret_as_redir(
 	char *str_proc, int i, t_process *proc, t_process *redir_config)
@@ -30,17 +38,17 @@ static int	interpret_as_redir(
 		return (p_ambiguous_err(raw_redir_file, redir_expanded));
 	}
 	redir_filename = cut_modifier(redir_expanded);
-	if (open_redir_file(redir_filename, &redir_mode) == ERROR)
+	update_redir_config(redir_config, redir_filename, &redir_mode);
+	if (open_redir_file(redir_filename, redir_config) == ERROR)
 	{
-		return (p_open_err(raw_redir_file, redir_expanded, redir_filename));
+		return (p_open_err(raw_redir_file, redir_expanded, redir_filename, errno));
 	}
-	update_redir_config(&redir_config, redir_filename);
 	strlen_has_read = count_redir_len(str_proc, i, redir_mode.fd_str);
 	free_redir(raw_redir_file, redir_expanded, redir_mode.fd_str);
 	return (strlen_has_read);
 }
 
-void		parse_redirect(char *str_proc, t_process *proc)
+int			parse_redirect(char *str_proc, t_process *proc)
 {
 	t_process	redir_config;
 	int			i;
@@ -48,7 +56,7 @@ void		parse_redirect(char *str_proc, t_process *proc)
 
 	init_redir_config(&redir_config);
 	i = 0;
-	while (str_proc[i])
+	while (str_proc[i]) // NOTE:エスケープをスキップする処理がない
 	{
 		if (str_proc[i] == '<' || str_proc[i] == '>')
 		{
@@ -62,6 +70,7 @@ void		parse_redirect(char *str_proc, t_process *proc)
 		i++;
 	}
 	set_redir_config(proc, &redir_config);
+	return (SUCCEEDED);
 }
 
 #endif
