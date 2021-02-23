@@ -7,6 +7,7 @@
 #include "exit_status.h"
 #include "struct/env_list.h"
 
+extern int g_status;
 extern t_env_list	*g_env_list;
 
 static int	init_env_list(void)
@@ -35,8 +36,9 @@ int			create_env_list(char **envp)
 	{
 		if (!(new = make_new_env_node(envp[i])))
 		{
-			malloc_error();
-			exit(GENERAL_ERRORS);
+			g_status = malloc_error();
+			return (ERROR);
+			// exit(GENERAL_ERRORS);
 		}
 		new->next = g_env_list;
 		g_env_list->prev->next = new;
