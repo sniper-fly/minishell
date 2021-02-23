@@ -47,5 +47,7 @@ t_bool		is_ambiguous_err(char *redir_expanded);
 t_bool		is_escape(char ch);
 
 char		*cut_modifier(char *src);
+int			open_redir_file(char *redir_filename, t_process *redir_config);
+void		update_redir_config(t_process *redir_config, char *redir_filename, t_redir_mode *redir_mode);
 
 #endif
