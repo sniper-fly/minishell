@@ -1,7 +1,6 @@
 #include "validation.h"
 #include "struct/t_bool.h"
 
-// リダイレクト後メタ
 static t_bool	is_meta_following_redirect(t_bool is_redirect)
 {
 	if (is_redirect)
@@ -10,7 +9,6 @@ static t_bool	is_meta_following_redirect(t_bool is_redirect)
 		return (FALSE);
 }
 
-// メタ後メタ
 static t_bool	is_meta_following_meta(char *cmd_line)
 {
 	if (is_meta_char(*cmd_line))

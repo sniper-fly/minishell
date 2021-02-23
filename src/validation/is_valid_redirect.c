@@ -1,7 +1,6 @@
 #include "validation.h"
 #include "struct/t_bool.h"
 
-// リダイレクト後リダイレクト
 static t_bool	is_single_redirect(char **cmd_line)
 {
 	if (**cmd_line == '<')
@@ -9,11 +8,11 @@ static t_bool	is_single_redirect(char **cmd_line)
 	else if (**cmd_line == '>')
 	{
 		++(*cmd_line);
-		if(**cmd_line == '>')
+		if (**cmd_line == '>')
 			++(*cmd_line);
 	}
 	skip_space(cmd_line);
-	if(is_redirect_char(**cmd_line))	// TODO:エラー出力
+	if (is_redirect_char(**cmd_line))
 		return (FALSE);
 	return (TRUE);
 }

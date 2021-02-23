@@ -11,7 +11,6 @@ void			put_syntax_error_message(char *msg)
 	pendl();
 }
 
-
 t_bool			is_meta_char(char c)
 {
 	if (c == '|' || c == ';')
