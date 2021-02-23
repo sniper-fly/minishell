@@ -1,7 +1,7 @@
 #include "utils.h"
 #include "struct/t_bool.h"
 
-extern char **g_builtin_func_names;
+extern const char *g_builtin_func_names[];
 
 t_bool is_builtin_func(char *cmd)
 {
@@ -10,8 +10,9 @@ t_bool is_builtin_func(char *cmd)
 	i = 0;
 	while(i < 7)
 	{
-		if(ft_strcmp(g_builtin_func_names[i], cmd))
+		if(!ft_strcmp((char *)g_builtin_func_names[i], cmd))
 			return (TRUE);
+		++i;
 	}
 	return (FALSE);
 }
