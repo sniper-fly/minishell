@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include "parse.h"
 #include "utils.h"
 #include "execute.h"
 #include "struct/t_bool.h"
@@ -18,7 +19,6 @@ static t_bool should_exec_builtin_func(t_process *procs)
 	return (FALSE);
 }
 
-
 void	exec_tasks(char ***tasks)
 {
 	int i;
@@ -27,11 +27,7 @@ void	exec_tasks(char ***tasks)
 	i = 0;
 	while (tasks[i]) //行のループ
 	{
-		procs = NULL;	// TODO:後で消す
-		// procs = parse(tasks[i]);
-		// TODO:procs = parse(tasks[i]);
-		// TODO:create_empty_file();
-		// TODO:ビルトインを実行するかどうかのチェック(前後が番兵かi.e.コマンドが単一かどうか)
+		procs = parse_each_task(tasks[i]); //TODO:
 		if (should_exec_builtin_func(procs))
 			exec_builtins(procs->cmd);
 		else
