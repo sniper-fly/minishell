@@ -23,11 +23,11 @@ static t_bool	is_closed_quote(char **cmd_line, char kind_of_quote)
 			if (**cmd_line == '\"')
 			{
 				++(*cmd_line);
-				continue;
+				continue ;
 			}
 		}
 		if (kind_of_quote == **cmd_line)
-			break;
+			break ;
 		++(*cmd_line);
 	}
 	return (TRUE);
@@ -39,7 +39,7 @@ t_bool			is_valid_quote(char *cmd_line)
 
 	while (*cmd_line)
 	{
-		if(is_quote(*cmd_line))
+		if (is_quote(*cmd_line))
 		{
 			kind_of_quote = *cmd_line;
 			if (!is_closed_quote(&cmd_line, kind_of_quote))

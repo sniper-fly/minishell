@@ -22,42 +22,54 @@ static int	count_env_list(void)
 	return (count);
 }
 
-static int	set_env_vars(char **env)
+static char	*make_env_str(t_env_list *env_var)
 {
-	int			i;
-	char		*tmp;
-	t_env_list	*env_var;
+	char	*tmp;
+	char	*env_var_str;
 
-	env_var = g_env_list->next;
-	while (env_var->key)
+	if (!(tmp = ft_strjoin(env_var->key, "=")))
+		return (NULL);
+	if (env_var->value)
 	{
-		if (!(tmp = ft_strjoin(env_var->key, "=")))
-		{
-			env[i] = NULL;
-			free_string_arr(env);
-			return (ERROR);
-		}
-		if (!(env[i] = ft_strjoin(tmp, env_var->value)))
+		if (!(env_var_str = ft_strjoin(tmp, env_var->value)))
 		{
 			free(tmp);
-			free_string_arr(env);
-			return (ERROR);
+			return (NULL);
 		}
-		free(tmp);
-		++i;
-		env_var = env_var->next;
 	}
-	env[i] = NULL;
-	return (SUCCESS);
+	else
+	{
+		if (!(env_var_str = ft_strdup(tmp)))
+		{
+			free(tmp);
+			return (NULL);
+		}
+	}
+	free(tmp);
+	return (env_var_str);
 }
 
 char		**get_env_array(void)
 {
-	char **env;
+	int			i;
+	char		**env;
+	t_env_list	*env_var;
 
 	if (!(env = malloc(sizeof(char *) * (count_env_list() + 1))))
 		return (NULL);
-	if (set_env_vars(env) == ERROR)
-		return (NULL);
+	i = 0;
+	env_var = g_env_list->next;
+	while (env_var->key)
+	{
+		if (!(env[i] = make_env_str(env_var)))
+		{
+			free_string_arr(env);
+			g_status = malloc_error();
+			return (NULL);
+		}
+		++i;
+		env_var = env_var->next;
+	}
+	env[i] = NULL;
 	return (env);
 }
