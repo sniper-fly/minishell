@@ -12,7 +12,8 @@ const char *g_builtin_func_names[] =
 	"export",
 	"unset",
 	"env",
-	"exit"
+	"exit",
+	"___redirect_failure___"
 };
 
 int (*g_builtin_func_ptrs[])(char **) =
@@ -23,7 +24,8 @@ int (*g_builtin_func_ptrs[])(char **) =
 	&my_export,
 	&my_unset,
 	&my_env,
-	&my_exit
+	&my_exit,
+	&redir_fail_cmd
 };
 
 void	exec_builtins(char **args)
