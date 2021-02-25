@@ -1,4 +1,6 @@
 #ifdef PARSE_EACH_TASK_C
+#include "utils.h"
+#include "execute.h"
 #include "debug.h"
 #include "parse.h"
 #include "env_ctrl.h"
@@ -19,7 +21,9 @@ int		main(void)
 		"\\\\\\\\\\",
 		" echo hello >test/var_parse/hello",
 		" echo bye >test/var_parse/hello >>test/var_parse/bye",
-		" echo err 2>test/var_parse/err >test/var_parse/err <Makefile",
+		" echo err 2>test/var_parse/err >test/var_parse/stdout <Makefile",
+		" echo err <notexist 2>test/var_parse/err >test/var_parse/stdout <Makefile",
+		" echo err  2>test/var_parse/err >test/var_parse/stdout <notexist <Makefile",
 		NULL,
 	};
 	char*	envvar[] = {"export", "foo=bar", "greeting=hello", "hey=good bye", NULL};
@@ -38,6 +42,7 @@ int		main(void)
 			procs = parse_each_task(tasks[j]); //行のループ
 			for (int k = 0; procs[k].is_end != TRUE; k++)
 				show_proc_property(&procs[k]);
+			free_procs(procs);
 		}
 		free_tasks(tasks);
 	}
