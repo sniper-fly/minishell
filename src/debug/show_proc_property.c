@@ -37,9 +37,9 @@ void		show_proc_property(t_process *proc)
 	show_string_arr(proc->cmd);
 	pendl();
 	put_file_name("redir in fname", proc->red_in_file_name);
-	put_file_name("redir out fname", proc->red_in_file_name);
+	put_file_name("redir out fname", proc->red_out_file_name);
 	put_redir_mode(proc->red_out_mode, "stdout mode");
-	put_file_name("redir err fname", proc->red_in_file_name);
+	put_file_name("redir err fname", proc->red_err_file_name);
 	put_redir_mode(proc->red_err_mode, "stderr mode");
 	pendl();
 }
