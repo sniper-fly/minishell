@@ -67,3 +67,6 @@ test_unit DETECT_REDIR_MODE_C
 test_unit IS_JUDGE_FUNCS_C
 test_unit FILL_SPACE_C
 test_unit GET_REDIRECT_FILE_C
+test_unit OPEN_REDIR_FILE
+
+# test_unit PARSE_EACH_TASK_C #不完全なテストなのでまだ追加しない
