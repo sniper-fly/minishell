@@ -10,3 +10,5 @@ test/answer/memleak_log/
 
 test/latest/memleak_log/
 test/latest/result/
+
+test/var_parse
