@@ -16,14 +16,14 @@ static void	p_common_err(char *cause, char *msg)
 int			p_bad_fd_err(char *fd_str)
 {
 	p_common_err(fd_str, "Bad file descriptor");
-	return (GENERAL_ERRORS);
+	return (ERROR);
 }
 
 int			p_ambiguous_err(char *str_to_free, char *redir_expanded)
 {
 	free(str_to_free);
 	p_common_err(redir_expanded, "ambiguous redirect");
-	return (GENERAL_ERRORS);
+	return (ERROR);
 }
 
 int			p_open_err(char *str_to_free1, char *str_to_free2, char *filename, int err_number)
@@ -35,5 +35,5 @@ int			p_open_err(char *str_to_free1, char *str_to_free2, char *filename, int err
 	ft_putstr_fd(": ", STD_ERR);
 	errno = err_number;
 	ft_perror(NULL);
-	return (err_number);
+	return (ERROR);
 }
