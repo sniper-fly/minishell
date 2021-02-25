@@ -37,7 +37,6 @@ static int	interpret_as_redir(char *str_proc, int i, t_process *redir_config)
 		return (p_bad_fd_err(redir_mode.fd_str));
 	}
 	raw_redir_file = get_redirect_file(str_proc, i, redir_mode.mode_bit); //TODO:
-	fill_space(str_proc, i, &redir_mode, raw_redir_file);
 	redir_expanded = expand_env_var_str(raw_redir_file);
 	if (is_ambiguous_err(redir_expanded))
 	{
@@ -51,6 +50,7 @@ static int	interpret_as_redir(char *str_proc, int i, t_process *redir_config)
 	}
 	strlen_has_read =
 		count_redir_len(str_proc, i, redir_mode.mode_bit, raw_redir_file);
+	fill_space(str_proc, i, &redir_mode, raw_redir_file);
 	free_redir(raw_redir_file, redir_expanded, redir_mode.fd_str);
 	return (strlen_has_read);
 }
