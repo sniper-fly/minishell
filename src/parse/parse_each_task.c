@@ -1,3 +1,4 @@
+#include "exit_status.h"
 #include "struct/process.h"
 #include "utils.h"
 #include "libft.h"
@@ -5,21 +6,12 @@
 #include "parse.h"
 #include <stdlib.h>
 
+extern int		g_status;
+
 static void			free_all(char *str, char **strs)
 {
 	free(str);
 	free_string_arr(strs);
-}
-
-//リダイレクトが失敗したときに、exit statusが一で常にリターンする関数が必要
-static char			**get_redir_fail_cmd(void)
-{
-	char	**none_cmd;
-
-	none_cmd = ft_calloc(sizeof(char*), 3);
-	none_cmd[0] = ft_strdup("___redirect_failure___"); //TODO:
-	none_cmd[1] = NULL;
-	return (none_cmd);
 }
 
 static t_process	*parse_cmd(char **str_procs, t_process *procs)
@@ -56,7 +48,13 @@ t_process			*parse_each_task(char **str_procs)
 	while (str_procs[i])
 	{
 		if (parse_redirect(str_procs[i], &(procs[i])) == ERROR)
-			procs[i].cmd = get_redir_fail_cmd();
+		{
+			g_status = GENERAL_ERRORS;
+			// free_single_proc(&procs[i]);
+			ft_bzero(&procs[i], sizeof(t_process));
+			free(str_procs[i]);
+			str_procs[i] = ft_strdup("___redirect_failure___");
+		}
 		i++;
 	}
 	procs = parse_cmd(str_procs, procs);
