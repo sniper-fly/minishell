@@ -3,7 +3,7 @@
 #include "utils.h"
 #include <stdlib.h>
 
-void		free_procs(t_process **procs)
+void		old_free_procs(t_process **procs)
 {
 	int		i;
 	int		j;

@@ -9,7 +9,7 @@ static void leak_test(void)
 
 	procs = generate_simple_procs("cat -e  aa  jfdk | echo aaa bb   dd | eee; hoge ; ajfsdla ; afda");
 	show_procs(procs);
-	free_procs(procs);
+	old_free_procs(procs);
 }
 
 int		main(void)
@@ -82,7 +82,7 @@ void	test_exec_cmd(char *cmd_line)
 	cmd_proc = generate_simple_procs(cmd_line);
 	ft_putstr_fd("===============\n", STD_OUT);
 	exec_cmd_for_debug(cmd_proc);
-	free_procs(cmd_proc);
+	old_free_procs(cmd_proc);
 	ft_putstr_fd("status:", STD_OUT);
 	ft_putnbr_fd(WEXITSTATUS(g_status), STD_OUT);
 	pendl();
