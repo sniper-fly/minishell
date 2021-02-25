@@ -14,5 +14,7 @@ int			ft_strcmp(char *s1, char *s2);
 int			ft_isspace(char ch);
 int			malloc_error(void);
 
+void		free_procs(t_process *procs);
+void		free_single_proc(t_process *proc);
 
 #endif
