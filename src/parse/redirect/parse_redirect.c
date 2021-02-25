@@ -1,6 +1,5 @@
 #include "struct/process.h"
 #include "libft.h"
-#include <errno.h>
 #include <stdlib.h>
 #include "parse.h"
 #include "constants.h"
@@ -40,13 +39,15 @@ static int	interpret_as_redir(char *str_proc, int i, t_process *redir_config)
 	redir_expanded = expand_env_var_str(raw_redir_file);
 	if (is_ambiguous_err(redir_expanded))
 	{
-		return (p_ambiguous_err(raw_redir_file, redir_expanded));
+		return (p_ambiguous_err(
+			redir_mode.fd_str, raw_redir_file, redir_expanded));
 	}
 	redir_filename = cut_modifier(redir_expanded);
 	update_redir_config(redir_config, redir_filename, &redir_mode);
 	if (open_redir_file(redir_filename, redir_config) == ERROR)
 	{
-		return (p_open_err(raw_redir_file, redir_expanded, redir_filename, errno));
+		return (p_open_err(redir_mode.fd_str,
+			raw_redir_file, redir_expanded, redir_config));
 	}
 	strlen_has_read =
 		count_redir_len(str_proc, i, redir_mode.mode_bit, raw_redir_file);
