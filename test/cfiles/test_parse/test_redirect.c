@@ -1,3 +1,102 @@
+#ifdef OPEN_REDIR_FILE
+// update_redir_configのテストも兼任
+#include <wait.h>
+#include <errno.h>
+#include "constants.h"
+#include "parse.h"
+#include "struct/redir_mode.h"
+#include "struct/process.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "constants.h"
+#include "utils.h"
+#include "libft.h"
+
+static void	test_open(char *str, t_redir_mode *redir_mode)
+{
+	char buf[1000];
+	t_process redir_config;
+	
+	ft_bzero(&redir_config, sizeof(t_process));
+	update_redir_config(&redir_config, str, redir_mode);
+	if (open_redir_file(str, &redir_config) == ERROR)
+		p_open_err(NULL, NULL, str, errno);
+	else
+	{
+		sprintf(buf, "cat %s", str);
+		system(buf);
+		wait(NULL);
+	}
+}
+
+int		main(void)
+{
+	char* add_out[] = {
+		"test/var/exist",
+		"test/var/add",
+	};
+	char* append_out = "test/var/append";
+	char* in = "test/var/in";
+	char* errout = "test/var/errout";
+	char* bad_in[] = {
+		"test/var/no_permission",
+		"test/var/no_read",
+		"notexist",
+		"test/var/notexist",
+	};
+	char* bad_out[] = {
+		"test/var/no_write",
+		"test/var/no_permission",
+	};
+	t_redir_mode	redir_mode;
+	char	buf[1000];
+
+	system("chmod a-r test/var/no_read"); wait(NULL);
+	system("chmod 000 test/var/no_permission"); wait(NULL);
+
+	redir_mode.mode_bit = REDIR_OUT;
+	ft_putstr_fd("======= stdout add ========\n", STD_OUT);
+	for (unsigned int i = 0; i < sizeof(add_out) / sizeof(char*) ; i++)
+		test_open(add_out[i], &redir_mode);
+	system("ls test/var"); wait(NULL);
+
+	redir_mode.mode_bit = REDIR_OUT | REDIR_APPEND;
+	ft_putstr_fd("======= stdout append ========\n", STD_OUT);
+	test_open(append_out, &redir_mode);
+	system("ls test/var"); wait(NULL);
+
+	redir_mode.mode_bit = REDIR_IN;
+	ft_putstr_fd("======= stdin ========\n", STD_OUT);
+	test_open(in, &redir_mode);
+	system("ls test/var"); wait(NULL);
+
+	redir_mode.mode_bit = REDIR_ERR;
+	ft_putstr_fd("======= stderr ========\n", STD_OUT);
+	test_open(errout, &redir_mode);
+	system("ls test/var"); wait(NULL);
+
+	redir_mode.mode_bit = REDIR_IN;
+	ft_putstr_fd("======= bad in ========\n", STD_OUT);
+	for (unsigned int i = 0; i < sizeof(bad_in) / sizeof(char*); i++)
+		test_open(bad_in[i], &redir_mode);
+	system("ls test/var"); wait(NULL);
+
+	redir_mode.mode_bit = REDIR_OUT;
+	ft_putstr_fd("======= bad out ========\n", STD_OUT);
+	for (unsigned int i = 0; i < sizeof(bad_out) / sizeof(char*); i++)
+		test_open(bad_out[i], &redir_mode);
+	system("ls test/var"); wait(NULL);
+
+	system("rm test/var/add"); wait(NULL);
+	system("echo exist > test/var/exist"); wait(NULL);
+	sprintf(buf, "rm %s", errout);
+	system(buf); wait(NULL);
+	system("chmod a+r test/var/no_read"); wait(NULL);
+	system("chmod 744 test/var/no_permission"); wait(NULL);
+}
+
+#endif
+
 #ifdef IS_JUDGE_FUNCS_C
 #include <stdio.h>
 #include "parse.h"
