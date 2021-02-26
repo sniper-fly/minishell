@@ -1,7 +1,8 @@
 #include "struct/env_list.h"
+#include "exit_status.h"
 
 t_env_list	*g_env_list;
-int			g_status;
+int			g_status = SUCCEEDED;
 
 #ifndef DEBUG
 
@@ -19,9 +20,7 @@ int		main(int argc, char **argv, char **envp)
 	char		*line;
 	// char		***tasks;
 
-	// setup_signal();
-	if ((line = ft_calloc(sizeof(char *), ARG_MAX + 1)) == NULL)
-		return (p_lack_of_heap_mem_err());
+	setup_shell(&line, envp);
 	while (1)
 	{
 		print_prompt();
