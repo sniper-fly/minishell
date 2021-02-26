@@ -30,6 +30,7 @@ status: 199
 exit
 minishell: exit: too many arguments
 
+didn't exit
 status: 1
 
 11 ==========
