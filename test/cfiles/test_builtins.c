@@ -84,7 +84,10 @@ static void test_my_exit(char **args, int n)
 		pendl();
 	}
 	else
+	{
 		my_exit(args);
+		ft_putendl_fd("didn't exit", 1);
+	}
 }
 
 int main(void)
