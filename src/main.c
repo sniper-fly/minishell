@@ -9,6 +9,9 @@ int			g_status;
 #include "constants.h"
 #include "struct/process.h"
 #include "parse.h"
+#include "libft.h"
+#include "main.h"
+#include "execute.h"
 
 int		main(int argc, char **argv, char **envp)
 {
@@ -17,7 +20,8 @@ int		main(int argc, char **argv, char **envp)
 	int			status;
 
 	setup_signal();
-	line = setup_cmd_line_buf(); //ARG_MAX + 1確保　
+	if ((line = ft_calloc(sizeof(char *), ARG_MAX + 1)) == NULL)
+		return (p_lack_of_heap_mem_err());
 	while (1)
 	{
 		read_cmd_line(line);
