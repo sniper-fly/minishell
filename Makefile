@@ -15,6 +15,7 @@ SRCS += $(shell find ./src/execute -type f -name "*.c")
 SRCS += $(shell find ./src/parse -type f -name "*.c")
 SRCS += $(shell find ./src/validation -type f -name "*.c")
 SRCS += $(shell find ./src/debug -type f -name "*.c")
+SRCS += $(shell find ./src/main -type f -name "*.c")
 
 # make debug ARG=READ_CMD_LINE_C　のようにして使う。
 ifdef DEBUG

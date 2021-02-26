@@ -5,6 +5,8 @@
 #include "read_cmd_line.h"
 #include "utils.h"
 
+extern int	g_status;
+
 static t_bool	is_there_endl(char *line)
 {
 	if (ft_strchr(line, '\n'))
@@ -44,7 +46,10 @@ int		read_cmd_line(char *line)
 	ft_bzero(line, ARG_MAX + 1);
 	actual_read_size = read(STD_IN, line, ARG_MAX);
 	if (line[0] == '\0')
-		exit(1);		//TODO: exitコードは最後のコマンドの終了値、つまり$?が入る
+	{
+		ft_putendl_fd("exit", STD_ERR);
+		exit(g_status);		//TODO: exitコードは最後のコマンドの終了値、つまり$?が入る
+	}
 	else if (actual_read_size == ERROR)
 	{
 		ft_perror("minishell");

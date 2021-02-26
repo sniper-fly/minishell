@@ -1,7 +1,8 @@
 #include "struct/env_list.h"
+#include "exit_status.h"
 
 t_env_list	*g_env_list;
-int			g_status;
+int			g_status = SUCCEEDED;
 
 #ifndef DEBUG
 
@@ -9,22 +10,30 @@ int			g_status;
 #include "constants.h"
 #include "struct/process.h"
 #include "parse.h"
+#include "libft.h"
+#include "main.h"
+#include "execute.h"
+#include <stdlib.h>
 
 int		main(int argc, char **argv, char **envp)
 {
 	char		*line;
 	char		***tasks;
-	int			status;
 
-	setup_signal();
-	line = setup_cmd_line_buf(); //ARG_MAX + 1確保　
-	while (1)
+	setup_shell(&line, envp);
+	while (TRUE)
 	{
+		print_prompt();
 		read_cmd_line(line);
-		if (!is_syntax_valid(line)) //lineは再利用するのでfreeしない
+		if (is_full_of_space(line))
 			continue ;
-		tasks = convert_line2tasks(line);
-		exec_cmd(tasks); //失敗したらtasksをfreeし忘れないように
+		if (!is_valid_command_line(line)) //lineは再利用するのでfreeしない
+		{
+			g_status = SYNTAX_ERROR; //exit statusの名前設定NOTE:
+			continue ;
+		}
+		tasks = convert_line2tasks(line); //TODO:
+		exec_tasks(tasks); //失敗したらtasksをfreeし忘れないように
 		free_tasks(tasks);
 	}
 	free(line);

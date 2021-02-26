@@ -23,7 +23,7 @@ static void	test_open(char *str, t_redir_mode *redir_mode)
 	filename = ft_strdup(str);
 	ft_bzero(&redir_config, sizeof(t_process));
 	update_redir_config(&redir_config, filename, redir_mode);
-	if (open_redir_file(str, &redir_config) == ERROR)
+	if (open_redir_file(str, &redir_config, redir_mode) == ERROR)
 		p_open_err(NULL, NULL, fname_expanded, &redir_config);
 	else
 	{
