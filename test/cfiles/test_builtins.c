@@ -67,6 +67,9 @@ int main(int argc, char *argv[], char *envp[])
 #include <stdio.h>
 #include "utils.h"
 #include "libft.h"
+#include <stdlib.h>
+
+extern int g_status;
 
 static void test_my_exit(char **args, int n)
 {
@@ -87,6 +90,7 @@ static void test_my_exit(char **args, int n)
 	{
 		my_exit(args);
 		ft_putendl_fd("didn't exit", 1);
+		exit(g_status);
 	}
 }
 
