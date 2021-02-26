@@ -27,32 +27,32 @@ static int	interpret_as_redir(char *str_proc, int i, t_process *redir_config)
 	char			*raw_redir_file;
 	char			*redir_expanded;
 	char			*redir_filename;
-	t_redir_mode	redir_mode;
+	t_redir_mode	current_redir;
 	int				strlen_has_read;
 
-	detect_redir_mode(str_proc, i, &redir_mode);
-	if (redir_mode.mode_bit & REDIR_BAD_FD)
+	detect_redir_mode(str_proc, i, &current_redir);
+	if (current_redir.mode_bit & REDIR_BAD_FD)
 	{
-		return (p_bad_fd_err(redir_mode.fd_str));
+		return (p_bad_fd_err(current_redir.fd_str));
 	}
-	raw_redir_file = get_redirect_file(str_proc, i, redir_mode.mode_bit); //TODO:
+	raw_redir_file = get_redirect_file(str_proc, i, current_redir.mode_bit); //TODO:
 	redir_expanded = expand_env_var_str(raw_redir_file);
 	if (is_ambiguous_err(redir_expanded))
 	{
 		return (p_ambiguous_err(
-			redir_mode.fd_str, raw_redir_file, redir_expanded));
+			current_redir.fd_str, raw_redir_file, redir_expanded));
 	}
 	redir_filename = cut_modifier(redir_expanded);
-	update_redir_config(redir_config, redir_filename, &redir_mode);
-	if (open_redir_file(redir_filename, redir_config) == ERROR)
+	update_redir_config(redir_config, redir_filename, &current_redir);
+	if (open_redir_file(redir_filename, redir_config, &current_redir) == ERROR)
 	{
-		return (p_open_err(redir_mode.fd_str,
+		return (p_open_err(current_redir.fd_str,
 			raw_redir_file, redir_expanded, redir_config));
 	}
 	strlen_has_read =
-		count_redir_len(str_proc, i, redir_mode.mode_bit, raw_redir_file);
-	fill_space(str_proc, i, &redir_mode, raw_redir_file);
-	free_redir(raw_redir_file, redir_expanded, redir_mode.fd_str);
+		count_redir_len(str_proc, i, current_redir.mode_bit, raw_redir_file);
+	fill_space(str_proc, i, &current_redir, raw_redir_file);
+	free_redir(raw_redir_file, redir_expanded, current_redir.fd_str);
 	return (strlen_has_read);
 }
 

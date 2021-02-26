@@ -56,12 +56,11 @@ int				my_exit(char **args)
 {
 	int	exit_status;
 
-	ft_putendl_fd("exit", STD_OUT);
+	ft_putendl_fd("exit", STD_ERR);
 	if (2 < count_string_arr_row(args))
 	{
 		ft_putendl_fd("minishell: exit: too many arguments\n", STD_ERR);
 		g_status = GENERAL_ERRORS;
-		exit(GENERAL_ERRORS);
 		return (GENERAL_ERRORS);
 	}
 	if (20 <= count_digit(args[1]))

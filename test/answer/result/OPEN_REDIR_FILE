@@ -1,0 +1,58 @@
+======= stdout add ========
+add
+append
+exist
+in
+no_permission
+no_read
+no_write
+======= stdout append ========
+append
+add
+append
+exist
+in
+no_permission
+no_read
+no_write
+======= stdin ========
+hello
+add
+append
+exist
+in
+no_permission
+no_read
+no_write
+======= stderr ========
+add
+append
+errout
+exist
+in
+no_permission
+no_read
+no_write
+======= bad in ========
+minishell: test/var/no_permission: Permission denied
+minishell: test/var/no_read: Permission denied
+minishell: notexist: No such file or directory
+minishell: test/var/notexist: No such file or directory
+add
+append
+errout
+exist
+in
+no_permission
+no_read
+no_write
+======= bad out ========
+minishell: test/var/no_permission: Permission denied
+add
+append
+errout
+exist
+in
+no_permission
+no_read
+no_write
