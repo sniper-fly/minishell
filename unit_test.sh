@@ -46,7 +46,7 @@ test_unit FREE_PROCS_C
 test_unit SHOW_STRING_ARR_C
 test_unit FT_PERROR_C
 test_unit CONVERT_LINE2TASKS_C
-test_unit EXEC_CMD_FOR_DEBUG_C
+# test_unit EXEC_CMD_FOR_DEBUG_C
 
 ## parse
 test_unit AUTO_RESIZE_CPY_C
