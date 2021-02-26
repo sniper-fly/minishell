@@ -3,6 +3,7 @@
 
 #define SUCCEEDED 0
 #define GENERAL_ERRORS 1
+#define SYNTAX_ERROR 2
 #define MISUSE_OF_SHELL_BUILTINS 2	// Missing keyword or command, or permission problem
 #define COMMAND_CANNOT_EXECUTE 126	// Permission problem or command is not executable
 #define COMMAND_NOT_FOUND 127	// Possible problem with $PATH or a typo

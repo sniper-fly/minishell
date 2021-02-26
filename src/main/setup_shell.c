@@ -13,7 +13,7 @@ void		setup_shell(char **line, char **envp)
 		exit(GENERAL_ERRORS);
 	}
 	// setup_signal();
-	// create_env_list(envp);
+	create_env_list(envp);
 
 	(void)envp;
 }
