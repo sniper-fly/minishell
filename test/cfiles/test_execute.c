@@ -1,3 +1,48 @@
+#ifdef TEST_REDIRECT
+
+#include <stdlib.h>
+#include "libft.h"
+#include "utils.h"
+#include "parse.h"
+#include "execute.h"
+#include "env_ctrl.h"
+
+static void test_redirect(char *cmd_line, int n)
+{
+	char ***tasks;
+
+	ft_putnbr_fd(n, 1);
+	ft_putendl_fd(" ====================", 1);
+	tasks = convert_line2tasks(cmd_line);
+	exec_tasks(tasks);
+	free_tasks(tasks);
+	pendl();
+}
+
+int main(int argc, char *argv[], char *envp[])
+{
+	(void)argc;
+	(void)argv;
+	create_env_list(envp);
+
+	char *cmd_lines[] =
+	{
+		"ls",
+		"wc < Makefile",
+		"ls > ./test/var_parse/execute1",
+		"wc < Makefile > ./test/var_parse/execute2",
+		"wc < unit_test.sh < Makefile > ./test/var_parse/execute3",
+		"wc < Makefile > ./test/var_parse/execute4 > ./test/var_parse/execute5",
+		"wc < unit_test.sh < Makefile > ./test/var_parse/execute6 > ./test/var_parse/execute7",
+		"wc < Makefile >> ./test/var_parse/execute8",
+		"wc < Makefile >> ./test/var_parse/execute8"
+	};
+	for(size_t i = 0; i < sizeof(cmd_lines)/sizeof(char *); ++i)
+		test_redirect(cmd_lines[i], i);
+}
+
+#endif
+
 #ifdef EXEC_CMD_C
 
 #include <sys/wait.h>
