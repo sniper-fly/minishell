@@ -30,7 +30,6 @@ int		main(int argc, char **argv, char **envp)
 			continue ;
 		if (!is_valid_command_line(line)) //lineは再利用するのでfreeしない
 			continue ;
-		ft_putendl_fd("hoge", STD_OUT);
 		// tasks = convert_line2tasks(line); //TODO:
 		// exec_tasks(tasks); //失敗したらtasksをfreeし忘れないように
 		// free_tasks(tasks);
