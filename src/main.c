@@ -12,24 +12,28 @@ int			g_status;
 #include "libft.h"
 #include "main.h"
 #include "execute.h"
+#include <stdlib.h>
 
 int		main(int argc, char **argv, char **envp)
 {
 	char		*line;
-	char		***tasks;
-	int			status;
+	// char		***tasks;
 
-	setup_signal();
+	// setup_signal();
 	if ((line = ft_calloc(sizeof(char *), ARG_MAX + 1)) == NULL)
 		return (p_lack_of_heap_mem_err());
 	while (1)
 	{
+		print_prompt();
 		read_cmd_line(line);
-		if (!is_syntax_valid(line)) //lineは再利用するのでfreeしない
+		if (is_full_of_space(line))
 			continue ;
-		tasks = convert_line2tasks(line);
-		exec_cmd(tasks); //失敗したらtasksをfreeし忘れないように
-		free_tasks(tasks);
+		if (!is_valid_command_line(line)) //lineは再利用するのでfreeしない
+			continue ;
+		ft_putendl_fd("hoge", STD_OUT);
+		// tasks = convert_line2tasks(line); //TODO:
+		// exec_tasks(tasks); //失敗したらtasksをfreeし忘れないように
+		// free_tasks(tasks);
 	}
 	free(line);
 	(void)argc; (void)argv; (void)envp;
