@@ -29,27 +29,27 @@ void	close_and_dup_fds_in_child_proc(int i, int **pipe_fd, t_process *procs)
 	}
 }
 
-void close_and_dup_fds_to_redirect(t_process proc)
+void close_and_dup_fds_to_redirect(t_process *proc)
 {
 	int	fd;
 
-	if (proc.red_in_file_name)
+	if (proc->red_in_file_name)
 	{
-		fd = open(proc.red_in_file_name, O_RDONLY);
+		fd = open(proc->red_in_file_name, O_RDONLY);
 		close(0);
 		dup2(fd, 0);
 		close(fd);
 	}
-	if (proc.red_out_file_name)
+	if (proc->red_out_file_name)
 	{
-		fd = open(proc.red_out_file_name, proc.red_out_mode);
+		fd = open(proc->red_out_file_name, proc->red_out_mode);
 		close(1);
 		dup2(fd, 1);
 		close(fd);
 	}
-	if (proc.red_err_file_name)
+	if (proc->red_err_file_name)
 	{
-		fd = open(proc.red_err_file_name, proc.red_err_mode);
+		fd = open(proc->red_err_file_name, proc->red_err_mode);
 		close(2);
 		dup2(fd, 2);
 		close(fd);

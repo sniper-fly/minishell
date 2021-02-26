@@ -26,7 +26,7 @@ static void	wait_child_procs(pid_t last_pid, int count_procs)
 
 static void exec_cmd(t_process proc)
 {
-	close_and_dup_fds_to_redirect(proc);
+	close_and_dup_fds_to_redirect(&proc);
 	if (is_builtin_func(proc.cmd[0]))
 	{
 		exec_builtins(proc.cmd);
