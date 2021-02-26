@@ -18,12 +18,15 @@ int		main(void)
 		" 'echo' 'aaa' ",
 		" echo ' \\af ' ",
 		" echo \" \\af \" ",
-		"\\\\\\\\\\",
+		"\\\\\\\\\\a",
 		" echo hello >test/var_parse/hello",
 		" echo bye >test/var_parse/hello >>test/var_parse/bye",
 		" echo err 2>test/var_parse/err >test/var_parse/stdout <Makefile",
 		" echo err <notexist 2>test/var_parse/err >test/var_parse/stdout <Makefile",
 		" echo err  2>test/var_parse/err >test/var_parse/stdout <notexist <Makefile",
+		" echo err  2>test/var_parse/err >test/var_parse/stdout <notexist <Makefile",
+		"wc < Makefile > ./test/var_parse/test",
+		"wc < Makefile  > ./test/var_parse/test 2>>./test/var_parse/errtest.txt",
 		NULL,
 	};
 	char*	envvar[] = {"export", "foo=bar", "greeting=hello", "hey=good bye", NULL};
