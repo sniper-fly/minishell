@@ -49,6 +49,7 @@ function update_each_file() {
 # update_each_file IS_JUDGE_FUNCS_C
 # update_each_file FILL_SPACE_C
 # update_each_file GET_REDIRECT_FILE_C
-update_each_file OPEN_REDIR_FILE
+# update_each_file OPEN_REDIR_FILE
+# update_each_file CUT_MODIFIER_C
 
 # update_each_file PARSE_EACH_TASK_C

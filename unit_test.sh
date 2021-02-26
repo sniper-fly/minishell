@@ -57,8 +57,8 @@ test_unit EXPAND_ENV_VAR_STR_C
 test_unit MY_ECHO_C
 test_unit MY_EXPORT_C
 # test_unit MY_CD_C
-test_unit MY_UNSET_C
-test_unit MY_ENV_C
+# test_unit MY_UNSET_C
+# test_unit MY_ENV_C
 test_unit MY_PWD_C
 test_unit MY_EXIT_C
 test_unit EXEC_BUILTINS_C
@@ -68,5 +68,6 @@ test_unit IS_JUDGE_FUNCS_C
 test_unit FILL_SPACE_C
 test_unit GET_REDIRECT_FILE_C
 test_unit OPEN_REDIR_FILE
+test_unit CUT_MODIFIER_C
 
 # test_unit PARSE_EACH_TASK_C #不完全なテストなのでまだ追加しない
