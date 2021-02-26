@@ -1,3 +1,4 @@
+#include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/wait.h>
@@ -11,23 +12,6 @@
 
 extern int	g_status;
 
-static int **create_pipe_fd_array(t_process *procs)
-{
-	int i;
-	int num_of_procs;
-	int **pipe_fd;
-
-	i = 0;
-	num_of_procs = count_procs(procs);
-	pipe_fd = malloc(sizeof(int *)*num_of_procs);	// TODO:mallocエラー処理
-	while(i < num_of_procs)
-	{
-		pipe_fd[i] = malloc(sizeof(int)*2); // TODO:mallocエラー処理
-		++i;
-	}
-	return pipe_fd;
-}
-
 static void	wait_child_procs(pid_t last_pid, int count_procs)
 {
 	int i;
@@ -40,45 +24,15 @@ static void	wait_child_procs(pid_t last_pid, int count_procs)
 	}
 }
 
-static void	close_and_dup_fds_in_child_proc(int i, int **pipe_fd, t_process *procs)
+static void exec_cmd(t_process proc)
 {
-
-	if(i == 0)
+	close_and_dup_fds_to_redirect(&proc);
+	if (is_builtin_func(proc.cmd[0]))
 	{
-		dup2(pipe_fd[i][1], 1);
-		close(pipe_fd[i][0]);
-		close(pipe_fd[i][1]);
+		exec_builtins(proc.cmd);
+		exit(g_status);
 	}
-	else if (procs[i+1].is_end == TRUE)
-	{
-		dup2(pipe_fd[i - 1][0], 0);
-		close(pipe_fd[i - 1][0]);
-		close(pipe_fd[i - 1][1]);
-	}
-	else
-	{
-		dup2(pipe_fd[i - 1][0], 0);
-		dup2(pipe_fd[i][1], 1);
-		close(pipe_fd[i - 1][0]);
-		close(pipe_fd[i - 1][1]);
-		close(pipe_fd[i][0]);
-		close(pipe_fd[i][1]);
-	}
-}
-
-static void free_pipe_fd_array(int **pipe_fd, t_process *procs)
-{
-	int i;
-	int num_of_procs;
-
-	i = 0;
-	num_of_procs = count_procs(procs);
-	while(i < num_of_procs)
-	{
-		free(pipe_fd[i]);
-		++i;
-	}
-	free(pipe_fd);
+	my_execve(proc.cmd);
 }
 
 void		exec_cmds(t_process *procs)
@@ -95,19 +49,14 @@ void		exec_cmds(t_process *procs)
 			pipe(pipe_fd[i]);
 		if ((pid = fork()) == 0)
 		{
-			close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
-			if (is_builtin_func(procs[i].cmd[0]))
-			{
-				exec_builtins(procs[i].cmd);
-				exit(g_status);
-			}
-			my_execve(procs[i].cmd);
+			if (procs[i + 1].is_end != TRUE)
+				close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
+			exec_cmd(procs[i]);
 		}
 		else if (i > 0)
 		{
 			close(pipe_fd[i - 1][0]);
 			close(pipe_fd[i - 1][1]);
-			// TODO:リダイレクト処理
 		}
 		++i;
 	}
