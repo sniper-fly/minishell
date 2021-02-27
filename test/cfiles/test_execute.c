@@ -149,7 +149,7 @@ int main(int argc, char *argv[], char *envp[])
 	//存在しないファイル
 	argc += 0;
 	argv[0][0] = 'A';
-	// create_env_list(envp);
+	create_env_list(envp);
 	exec_test(cmd, envp);
 	exec_test(cmd1, envp);
 	exec_test(cmd2, envp);
@@ -207,7 +207,7 @@ int main(int argc, char *argv[], char *envp[])
 	//存在しないファイル
 	argc += 0;
 	argv[0][0] = 'A';
-	// create_env_list(envp);
+	create_env_list(envp);
 	exec_test_and_output_exit_status(cmd, envp);
 	exec_test_and_output_exit_status(cmd1, envp);
 	exec_test_and_output_exit_status(cmd2, envp);
