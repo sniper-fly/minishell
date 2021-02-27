@@ -5,6 +5,7 @@
 #include "utils.h"
 #include "constants.h"
 #include "execute.h"
+#include "env_ctrl.h"
 #include "exit_status.h"
 #include "struct/process.h"
 #include "builtins/builtins.h"
@@ -27,6 +28,7 @@ static void	wait_child_procs(pid_t last_pid, int count_procs)
 static void	exec_cmd(int i, int **pipe_fd, t_process *procs)
 {
 	char	**envp;
+
 	if (procs[i + 1].is_end != TRUE)
 		close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
 	close_and_dup_fds_to_redirect(&(procs[i]));
