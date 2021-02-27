@@ -41,7 +41,7 @@ static void	check_if_the_full_path_is_valid(char *cmd_path)
 	}
 }
 
-static void do_execve(char *cmd_path, char **cmd, char **envp)
+static void	do_execve(char *cmd_path, char **cmd, char **envp)
 {
 	if (execve(cmd_path, cmd, envp) == ERROR)
 	{
@@ -66,7 +66,7 @@ static char	*get_command_path(char *cmd)
 		return (NULL);
 	}
 	i = 0;
-	while(path_db_ptr[i])
+	while (path_db_ptr[i])
 	{
 		if (!(cmd_path = join_cmd_to_path(cmd, path_db_ptr[i])))
 		{
