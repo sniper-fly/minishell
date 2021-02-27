@@ -119,12 +119,12 @@ int main(int argc, char *argv[], char *envp[])
 #include "env_ctrl.h"
 #include <sys/wait.h>
 
-static void exec_test(char **cmd)
+static void exec_test(char **cmd, char **envp)
 {
 	if(fork())
 		wait(NULL);
 	else{
-		my_execve(cmd);
+		my_execve(cmd, envp);
 		exit(0);
 	}
 }
@@ -149,13 +149,13 @@ int main(int argc, char *argv[], char *envp[])
 	//存在しないファイル
 	argc += 0;
 	argv[0][0] = 'A';
-	create_env_list(envp);
-	exec_test(cmd);
-	exec_test(cmd1);
-	exec_test(cmd2);
-	exec_test(cmd3);
-	exec_test(cmd4);
-	exec_test(cmd5);
+	// create_env_list(envp);
+	exec_test(cmd, envp);
+	exec_test(cmd1, envp);
+	exec_test(cmd2, envp);
+	exec_test(cmd3, envp);
+	exec_test(cmd4, envp);
+	exec_test(cmd5, envp);
 }
 
 #endif
@@ -172,7 +172,7 @@ int main(int argc, char *argv[], char *envp[])
 #include "constants.h"
 #include "utils.h"
 
-static void exec_test_and_output_exit_status(char **cmd)
+static void exec_test_and_output_exit_status(char **cmd, char **envp)
 {
 	int status;
 
@@ -183,7 +183,7 @@ static void exec_test_and_output_exit_status(char **cmd)
 		ft_putnbr_fd(WEXITSTATUS(status), STD_OUT);
 		pendl();
 	}else{
-		my_execve(cmd);
+		my_execve(cmd, envp);
 	}
 }
 
@@ -207,13 +207,13 @@ int main(int argc, char *argv[], char *envp[])
 	//存在しないファイル
 	argc += 0;
 	argv[0][0] = 'A';
-	create_env_list(envp);
-	exec_test_and_output_exit_status(cmd);
-	exec_test_and_output_exit_status(cmd1);
-	exec_test_and_output_exit_status(cmd2);
-	exec_test_and_output_exit_status(cmd3);
-	exec_test_and_output_exit_status(cmd4);
-	exec_test_and_output_exit_status(cmd5);
+	// create_env_list(envp);
+	exec_test_and_output_exit_status(cmd, envp);
+	exec_test_and_output_exit_status(cmd1, envp);
+	exec_test_and_output_exit_status(cmd2, envp);
+	exec_test_and_output_exit_status(cmd3, envp);
+	exec_test_and_output_exit_status(cmd4, envp);
+	exec_test_and_output_exit_status(cmd5, envp);
 }
 
 #endif
