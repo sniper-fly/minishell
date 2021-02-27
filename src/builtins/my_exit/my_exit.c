@@ -38,7 +38,6 @@ int				my_exit(char **args)
 		ft_putendl_fd(": numeric argument required", STD_ERR);
 		g_status = MISUSE_OF_SHELL_BUILTINS;
 		exit(MISUSE_OF_SHELL_BUILTINS);
-		return (MISUSE_OF_SHELL_BUILTINS);
 	}
 	if (args[1])
 		g_status = ft_atol(args[1]) & 255;
