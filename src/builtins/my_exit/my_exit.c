@@ -63,7 +63,7 @@ int				my_exit(char **args)
 		g_status = GENERAL_ERRORS;
 		return (GENERAL_ERRORS);
 	}
-	if (20 <= count_digit(args[1]))
+	if (args[1] && 20 <= count_digit(args[1]))
 	{
 		ft_putstr_fd("minishell: exit: ", STD_ERR);
 		ft_putstr_fd(args[1], STD_ERR);

@@ -12,7 +12,7 @@ extern int	g_status;
 
 static t_bool should_exec_builtin_func(t_process *procs)
 {
-	if(procs[1].is_end == TRUE)
+	if(procs[1].is_end != TRUE)
 		return (FALSE);
 	if (is_builtin_func(procs[0].cmd[0]))
 		return (TRUE);
@@ -29,7 +29,7 @@ void	exec_tasks(char ***tasks)
 	{
 		procs = parse_each_task(tasks[i]); //TODO:
 		if (should_exec_builtin_func(procs))
-			exec_builtins(procs->cmd);
+			exec_builtins(procs[0].cmd);
 		else
 			exec_cmds(procs); //パイプのwhileループ(列のループ)
 		// TODO:free_procs(procs);
