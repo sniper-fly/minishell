@@ -3,11 +3,10 @@
 
 int	count_procs(t_process *procs)
 {
-	int count;
+	int	count;
 
 	count = 0;
-	while(procs[count].is_end != TRUE)
+	while (procs[count].is_end != TRUE)
 		++count;
-	return count;
+	return (count);
 }
-

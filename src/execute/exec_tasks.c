@@ -10,24 +10,29 @@
 
 extern int	g_status;
 
-static t_bool should_exec_builtin_func(t_process *procs)
+static t_bool	should_exec_builtin_func(t_process *procs)
 {
-	if(procs[1].is_end != TRUE)
+	if (procs[1].is_end != TRUE)
 		return (FALSE);
 	if (is_builtin_func(procs[0].cmd[0]))
 		return (TRUE);
 	return (FALSE);
 }
 
-void	exec_tasks(char ***tasks)
+void			exec_tasks(char ***tasks)
 {
-	int i;
-	t_process *procs;
+	int			i;
+	t_process	*procs;
 
 	i = 0;
 	while (tasks[i]) //行のループ
 	{
-		procs = parse_each_task(tasks[i]); //TODO:
+		if (!(procs = parse_each_task(tasks[i])))
+		{
+			g_status = malloc_error();
+			++i;
+			continue;
+		}
 		if (should_exec_builtin_func(procs))
 			exec_builtins(procs[0].cmd);
 		else
