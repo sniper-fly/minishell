@@ -5,7 +5,6 @@
 #include "utils.h"
 #include "constants.h"
 #include "execute.h"
-#include "my_execve.h"
 #include "exit_status.h"
 #include "struct/process.h"
 #include "builtins/builtins.h"
@@ -18,13 +17,14 @@ static void	wait_child_procs(pid_t last_pid, int count_procs)
 
 	i = 0;
 	waitpid(last_pid, &g_status, 0);
-	while(i < count_procs - 1){
+	while (i < count_procs - 1)
+	{
 		wait(NULL);
 		++i;
 	}
 }
 
-static void exec_cmd(int i, int **pipe_fd, t_process *procs)
+static void	exec_cmd(int i, int **pipe_fd, t_process *procs)
 {
 	char	**envp;
 	if (procs[i + 1].is_end != TRUE)
