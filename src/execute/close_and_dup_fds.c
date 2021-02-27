@@ -5,7 +5,6 @@
 
 void	close_and_dup_fds_in_child_proc(int i, int **pipe_fd, t_process *procs)
 {
-
 	if (i == 0)
 	{
 		dup2(pipe_fd[i][1], 1);
