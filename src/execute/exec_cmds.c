@@ -24,35 +24,43 @@ static void	wait_child_procs(pid_t last_pid, int count_procs)
 	}
 }
 
-static void exec_cmd(t_process *proc)
+static void exec_cmd(int i, int **pipe_fd, t_process *procs)
 {
-	close_and_dup_fds_to_redirect(proc);
-	if (is_builtin_func(proc->cmd[0]))
+	char	**envp;
+	if (procs[i + 1].is_end != TRUE)
+		close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
+	close_and_dup_fds_to_redirect(&(procs[i]));
+	if (is_builtin_func(procs[i].cmd[0]))
 	{
-		exec_builtins(proc->cmd);
+		exec_builtins(procs[i].cmd);
 		exit(g_status);
 	}
-	my_execve(proc->cmd);
+	if (!(envp = get_env_array()))
+	{
+		g_status = malloc_error();
+		return ;
+	}
+	my_execve(procs[i].cmd, envp);
 }
 
 void		exec_cmds(t_process *procs)
 {
-	int i;
-	pid_t pid;
-	int **pipe_fd;
+	int		i;
+	int		**pipe_fd;
+	pid_t	pid;
 
 	i = 0;
-	pipe_fd = create_pipe_fd_array(procs);
+	if (!(pipe_fd = create_pipe_fd_array(procs)))
+	{
+		g_status = malloc_error();
+		return ;
+	}
 	while (procs[i].is_end != TRUE)
 	{
-		if (procs[i+1].is_end != TRUE)
+		if (procs[i + 1].is_end != TRUE)
 			pipe(pipe_fd[i]);
 		if ((pid = fork()) == 0)
-		{
-			if (procs[i + 1].is_end != TRUE)
-				close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
-			exec_cmd(&(procs[i]));
-		}
+			exec_cmd(i, pipe_fd, procs);
 		else if (i > 0)
 		{
 			close(pipe_fd[i - 1][0]);
