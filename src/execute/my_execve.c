@@ -7,7 +7,6 @@
 #include "libft.h"
 #include "execute.h"
 #include "env_ctrl.h"
-#include "my_execve.h"
 #include "constants.h"
 #include "exit_status.h"
 #include "struct/process.h"
@@ -89,7 +88,7 @@ void		my_execve(char **cmd, char **envp)
 		check_if_the_full_path_is_valid(cmd[0]);
 	if (is_there_execute_file_at(cmd[0]))
 		do_execve(cmd[0], cmd, envp);
-	if (cmd_path = get_command_path(cmd[0]))
+	if ((cmd_path = get_command_path(cmd[0])))
 		do_execve(cmd_path, cmd, envp);
 	else if (g_status != GENERAL_ERRORS)
 		if_command_not_found(cmd[0]);
