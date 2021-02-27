@@ -6,7 +6,7 @@
 void	close_and_dup_fds_in_child_proc(int i, int **pipe_fd, t_process *procs)
 {
 
-	if(i == 0)
+	if (i == 0)
 	{
 		dup2(pipe_fd[i][1], 1);
 		close(pipe_fd[i][0]);
@@ -29,7 +29,7 @@ void	close_and_dup_fds_in_child_proc(int i, int **pipe_fd, t_process *procs)
 	}
 }
 
-void close_and_dup_fds_to_redirect(t_process *proc)
+void	close_and_dup_fds_to_redirect(t_process *proc)
 {
 	int	fd;
 
