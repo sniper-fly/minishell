@@ -10,7 +10,7 @@ t_bool	is_builtin_func(char *cmd)
 	i = 0;
 	while (i < 7)
 	{
-		if(!ft_strcmp((char *)g_builtin_func_names[i], cmd))
+		if (!ft_strcmp((char *)g_builtin_func_names[i], cmd))
 			return (TRUE);
 		++i;
 	}
