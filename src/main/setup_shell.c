@@ -1,3 +1,4 @@
+#include "setup_signal.h"
 #include "env_ctrl.h"
 #include "exit_status.h"
 #include <stdlib.h>
@@ -12,7 +13,7 @@ void		setup_shell(char **line, char **envp)
 		p_lack_of_heap_mem_err();
 		exit(GENERAL_ERRORS);
 	}
-	// setup_signal();
+	setup_signal();
 	create_env_list(envp);
 
 	(void)envp;

@@ -19,11 +19,15 @@ static void	wait_child_procs(pid_t last_pid, int count_procs)
 
 	i = 0;
 	waitpid(last_pid, &status, 0);
-	g_status = WEXITSTATUS(status);
-	waitpid(last_pid, &g_status, 0);
+	if (WIFSIGNALED(status))
+		g_status = WTERMSIG(status) + 128;
+	else
+		g_status = WEXITSTATUS(status);
 	while (i < count_procs - 1)
 	{
-		wait(NULL);
+		wait(&status);
+		if (WIFSIGNALED(status))
+			g_status = WTERMSIG(status) + 128;
 		++i;
 	}
 }
