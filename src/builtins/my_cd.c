@@ -18,19 +18,24 @@ static void	put_error_msg(char *file_path)
 
 static int	change_env_vars(void)
 {
-	char	*pwd;
-	char	**args_to_my_export;
+	char		*pwd;
+	char		**args_to_my_export;
+	t_env_list	*pwd_node;
 
 	if (!(args_to_my_export = malloc(sizeof(char *) * 4)))
 		return (ERROR);
 	if (!(args_to_my_export[0] = ft_strdup("export")))
 		return (ERROR);
-	if (!(args_to_my_export[1] =
-	ft_strjoin("OLDPWD=", search_env_node("PWD")->value)))
-		return (ERROR);
 	pwd = getcwd(NULL, 0);
-	if (!(args_to_my_export[2] = ft_strjoin("PWD=", pwd)))
+	if (!(args_to_my_export[1] = ft_strjoin("PWD=", pwd)))
 		return (ERROR);
+	if ((pwd_node = search_env_node("PWD")) != g_env_list)
+	{
+		if (!(args_to_my_export[2] = ft_strjoin("OLDPWD=", pwd_node->value)))
+			return (ERROR);
+	}
+	else
+		args_to_my_export[2] = NULL;
 	args_to_my_export[3] = NULL;
 	my_export(args_to_my_export);
 	free(pwd);
@@ -76,7 +81,7 @@ static char	*set_path(char *arg)
 
 int			my_cd(char **args)
 {
-	char *path;
+	char	*path;
 
 	if (2 < count_string_arr_row(args))
 	{
