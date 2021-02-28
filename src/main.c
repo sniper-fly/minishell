@@ -1,11 +1,4 @@
-#include "struct/env_list.h"
-#include "exit_status.h"
-
-t_env_list	*g_env_list;
-int			g_status = SUCCEEDED;
-
-#ifndef DEBUG
-
+#include <signal.h>
 #include "read_cmd_line.h"
 #include "constants.h"
 #include "struct/process.h"
@@ -14,6 +7,14 @@ int			g_status = SUCCEEDED;
 #include "main.h"
 #include "execute.h"
 #include <stdlib.h>
+#include "struct/env_list.h"
+#include "exit_status.h"
+
+t_env_list				*g_env_list;
+int						g_status = SUCCEEDED;
+volatile sig_atomic_t	g_is_reading_cmd_line;
+
+#ifndef DEBUG
 
 int		main(int argc, char **argv, char **envp)
 {

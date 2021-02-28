@@ -4,8 +4,10 @@
 #include "libft.h"
 #include "read_cmd_line.h"
 #include "utils.h"
+#include <signal.h>
 
-extern int	g_status;
+extern int						g_status;
+extern volatile sig_atomic_t	g_is_reading_cmd_line;
 
 static t_bool	is_there_endl(char *line)
 {
@@ -18,8 +20,10 @@ static int		read_cmd_line_recursive(char *line, int size_has_read)
 {
 	int		actual_read_size;
 
+	g_is_reading_cmd_line = TRUE;
 	actual_read_size =
 		read(STD_IN, &line[size_has_read], ARG_MAX - size_has_read);
+	g_is_reading_cmd_line = FALSE;
 	if (actual_read_size == ERROR)
 	{
 		ft_perror("minishell");
@@ -44,7 +48,9 @@ int		read_cmd_line(char *line)
 	int		actual_read_size;
 
 	ft_bzero(line, ARG_MAX + 1);
+	g_is_reading_cmd_line = TRUE;
 	actual_read_size = read(STD_IN, line, ARG_MAX);
+	g_is_reading_cmd_line = FALSE;
 	if (line[0] == '\0')
 	{
 		ft_putendl_fd("exit", STD_ERR);
@@ -57,16 +63,11 @@ int		read_cmd_line(char *line)
 	}
 	else if (actual_read_size == ARG_MAX)
 	{
-		// dump_remained_input(); //エラー処理必要なし //REVIEW: 余裕があれば対応
-		//余分に読んでいる部分を吸収する
-		ft_putstr_fd(
-			"minishell: Input reached maximum size(ARG_MAX)\n", STD_ERR);
+		ft_putstr_fd( "minishell: Input reached maximum size.\n", STD_ERR);
 		return (ERROR);
 	}
 	//もし改行が含まれてなかったら、つまりctrl-Dが入力されたら
 	if (!is_there_endl(line))
-	{
 		read_cmd_line_recursive(line, ft_strlen(line));
-	}
 	return (0);
 }
