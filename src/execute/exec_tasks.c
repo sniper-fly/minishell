@@ -19,7 +19,7 @@ static t_bool	should_exec_builtin_func(t_process *procs)
 	return (FALSE);
 }
 
-static void fix_standard_fds(t_process *proc, int fd_stdin, int fd_stdout, int fd_stderr)
+static void reset_standard_fds(t_process *proc, int fd_stdin, int fd_stdout, int fd_stderr)
 {
 	int	fd;
 
@@ -55,7 +55,7 @@ static void exec_single_process_builtin(t_process *proc)
 	fd_stderr = dup(2);
 	close_and_dup_fds_to_redirect(proc);
 	exec_builtins(proc->cmd);
-	fix_standard_fds(proc, fd_stdin, fd_stdout, fd_stderr);
+	reset_standard_fds(proc, fd_stdin, fd_stdout, fd_stderr);
 }
 
 void			exec_tasks(char ***tasks)
