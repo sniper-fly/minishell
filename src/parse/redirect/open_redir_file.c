@@ -10,6 +10,7 @@ int			open_redir_file(
 	int		open_flag;
 	int		fd;
 
+	open_flag = 0;
 	if (current_redir->mode_bit & REDIR_IN)
 	{
 		open_flag = O_RDONLY;

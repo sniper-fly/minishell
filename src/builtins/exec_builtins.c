@@ -1,6 +1,7 @@
 #include "utils.h"
 #include "struct/t_bool.h"
 #include "builtins/builtins.h"
+#include <stddef.h>
 
 extern int g_status;
 
@@ -13,7 +14,8 @@ const char *g_builtin_func_names[] =
 	"unset",
 	"env",
 	"exit",
-	"___redirect_failure___"
+	"___redirect_failure___",
+	NULL
 };
 
 int (*g_builtin_func_ptrs[])(char **) =
@@ -30,10 +32,12 @@ int (*g_builtin_func_ptrs[])(char **) =
 
 void	exec_builtins(char **args)
 {
-	int i;
+	int	i;
+	int	sum_builtins;
 
 	i = 0;
-	while (i < 7)
+	sum_builtins = count_string_arr_row((char**)g_builtin_func_names);
+	while (i < sum_builtins)
 	{
 		if (!ft_strcmp((char *)g_builtin_func_names[i], args[0]))
 		{
