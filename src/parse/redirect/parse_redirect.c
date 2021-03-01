@@ -5,6 +5,13 @@
 #include "constants.h"
 #include "exit_status.h"
 #include "struct/redir_mode.h"
+#include "utils.h"
+
+static int	return_error_with_free_(t_process *redir_config)
+{
+	free_single_proc(redir_config);
+	return (ERROR);
+}
 
 static void	free_redir(char *str1, char *str2)
 {
@@ -30,12 +37,12 @@ static int	interpret_as_redir(char *str_proc, int i, t_process *redir_config)
 
 	detect_redir_mode(str_proc, i, &current_redir);
 	if (current_redir.mode_bit & REDIR_BAD_FD)
-		return (p_bad_fd_err(current_redir.fd_str)); //redir_configのfree
+		return (p_bad_fd_err(current_redir.fd_str, redir_config)); //redir_configのfree
 	raw_red_fname = get_redirect_file(str_proc, i, current_redir.mode_bit); //TODO:
 	redir_filename =
 		extract_redir_fname(&current_redir, raw_red_fname);
 	if (redir_filename == NULL)
-		return (ERROR);//redir_configのfree
+		return (return_error_with_free_(redir_config));//redir_configのfree
 	strlen_has_read =
 		count_redir_len(str_proc, i, current_redir.mode_bit, raw_red_fname);
 	update_redir_config(redir_config, redir_filename, &current_redir);

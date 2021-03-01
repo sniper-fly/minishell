@@ -13,9 +13,10 @@ static void	p_common_err(char *cause, char *msg)
 	ft_putendl_fd(msg, STD_ERR);
 }
 
-int			p_bad_fd_err(char *fd_str)
+int			p_bad_fd_err(char *fd_str, t_process *redir_config)
 {
 	p_common_err(fd_str, "Bad file descriptor");
+	free_single_proc(redir_config);
 	free(fd_str);
 	return (ERROR);
 }
