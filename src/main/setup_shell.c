@@ -6,6 +6,8 @@
 #include "libft.h"
 #include "main.h"
 
+extern int g_status;
+
 void		setup_shell(char **line, char **envp)
 {
 	if ((*line = ft_calloc(sizeof(char *), ARG_MAX + 1)) == NULL)
@@ -14,7 +16,9 @@ void		setup_shell(char **line, char **envp)
 		exit(GENERAL_ERRORS);
 	}
 	setup_signal();
-	create_env_list(envp);
-
+	if (create_env_list(envp) == ERROR)
+		exit(g_status);
+	if (init_pwd() == ERROR)
+		exit(g_status);
 	(void)envp;
 }

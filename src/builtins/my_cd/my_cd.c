@@ -6,44 +6,13 @@
 #include "env_ctrl.h"
 #include "constants.h"
 #include "exit_status.h"
+#include "builtins/my_cd.h"
 #include "builtins/builtins.h"
 
-extern t_env_list *g_env_list;
+extern char			*g_pwd;
+extern t_env_list	*g_env_list;
 
-static void	put_error_msg(char *file_path)
-{
-	ft_putstr_fd("minishell: cd: ", STD_ERR);
-	ft_perror(file_path);
-}
-
-static int	change_env_vars(void)
-{
-	char		*pwd;
-	char		**args_to_my_export;
-	t_env_list	*pwd_node;
-
-	if (!(args_to_my_export = malloc(sizeof(char *) * 4)))
-		return (ERROR);
-	if (!(args_to_my_export[0] = ft_strdup("export")))
-		return (ERROR);
-	pwd = getcwd(NULL, 0);
-	if (!(args_to_my_export[1] = ft_strjoin("PWD=", pwd)))
-		return (ERROR);
-	if ((pwd_node = search_env_node("PWD")) != g_env_list)
-	{
-		if (!(args_to_my_export[2] = ft_strjoin("OLDPWD=", pwd_node->value)))
-			return (ERROR);
-	}
-	else
-		args_to_my_export[2] = NULL;
-	args_to_my_export[3] = NULL;
-	my_export(args_to_my_export);
-	free(pwd);
-	free_string_arr(args_to_my_export);
-	return (0);
-}
-
-static char	*replace_homedir_to_path(char *arg)
+static char		*replace_homedir_with_path(char *arg)
 {
 	char	*path;
 	char	*homedir_path;
@@ -62,13 +31,13 @@ static char	*replace_homedir_to_path(char *arg)
 	return (path);
 }
 
-static char	*set_path(char *arg)
+static char		*set_path(char *arg)
 {
 	char	*path;
 
 	if (!arg || arg[0] == '~')
 	{
-		if (!(path = replace_homedir_to_path(arg)))
+		if (!(path = replace_homedir_with_path(arg)))
 			return (NULL);
 	}
 	else
@@ -79,20 +48,28 @@ static char	*set_path(char *arg)
 	return (path);
 }
 
-int			my_cd(char **args)
+static t_bool	is_valid_arg(char **args)
 {
-	char	*path;
-
 	if (2 < count_string_arr_row(args))
 	{
 		ft_putendl_fd("minishell: cd: too many arguments", STD_ERR);
-		return (GENERAL_ERRORS);
+		return (FALSE);
 	}
 	if (!args[1] && search_env_node("HOME") == g_env_list)
 	{
 		ft_putendl_fd("minishell: cd: HOME not set", STD_ERR);
-		return (GENERAL_ERRORS);
+		return (FALSE);
 	}
+	return (TRUE);
+}
+
+int				my_cd(char **args)
+{
+	char	*path;
+	char	*new_pwd;
+
+	if (!is_valid_arg(args))
+		return (GENERAL_ERRORS);
 	if (!(path = set_path(args[1])))
 		return (malloc_error());
 	if (chdir(path) == -1)
@@ -104,5 +81,9 @@ int			my_cd(char **args)
 	free(path);
 	if (change_env_vars() == ERROR)
 		return (malloc_error());
+	if (!(new_pwd = ft_strdup(search_env_node("PWD")->value)))
+		return (malloc_error());
+	free(g_pwd);
+	g_pwd = new_pwd;
 	return (SUCCEEDED);
 }
