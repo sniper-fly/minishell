@@ -19,7 +19,7 @@ int	init_pwd(void)
 	if ((env_pwd = search_env_node("PWD")) != g_env_list
 	&& (tmp = opendir(env_pwd->value)))
 	{
-		free(tmp);
+		closedir(tmp);
 		if (!(g_pwd = ft_strdup(env_pwd->value)))
 		{
 			g_status = malloc_error();
