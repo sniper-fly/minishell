@@ -19,8 +19,8 @@ static int	set_env_pwd(char **args_for_my_export)
 	if (!(pwd = getcwd(NULL, 0)) && errno == ENOENT)
 	{
 		put_error_msg(NULL);
-			if (!(pwd = ft_strjoin(g_pwd, "/.")))
-				return (ERROR);
+		if (!(pwd = ft_strjoin(g_pwd, "/.")))
+			return (ERROR);
 	}
 	if (!(args_for_my_export[1] = ft_strjoin("PWD=", pwd)))
 	{

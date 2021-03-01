@@ -12,7 +12,7 @@
 extern char			*g_pwd;
 extern t_env_list	*g_env_list;
 
-static char	*replace_homedir_to_path(char *arg)
+static char		*replace_homedir_to_path(char *arg)
 {
 	char	*path;
 	char	*homedir_path;
@@ -31,7 +31,7 @@ static char	*replace_homedir_to_path(char *arg)
 	return (path);
 }
 
-static char	*set_path(char *arg)
+static char		*set_path(char *arg)
 {
 	char	*path;
 
@@ -63,7 +63,7 @@ static t_bool	is_valid_arg(char **args)
 	return (TRUE);
 }
 
-int			my_cd(char **args)
+int				my_cd(char **args)
 {
 	char	*path;
 	char	*new_pwd;
