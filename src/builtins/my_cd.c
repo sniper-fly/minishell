@@ -8,7 +8,8 @@
 #include "exit_status.h"
 #include "builtins/builtins.h"
 
-extern t_env_list *g_env_list;
+extern char			*g_pwd;
+extern t_env_list	*g_env_list;
 
 static void	put_error_msg(char *file_path)
 {
@@ -19,20 +20,17 @@ static void	put_error_msg(char *file_path)
 static int	set_pwd(char **args_for_my_export)
 {
 	char		*pwd;
-	t_env_list	*pwd_node;
 
 	if (!(pwd = getcwd(NULL, 0)) && errno == ENOENT)
 	{
-		put_error_msg(NULL);
-		pwd_node = search_env_node("PWD");	// note:if no exist
-		if (pwd_node->value[ft_strlen(pwd_node->value) - 1] == '/')
+		if (g_pwd[ft_strlen(g_pwd) - 1] == '/')
 		{
-			if (!(pwd = ft_strjoin(pwd_node->value, ".")))
+			if (!(pwd = ft_strjoin(g_pwd, ".")))
 				return (ERROR);
 		}
 		else
 		{
-			if (!(pwd = ft_strjoin(pwd_node->value, "/.")))
+			if (!(pwd = ft_strjoin(g_pwd, "/.")))
 				return (ERROR);
 		}
 	}
@@ -41,6 +39,9 @@ static int	set_pwd(char **args_for_my_export)
 		free_string_arr(args_for_my_export);
 		return (ERROR);
 	}
+	free(g_pwd);
+	if (!(g_pwd = ft_strdup(pwd)))
+		return (ERROR);
 	free(pwd);
 	return (SUCCEEDED);
 }
