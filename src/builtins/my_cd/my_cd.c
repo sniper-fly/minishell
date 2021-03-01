@@ -12,7 +12,7 @@
 extern char			*g_pwd;
 extern t_env_list	*g_env_list;
 
-static char		*replace_homedir_to_path(char *arg)
+static char		*replace_homedir_with_path(char *arg)
 {
 	char	*path;
 	char	*homedir_path;
@@ -37,7 +37,7 @@ static char		*set_path(char *arg)
 
 	if (!arg || arg[0] == '~')
 	{
-		if (!(path = replace_homedir_to_path(arg)))
+		if (!(path = replace_homedir_with_path(arg)))
 			return (NULL);
 	}
 	else
