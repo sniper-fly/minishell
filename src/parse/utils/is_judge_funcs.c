@@ -13,27 +13,23 @@ t_bool			is_escape(char ch)
 }
 
 //strtrimしてもなお、空白が残っている場合。エスケープあり。
-t_bool			is_ambiguous_err(char *redir_expanded)
+t_bool			is_ambiguous_err(char *redir_trimmed)
 {
-	char	*trimmed;
 	int		i;
 
-	trimmed = ft_strtrim(redir_expanded, " "); //TODO:
 	i = 0;
-	while (trimmed[i])
+	while (redir_trimmed[i])
 	{
-		if (ft_isspace(trimmed[i]))
+		if (ft_isspace(redir_trimmed[i]))
 		{
-			free(trimmed);
 			return (TRUE);
 		}
-		else if (is_escape(trimmed[i]))
+		else if (is_escape(redir_trimmed[i]))
 		{
-			skip_escape_seq(trimmed, &i);
+			skip_escape_seq(redir_trimmed, &i);
 			continue ;
 		}
 		i++;
 	}
-	free(trimmed);
 	return (FALSE);
 }
