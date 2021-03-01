@@ -77,6 +77,7 @@ static char	*get_command_path(char *cmd)
 		free(cmd_path);
 		++i;
 	}
+	free_string_arr(path_db_ptr);
 	return (NULL);
 }
 
