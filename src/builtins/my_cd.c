@@ -23,6 +23,7 @@ static int	set_pwd(char **args_for_my_export)
 
 	if (!(pwd = getcwd(NULL, 0)) && errno == ENOENT)
 	{
+		put_error_msg(NULL);
 		if (g_pwd[ft_strlen(g_pwd) - 1] == '/')
 		{
 			if (!(pwd = ft_strjoin(g_pwd, ".")))
