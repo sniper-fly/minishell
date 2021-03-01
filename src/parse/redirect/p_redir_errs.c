@@ -37,7 +37,6 @@ int			p_open_err(char *str_to_free1, char *str_to_free2,
 	ft_perror(NULL);
 	free(str_to_free1);
 	free(str_to_free2);
-	free(redir_filename);
 	free_single_proc(redir_config);
 	return (ERROR);
 }
