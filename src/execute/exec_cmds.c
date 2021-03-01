@@ -36,8 +36,7 @@ static void	exec_cmd(int i, int **pipe_fd, t_process *procs)
 {
 	char	**envp;
 
-	if (procs[i + 1].is_end != TRUE)
-		close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
+	close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
 	close_and_dup_fds_to_redirect(&(procs[i]));
 	if (is_builtin_func(procs[i].cmd[0]))
 	{
