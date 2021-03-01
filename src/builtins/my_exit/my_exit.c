@@ -4,8 +4,9 @@
 #include "constants.h"
 #include "exit_status.h"
 #include "builtins/my_exit.h"
+#include <signal.h>
 
-extern int g_status;
+extern volatile sig_atomic_t g_status;
 
 static int		count_digit(char *status)
 {

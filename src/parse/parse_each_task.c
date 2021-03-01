@@ -5,8 +5,9 @@
 #include "constants.h"
 #include "parse.h"
 #include <stdlib.h>
+#include <signal.h>
 
-extern int		g_status;
+extern volatile sig_atomic_t		g_status;
 
 static void			free_all(char *str, char **strs)
 {

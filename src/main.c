@@ -12,7 +12,7 @@
 
 char					*g_pwd;
 t_env_list				*g_env_list;
-int						g_status = SUCCEEDED;
+volatile sig_atomic_t	g_status = SUCCEEDED;
 volatile sig_atomic_t	g_is_reading_cmd_line;
 
 #ifndef DEBUG

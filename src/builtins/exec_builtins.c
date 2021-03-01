@@ -2,8 +2,9 @@
 #include "struct/t_bool.h"
 #include "builtins/builtins.h"
 #include <stddef.h>
+#include <signal.h>
 
-extern int g_status;
+extern volatile sig_atomic_t g_status;
 
 const char *g_builtin_func_names[] =
 {

@@ -3,8 +3,9 @@
 #include "libft.h"
 #include "struct/t_bool.h"
 #include <stdlib.h>
+#include <signal.h>
 
-extern int	g_status;
+extern volatile sig_atomic_t	g_status;
 
 static char *join_status_ch(char *expanded_str, int *buflen)
 {

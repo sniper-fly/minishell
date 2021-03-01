@@ -9,8 +9,9 @@
 #include "exit_status.h"
 #include "struct/process.h"
 #include "builtins/builtins.h"
+#include <signal.h>
 
-extern int	g_status;
+extern volatile sig_atomic_t	g_status;
 
 static void	wait_child_procs(pid_t last_pid, int count_procs)
 {

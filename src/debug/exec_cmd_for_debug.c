@@ -1,7 +1,8 @@
 #include "execute.h"
 #include "struct/process.h"
+#include <signal.h>
 
-extern int	g_status;
+extern volatile sig_atomic_t	g_status;
 
 void	exec_cmd_for_debug(t_process **procs)
 {

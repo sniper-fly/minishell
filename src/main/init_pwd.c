@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <signal.h>
 #include <dirent.h>
 #include <stdlib.h>
 #include "libft.h"
@@ -7,7 +8,7 @@
 #include "constants.h"
 #include "struct/env_list.h"
 
-extern int g_status;
+extern volatile sig_atomic_t g_status;
 extern char *g_pwd;
 extern t_env_list *g_env_list;
 

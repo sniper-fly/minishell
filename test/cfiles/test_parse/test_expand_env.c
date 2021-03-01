@@ -1,4 +1,5 @@
 #ifdef EXPAND_ENV_VAR_STR_C
+#include <signal.h>
 #include "parse.h"
 #include "env_ctrl.h"
 #include "builtins/builtins.h"
@@ -7,7 +8,7 @@
 #include <string.h>
 
 extern char	**environ;
-extern int g_status;
+extern volatile sig_atomic_t g_status;
 
 static void	print_result(char *str, char *answer, int i)
 {

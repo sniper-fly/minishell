@@ -7,8 +7,9 @@
 #include "struct/t_bool.h"
 #include "struct/process.h"
 #include "builtins/builtins.h"
+#include <signal.h>
 
-extern int	g_status;
+extern volatile sig_atomic_t	g_status;
 
 static t_bool	should_exec_builtin_func(t_process *procs)
 {

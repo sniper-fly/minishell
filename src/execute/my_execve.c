@@ -11,8 +11,9 @@
 #include "exit_status.h"
 #include "struct/process.h"
 #include "struct/env_list.h"
+#include <signal.h>
 
-extern int g_status;
+extern volatile sig_atomic_t g_status;
 extern t_env_list	*g_env_list;
 
 static int	is_there_execute_file_at(char *cmd_path)
