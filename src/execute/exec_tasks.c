@@ -76,7 +76,7 @@ void			exec_tasks(char ***tasks)
 			exec_single_process_builtin(&procs[0]);
 		else
 			exec_cmds(procs); //パイプのwhileループ(列のループ)
-		// TODO:free_procs(procs);
+		free_procs(procs);
 		++i;
 	}
 }

@@ -111,18 +111,17 @@ int		main(void)
 int		main(void)
 {
 	char*	correct[] = {
-		"  aaaa  ",
+		"aaaa",
 		"aaa",
 		"\"  hoge  \"",
-		"  ' a a a '  ",
-		"  aa\" \\\" a a \"aa  ",
-		"  aa\\ a\\a\\ a  ",
+		"' a a a '",
+		"aa\" \\\" a a \"aa",
+		"aa\\ a\\a\\ a",
 	};
 	char*	wrong[] = {
 		"a a",
-		"    a a    ",
-		"   a\ta  ",
-		"  \"\" ''",
+		"a\ta",
+		"\"\" ''",
 	};
 	for (unsigned int i = 0; i < sizeof(correct) / sizeof(char*); i++)
 	{

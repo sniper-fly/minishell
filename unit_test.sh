@@ -1,6 +1,6 @@
 #!/bin/bash
 
-all_test_files=`find ./test/cfiles -type f -name "*.c"`
+all_test_files="`find ./test/cfiles -type f -name "*.c"` ./src/main.c"
 ESC=$(printf '\033')
 echo "==================================="
 
