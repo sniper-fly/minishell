@@ -23,4 +23,4 @@ unit_test.sh
 minishell: /bin/: Is a directory
 minishell: /root/a: Permission denied
 minishell: /not/exist: No such file or directory
-notexist: command not found
+minishell: notexist: command not found
