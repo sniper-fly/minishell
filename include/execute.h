@@ -15,6 +15,8 @@ void free_pipe_fd_array(int **pipe_fd, t_process *procs);
 int	count_procs(t_process *procs);
 void	if_command_not_found(char *cmd_path);
 char	*join_cmd_to_path(char *cmd, char *path_ptr);
-
+int	is_there_execute_file_at(char *cmd_path);
+void	is_dir(char *cmd_path);
+void	check_if_the_full_path_is_valid(char *cmd_path);
 
 #endif
