@@ -25,7 +25,7 @@ char		*auto_resize_cpy(char *dst, int idx, int *buf_size, char src_ch)
 		dst[idx] = src_ch;
 			return (dst);
 	}
-	while (idx >= *buf_size)
+	while (idx >= *buf_size - 2)
 		*buf_size += RESIZE_BUF_LEN;
 	resized_dst = ft_calloc(sizeof(char), *buf_size);
 	if (resized_dst == NULL)
