@@ -125,6 +125,7 @@ int main(void)
 #ifdef MY_PWD_C
 
 #include "libft.h"
+#include "main.h"
 #include "env_ctrl.h"
 #include "struct/env_list.h"
 
@@ -139,6 +140,7 @@ int main(int argc, char *argv[], char *envp[])
 	argv[0][0] = 'a';
 
 	create_env_list(envp);
+	init_pwd();
 
 	my_pwd(pwd_args);
 	my_cd(cd_args);
