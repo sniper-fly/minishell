@@ -7,6 +7,8 @@ void	close_and_dup_fds_in_child_proc(int i, int **pipe_fd, t_process *procs)
 {
 	if (i == 0)
 	{
+		if (procs[1].is_end == TRUE)
+			return ;
 		dup2(pipe_fd[i][1], 1);
 		close(pipe_fd[i][0]);
 		close(pipe_fd[i][1]);

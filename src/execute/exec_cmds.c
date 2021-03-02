@@ -39,6 +39,11 @@ static void	exec_cmd(int i, int **pipe_fd, t_process *procs)
 
 	close_and_dup_fds_in_child_proc(i, pipe_fd, procs);
 	close_and_dup_fds_to_redirect(&(procs[i]));
+	if (!(procs[i].cmd[0]))
+	{
+		g_status = SUCCEEDED;
+		exit(g_status);
+	}
 	if (is_builtin_func(procs[i].cmd[0]))
 	{
 		exec_builtins(procs[i].cmd);
@@ -47,7 +52,7 @@ static void	exec_cmd(int i, int **pipe_fd, t_process *procs)
 	if (!(envp = get_env_array()))
 	{
 		g_status = malloc_error();
-		return ;
+		exit(g_status);
 	}
 	my_execve(procs[i].cmd, envp);
 }

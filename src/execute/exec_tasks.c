@@ -4,6 +4,7 @@
 #include "parse.h"
 #include "utils.h"
 #include "execute.h"
+#include "exit_status.h"
 #include "struct/t_bool.h"
 #include "struct/process.h"
 #include "builtins/builtins.h"
@@ -14,6 +15,8 @@ extern volatile sig_atomic_t	g_status;
 static t_bool	should_exec_builtin_func(t_process *procs)
 {
 	if (procs[1].is_end != TRUE)
+		return (FALSE);
+	if (!(procs[0].cmd[0]))
 		return (FALSE);
 	if (is_builtin_func(procs[0].cmd[0]))
 		return (TRUE);
