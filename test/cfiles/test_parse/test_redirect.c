@@ -17,18 +17,15 @@ static void	test_open(char *str, t_redir_mode *redir_mode)
 	char buf[1000];
 	t_process redir_config;
 	char	*fname_expanded;
-	char	*filename;
 	
 	fname_expanded = ft_strdup(str);
-	filename = ft_strdup(str);
 	ft_bzero(&redir_config, sizeof(t_process));
-	update_redir_config(&redir_config, filename, redir_mode);
+	update_redir_config(&redir_config, fname_expanded, redir_mode);
 	if (open_redir_file(str, &redir_config, redir_mode) == ERROR)
 		p_open_err(NULL, NULL, fname_expanded, &redir_config);
 	else
 	{
 		free(fname_expanded);
-		free(filename);
 		sprintf(buf, "cat %s", str);
 		system(buf);
 		wait(NULL);

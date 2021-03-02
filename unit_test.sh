@@ -13,7 +13,7 @@ function test_unit() {
 	echo "$1"
 	echo #改行
 	touch_all
-	make -s debug ARG=$1
+	make -s debug ARG=$1 sanitize=1
 
 	echo "---output test result---"
 	./minishell > ./test/latest/result/$1 2>&1
@@ -34,7 +34,10 @@ function test_unit() {
 	# else
 	# 	printf "${ESC}[31m%s${ESC}[m\n" 'FAILURE'
 	# fi
-	valgrind ./minishell > ./test/latest/memleak_log/$1 2>&1
+
+
+	# valgrind ./minishell > ./test/latest/memleak_log/$1 2>&1
+
 
 	echo "==================================="
 }
