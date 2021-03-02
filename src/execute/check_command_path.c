@@ -26,7 +26,7 @@ int		is_there_execute_file_at(char *cmd_path)
 	return (TRUE);
 }
 
-void	is_dir(char *cmd_path)
+void	exit_if_command_path_is_dir(char *cmd_path)
 {
 	DIR	*dir;
 

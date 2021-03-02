@@ -62,7 +62,7 @@ void		my_execve(char **cmd, char **envp)
 {
 	char *cmd_path;
 
-	is_dir(cmd[0]);
+	exit_if_command_path_is_dir(cmd[0]);
 	if (cmd[0][0] == '/')
 		check_if_the_full_path_is_valid(cmd[0]);
 	if (is_there_execute_file_at(cmd[0]))
