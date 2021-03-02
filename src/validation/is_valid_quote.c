@@ -41,8 +41,13 @@ t_bool			is_valid_quote(char *cmd_line)
 	i = 0;
 	while (cmd_line[i])
 	{
-		if (is_quote(cmd_line[i]) && 0 < i && cmd_line[i - 1] != '\\')
+		if (is_quote(cmd_line[i]))
 		{
+			if (0 < i && cmd_line[i - 1] == '\\')
+			{
+				++i;
+				continue ;
+			}
 			kind_of_quote = cmd_line[i];
 			if (!is_closed_quote(&i, cmd_line, kind_of_quote))
 			{
