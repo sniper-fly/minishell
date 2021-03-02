@@ -20,7 +20,7 @@ static int	is_there_execute_file_at(char *cmd_path)
 	int	fd;
 
 	fd = open(cmd_path, O_WRONLY);
-	return (fd != ERROR || errno != ENOENT);
+	return (fd != ERROR && errno != ENOENT);
 }
 
 static void	check_if_the_full_path_is_valid(char *cmd_path)
