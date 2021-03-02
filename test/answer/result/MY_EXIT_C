@@ -20,21 +20,96 @@ status: 12
 
 6 ==========
 exit
-status: 0
+status: 111
 
 7 ==========
 exit
-status: 199
+status: 0
+
+8 ==========
+exit
+status: 0
+
+9 ==========
+exit
+status: 0
 
 10 ==========
 exit
-minishell: exit: too many arguments
-
-didn't exit
-status: 1
+status: 199
 
 11 ==========
 exit
+status: 57
+
+12 ==========
+exit
+status: 199
+
+20 ==========
+exit
+minishell: exit: too many arguments
+didn't exit
+status: 1
+
+21 ==========
+exit
 minishell: exit: 11111111111111111111: numeric argument required
 status: 2
+
+22 ==========
+exit
+minishell: exit: +11111111111111111111: numeric argument required
+status: 2
+
+23 ==========
+exit
+minishell: exit: -11111111111111111111: numeric argument required
+status: 2
+
+24 ==========
+exit
+minishell: exit: +++0: numeric argument required
+status: 2
+
+25 ==========
+exit
+minishell: exit: +-0: numeric argument required
+status: 2
+
+26 ==========
+exit
+minishell: exit: +-++--+-11111: numeric argument required
+status: 2
+
+27 ==========
+exit
+minishell: exit: a11111: numeric argument required
+status: 2
+
+28 ==========
+exit
+minishell: exit: 11a111: numeric argument required
+status: 2
+
+29 ==========
+exit
+minishell: exit: -11111b: numeric argument required
+status: 2
+
+30 ==========
+exit
+minishell: exit: 111+11: numeric argument required
+status: 2
+
+31 ==========
+exit
+minishell: exit: 111*11: numeric argument required
+status: 2
+
+32 ==========
+exit
+minishell: exit: too many arguments
+didn't exit
+status: 1
 

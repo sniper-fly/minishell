@@ -8,6 +8,7 @@ Valid commands ==========
 [32mVALID[m : echo 'a\' 
 [32mVALID[m : echo 'a"a' 
 [32mVALID[m : echo "h'e"l'l"o'
+[32mVALID[m : "echo" "hello"
 [32mVALID[m :   \"  
 [32mVALID[m :   \'  
 
@@ -30,5 +31,7 @@ minishell: syntax error quotation is not closed
 [31mINVALID[m : echo """""""echo 'a\'a'
 minishell: syntax error quotation is not closed
 [31mINVALID[m : echo 'a\'' 
+minishell: syntax error quotation is not closed
+[31mINVALID[m : echo "a
 minishell: syntax error quotation is not closed
 [31mINVALID[m : echo "\
