@@ -19,9 +19,14 @@ extern t_env_list	*g_env_list;
 static int	is_there_execute_file_at(char *cmd_path)
 {
 	int	fd;
+	int	tmp_errno;
 
 	fd = open(cmd_path, O_WRONLY);
-	return (fd != ERROR && errno != ENOENT);
+	tmp_errno = errno;
+	close(fd);
+	if (fd == ERROR || tmp_errno == ENOENT)
+		return (FALSE);
+	return (TRUE);
 }
 
 static void	check_if_the_full_path_is_valid(char *cmd_path)
