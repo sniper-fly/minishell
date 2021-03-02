@@ -121,6 +121,9 @@ int main(void)
 	char *args27[] = {"exit", "a11111", NULL};
 	char *args28[] = {"exit", "11a111", NULL};
 	char *args29[] = {"exit", "-11111b", NULL};
+	char *args30[] = {"exit", "111+11", NULL};
+	char *args31[] = {"exit", "111*11", NULL};
+	char *args32[] = {"exit", "1", "11111111111", NULL};
 
 
 	test_my_exit(args1, 1);
@@ -146,6 +149,9 @@ int main(void)
 	test_my_exit(args27, 27);
 	test_my_exit(args28, 28);
 	test_my_exit(args29, 29);
+	test_my_exit(args30, 30);
+	test_my_exit(args31, 31);
+	test_my_exit(args32, 32);
 }
 
 #endif
