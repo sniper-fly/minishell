@@ -1,4 +1,5 @@
 #include <fcntl.h>
+#include <dirent.h>
 #include <errno.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -15,31 +16,6 @@
 
 extern volatile sig_atomic_t g_status;
 extern t_env_list	*g_env_list;
-
-static int	is_there_execute_file_at(char *cmd_path)
-{
-	int	fd;
-
-	fd = open(cmd_path, O_WRONLY);
-	return (fd != ERROR && errno != ENOENT);
-}
-
-static void	check_if_the_full_path_is_valid(char *cmd_path)
-{
-	if (open(cmd_path, O_RDWR) == ERROR && (errno == EISDIR || errno == ENOENT))
-	{
-		ft_putstr_fd("minishell: ", STD_ERR);
-		ft_putstr_fd(cmd_path, STD_ERR);
-		ft_putstr_fd(": ", STD_ERR);
-		ft_putendl_fd(strerror(errno), STD_ERR);
-		if (errno == EISDIR)
-			exit(COMMAND_CANNOT_EXECUTE);
-		else if (errno == ENOENT)
-			exit(COMMAND_NOT_FOUND);
-		else
-			exit(GENERAL_ERRORS);
-	}
-}
 
 static void	do_execve(char *cmd_path, char **cmd, char **envp)
 {
@@ -86,6 +62,7 @@ void		my_execve(char **cmd, char **envp)
 {
 	char *cmd_path;
 
+	is_dir(cmd[0]);
 	if (cmd[0][0] == '/')
 		check_if_the_full_path_is_valid(cmd[0]);
 	if (is_there_execute_file_at(cmd[0]))
