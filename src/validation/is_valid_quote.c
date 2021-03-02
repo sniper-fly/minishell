@@ -8,49 +8,49 @@ static t_bool	is_quote(char c)
 	return (FALSE);
 }
 
-static t_bool	is_closed_quote(char **cmd_line, char kind_of_quote)
+static t_bool	is_closed_quote(int *i, char *cmd_line, char kind_of_quote)
 {
-	++(*cmd_line);
+	++(*i);
 	while (TRUE)
 	{
-		if (!(**cmd_line))
+		if (!(cmd_line[*i]))
 			return (FALSE);
-		if (**cmd_line == '\\')
+		if (cmd_line[*i] == '\\')
 		{
-			++(*cmd_line);
-			if (!(**cmd_line))
+			++(*i);
+			if (!(cmd_line[*i]))
 				return (FALSE);
-			if (**cmd_line == '\"')
+			if (cmd_line[*i] == '\"')
 			{
-				++(*cmd_line);
+				++(*i);
 				continue ;
 			}
 		}
-		if (kind_of_quote == **cmd_line)
+		if (kind_of_quote == cmd_line[*i])
 			break ;
-		++(*cmd_line);
+		++(*i);
 	}
 	return (TRUE);
 }
 
 t_bool			is_valid_quote(char *cmd_line)
 {
+	int		i;
 	char	kind_of_quote;
 
-	while (*cmd_line)
+	i = 0;
+	while (cmd_line[i])
 	{
-		if (*cmd_line == '\\')
-			cmd_line += 2;
-		if (is_quote(*cmd_line))
+		if (is_quote(cmd_line[i]) && 0 < i && cmd_line[i - 1] != '\\')
 		{
-			kind_of_quote = *cmd_line;
-			if (!is_closed_quote(&cmd_line, kind_of_quote))
+			kind_of_quote = cmd_line[i];
+			if (!is_closed_quote(&i, cmd_line, kind_of_quote))
 			{
 				put_syntax_error_message("quotation is not closed");
 				return (FALSE);
 			}
 		}
-		++cmd_line;
+		++i;
 	}
 	return (TRUE);
 }
