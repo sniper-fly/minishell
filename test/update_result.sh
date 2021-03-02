@@ -53,3 +53,6 @@ function update_each_file() {
 # update_each_file CUT_MODIFIER_C
 
 # update_each_file PARSE_EACH_TASK_C
+# update_each_file IS_VALID_QUOTE_C
+# update_each_file IS_VALID_CHAR_CODE_C
+# update_each_file IS_VALID_META_AND_REDIRECT_C

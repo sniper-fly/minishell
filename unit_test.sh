@@ -70,4 +70,8 @@ test_unit GET_REDIRECT_FILE_C
 test_unit OPEN_REDIR_FILE
 test_unit CUT_MODIFIER_C
 
+test_unit IS_VALID_QUOTE_C
+test_unit IS_VALID_CHAR_CODE_C
+test_unit IS_VALID_META_AND_REDIRECT_C
+
 # test_unit PARSE_EACH_TASK_C #不完全なテストなのでまだ追加しない
