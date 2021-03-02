@@ -31,7 +31,6 @@ char		*auto_resize_join(char *dst, int *buflen, char ch);
 char		*handle_escape( char *expanded_str, int *buflen, char *str, int *i);
 
 char		*interpret_envvar( char *expanded_str, int *buflen, char *str, int *i);
-t_bool		should_interpret_as_envvar(char *str, int i);
 
 void		detect_redir_mode(char *str_proc, int i, t_redir_mode *redir_mode);
 char		*get_redirect_file(char *str, int i, int mode_bit);
