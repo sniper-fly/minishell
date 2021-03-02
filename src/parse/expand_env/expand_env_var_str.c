@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 // $があり、かつその次の文字が\,space,},\0のいずれかでない
-t_bool		should_interpret_as_envvar(char *str, int i)
+static t_bool	should_interpret_as_envvar(char *str, int i)
 {
 	if (str[i] == '$' &&
 		!((str[i + 1] == BACK_SLASH || ft_isspace(str[i + 1]) ||
@@ -17,7 +17,7 @@ t_bool		should_interpret_as_envvar(char *str, int i)
 	return (FALSE);
 }
 
-char	*interpret_envvar( char *expanded_str, int *buflen, char *str, int *i)
+char			*interpret_envvar( char *expanded_str, int *buflen, char *str, int *i)
 {
 	char	*env_key;
 
@@ -29,7 +29,7 @@ char	*interpret_envvar( char *expanded_str, int *buflen, char *str, int *i)
 	return (expanded_str);
 }
 
-char	*expand_env_var_str(char *str)
+char			*expand_env_var_str(char *str)
 {
 	char	*expanded_str;
 	int		buflen;
