@@ -40,7 +40,7 @@ int				my_exit(char **args)
 	{
 		if (1 < i)
 		{
-			ft_putendl_fd("minishell: exit: too many arguments\n", STD_ERR);
+			ft_putendl_fd("minishell: exit: too many arguments", STD_ERR);
 			g_status = GENERAL_ERRORS;
 			return (GENERAL_ERRORS);
 		}
