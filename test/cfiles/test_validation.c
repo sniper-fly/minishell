@@ -33,6 +33,7 @@ int main(void)
 		"echo \'a\\\' ", //   'a\'
 		"echo \'a\"a\' ", //   'a"a'
 		"echo \"h\'e\"l\'l\"o\'",
+		"\"echo\" \"hello\"",
 		"  \\\"  ",
 		"  \\\'  ",
 	};
@@ -49,6 +50,7 @@ int main(void)
 		"echo \"\"\"\"\"\"\""
 		"echo \'a\\\'a\'", //   'a\'a'
 		"echo \'a\\\'\' ", //   'a\''
+		"echo \"a",
 		"echo \"\\", //この例だとセグフォする可能性がある
 	};
 
