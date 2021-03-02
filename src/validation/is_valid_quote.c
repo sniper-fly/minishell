@@ -39,6 +39,8 @@ t_bool			is_valid_quote(char *cmd_line)
 
 	while (*cmd_line)
 	{
+		if (*cmd_line == '\\')
+			cmd_line += 2;
 		if (is_quote(*cmd_line))
 		{
 			kind_of_quote = *cmd_line;
