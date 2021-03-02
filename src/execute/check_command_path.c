@@ -8,7 +8,7 @@
 #include "constants.h"
 #include "exit_status.h"
 
-int	is_there_execute_file_at(char *cmd_path)
+int		is_there_execute_file_at(char *cmd_path)
 {
 	int	fd;
 
@@ -48,9 +48,6 @@ void	check_if_the_full_path_is_valid(char *cmd_path)
 	{
 		ft_putstr_fd("minishell: ", STD_ERR);
 		ft_perror(cmd_path);
-		// ft_putstr_fd(cmd_path, STD_ERR);
-		// ft_putstr_fd(": ", STD_ERR);
-		// ft_putendl_fd(strerror(errno), STD_ERR);
 		if (errno == ENOENT || errno == EACCES)
 			exit(COMMAND_NOT_FOUND);
 		else
