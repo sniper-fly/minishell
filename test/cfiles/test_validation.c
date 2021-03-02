@@ -33,6 +33,8 @@ int main(void)
 		"echo \'a\\\' ", //   'a\'
 		"echo \'a\"a\' ", //   'a"a'
 		"echo \"h\'e\"l\'l\"o\'",
+		"  \\\"  ",
+		"  \\\'  ",
 	};
 
 	char *invalid_cmds[] =
