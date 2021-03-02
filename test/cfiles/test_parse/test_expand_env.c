@@ -17,7 +17,7 @@ static void	print_result(char *str, char *answer, int i)
 	expanded = expand_env_var_str(str);
 	printf("[%d] : %s : %s\n", i / 2, str, expanded);
 	if (strcmp(expanded, answer) != 0)
-		printf("!!not expected result at %d\n\n", i / 2);
+		printf("!!not expected result at %d answer is[%s]\n\n", i / 2, answer);
 	free(expanded);
 }
 
@@ -47,7 +47,16 @@ static void	leak_test(void)
 		"foo\\$foo",		"foo\\$foo",
 		"$$$$$foo",			"$$$$bar",
 		"\"'$foo'\"",		"\"'bar'\"",
-		"\"\\\"'$foo'\\\"\"\0",	"\"\\\"'bar'\\\"\"\0" //"\"'$foo'\""
+		"\"\\\"'$foo'\\\"\"\0",	"\"\\\"'bar'\\\"\"\0", //"\"'$foo'\""
+		"\"$\"",			"\"$\"",
+		"\"$'\"",			"\"$'\"",
+		"'$'",				"'$'",
+		"$\"\"",			"\"\"",
+		"\" $\\ \"",		"\" $\\ \"", //" $\ "
+		"'$'",				"'$'",
+		"\"$}\"",			"\"$}\"",
+		"\"$$\"",			"\"$$\"",
+		"\" $$ \"",			"\" $$ \"",
 	};
 	char*	env_to_add1[] = {"export", "name=nop", NULL};
 	char*	env_to_add2[] = {"export", "foo=bar", NULL};
