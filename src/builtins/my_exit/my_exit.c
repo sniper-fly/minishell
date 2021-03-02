@@ -9,7 +9,7 @@
 
 extern volatile sig_atomic_t g_status;
 
-static int		is_numeric_argument(char *arg)
+static t_bool	is_numeric_argument(char *arg)
 {
 	int	i;
 	int digit;
@@ -25,7 +25,7 @@ static int		is_numeric_argument(char *arg)
 		++digit;
 		++i;
 	}
-	if (20 < digit)
+	if (20 <= digit)
 		return (FALSE);
 	return (TRUE);
 }
@@ -36,7 +36,7 @@ int				my_exit(char **args)
 
 	ft_putendl_fd("exit", STD_ERR);
 	i = 1;
-	while(args[i])
+	while (args[i])
 	{
 		if (1 < i)
 		{
