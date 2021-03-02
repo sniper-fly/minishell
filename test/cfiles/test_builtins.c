@@ -102,11 +102,26 @@ int main(void)
 	char *args3[] = {"exit", "1000", NULL};
 	char *args4[] = {"exit", "-1", NULL};
 	char *args5[] = {"exit", "-500", NULL};
-	char *args6[] = {"exit", NULL};
-	char *args7[] = {"exit", "1111111111111111111", NULL};	// 19ケタ
+	char *args6[] = {"exit", "+111", NULL};
+	char *args7[] = {"exit", "+0", NULL};
+	char *args8[] = {"exit", "-0", NULL};
+	char *args9[] = {"exit", NULL};
+	char *args10[] = {"exit", "1111111111111111111", NULL};	// 19ケタ
+	char *args11[] = {"exit", "-1111111111111111111", NULL};	// 19ケタ
+	char *args12[] = {"exit", "+1111111111111111111", NULL};	// 19ケタ
 
-	char *args10[] = {"exit", "1", "2", "3", NULL};
-	char *args11[] = {"exit", "11111111111111111111", NULL};	// 20ケタ
+
+	char *args20[] = {"exit", "1", "2", "3", NULL};
+	char *args21[] = {"exit", "11111111111111111111", NULL};	// 20ケタ
+	char *args22[] = {"exit", "+11111111111111111111", NULL};	// 20ケタ
+	char *args23[] = {"exit", "-11111111111111111111", NULL};	// 20ケタ
+	char *args24[] = {"exit", "+++0", NULL};
+	char *args25[] = {"exit", "+-0", NULL};
+	char *args26[] = {"exit", "+-++--+-11111", NULL};
+	char *args27[] = {"exit", "a11111", NULL};
+	char *args28[] = {"exit", "11a111", NULL};
+	char *args29[] = {"exit", "-11111b", NULL};
+
 
 	test_my_exit(args1, 1);
 	test_my_exit(args2, 2);
@@ -115,9 +130,22 @@ int main(void)
 	test_my_exit(args5, 5);
 	test_my_exit(args6, 6);
 	test_my_exit(args7, 7);
-
+	test_my_exit(args8, 8);
+	test_my_exit(args9, 9);
 	test_my_exit(args10, 10);
 	test_my_exit(args11, 11);
+	test_my_exit(args12, 12);
+
+	test_my_exit(args20, 20);
+	test_my_exit(args21, 21);
+	test_my_exit(args22, 22);
+	test_my_exit(args23, 23);
+	test_my_exit(args24, 24);
+	test_my_exit(args25, 25);
+	test_my_exit(args26, 26);
+	test_my_exit(args27, 27);
+	test_my_exit(args28, 28);
+	test_my_exit(args29, 29);
 }
 
 #endif
