@@ -1,0 +1,83 @@
+Normal commands ===========================
+[32mVALID[m : echo hello | wc
+[32mVALID[m : echo hello > a | wc
+[32mVALID[m : echo hello >> a | wc
+[32mVALID[m : cat < a | wc
+[32mVALID[m : cat < a > b | wc
+[32mVALID[m : cat > a < b | wc
+[32mVALID[m : echo hello > a > b
+[32mVALID[m : echo hello < a < b
+[32mVALID[m : echo hello > a > b > c >> d < e < f
+[32mVALID[m : echo hello > a < b < c > d < e >> f
+[32mVALID[m :    
+[32mVALID[m : 	   
+[32mVALID[m : 
+[32mVALID[m : >a
+
+Start with meta ============================
+minishell: syntax error invalid token
+[31mINVALID[m : | wc
+minishell: syntax error invalid token
+[31mINVALID[m : ; echo hello
+minishell: syntax error invalid token
+[31mINVALID[m :    	; echo hello
+
+Meta following meta ========================
+minishell: syntax error invalid token
+[31mINVALID[m : echo hello |  | wc
+minishell: syntax error invalid token
+[31mINVALID[m : echo hello | ; ls
+minishell: syntax error invalid token
+[31mINVALID[m : echo hello|	;ls
+
+Meta following redirect ====================
+minishell: syntax error invalid token
+[31mINVALID[m : echo hello > |
+minishell: syntax error invalid token
+[31mINVALID[m : echo hello < |
+minishell: syntax error invalid token
+[31mINVALID[m : <|
+
+Exeption redirect ==========================
+minishell: syntax error invalid redirect
+[31mINVALID[m : cat << a
+
+Redirect following redirect ================
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello > > a.txt
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello < > a.txt
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello > < a.txt
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello < < a.txt
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello > >> a.txt
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello < >> a.txt
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello >> < a.txt
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello << a.txt
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello << > a.txt
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello > << a.txt
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello >> << a.txt
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello >> >> a.txt
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello << << a.txt
+
+Ends with redirect ==========================
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello >
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello <
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello >>
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello >> a >
+minishell: syntax error invalid redirect
+[31mINVALID[m : echo hello <                    

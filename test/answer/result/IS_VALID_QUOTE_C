@@ -1,0 +1,32 @@
+Valid commands ==========
+[32mVALID[m : echo "hello"
+[32mVALID[m : echo 'hello'
+[32mVALID[m : echo "hell\"o"
+[32mVALID[m : echo ""
+[32mVALID[m : echo "hello''world"echo "a\"a" 
+[32mVALID[m : echo 'a\"a' 
+[32mVALID[m : echo 'a\' 
+[32mVALID[m : echo 'a"a' 
+[32mVALID[m : echo "h'e"l'l"o'
+
+Invalid commands ========
+minishell: syntax error quotation is not closed
+[31mINVALID[m : echo "hello
+minishell: syntax error quotation is not closed
+[31mINVALID[m : ehco 'hello
+minishell: syntax error quotation is not closed
+[31mINVALID[m : ehco "hello'
+minishell: syntax error quotation is not closed
+[31mINVALID[m : echo 'hello"
+minishell: syntax error quotation is not closed
+[31mINVALID[m : echo 'hell\'o'
+minishell: syntax error quotation is not closed
+[31mINVALID[m : echo "h'e"l'l"o"
+minishell: syntax error quotation is not closed
+[31mINVALID[m : echo """
+minishell: syntax error quotation is not closed
+[31mINVALID[m : echo """""""echo 'a\'a'
+minishell: syntax error quotation is not closed
+[31mINVALID[m : echo 'a\'' 
+minishell: syntax error quotation is not closed
+[31mINVALID[m : echo "\
