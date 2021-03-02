@@ -1,4 +1,5 @@
 #include "setup_signal.h"
+#include <signal.h>
 #include "env_ctrl.h"
 #include "exit_status.h"
 #include <stdlib.h>
@@ -6,7 +7,7 @@
 #include "libft.h"
 #include "main.h"
 
-extern int g_status;
+extern volatile sig_atomic_t g_status;
 
 void		setup_shell(char **line, char **envp)
 {

@@ -6,7 +6,7 @@
 #include "libft.h"
 #include "main.h"
 
-extern int						g_status;
+extern volatile sig_atomic_t	g_status;
 extern volatile sig_atomic_t	g_is_reading_cmd_line;
 
 static void	interrupt_handler(int sig)

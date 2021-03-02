@@ -54,8 +54,9 @@ int main(int argc, char *argv[], char *envp[])
 #include "constants.h"
 #include "read_cmd_line.h"
 #include "libft.h"
+#include <signal.h>
 
-extern int g_status;
+extern volatile sig_atomic_t g_status;
 
 int main(void)
 {
@@ -87,8 +88,9 @@ int main(void)
 #include "env_ctrl.h"
 #include "constants.h"
 #include "read_cmd_line.h"
+#include <signal.h>
 
-extern int g_status;
+extern volatile sig_atomic_t g_status;
 
 int main(int argc, char *argv[], char *envp[])
 {

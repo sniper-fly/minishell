@@ -6,7 +6,7 @@
 #include "utils.h"
 #include <signal.h>
 
-extern int						g_status;
+extern volatile sig_atomic_t						g_status;
 extern volatile sig_atomic_t	g_is_reading_cmd_line;
 
 static t_bool	is_there_endl(char *line)

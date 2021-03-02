@@ -72,8 +72,9 @@ int		main(void)
 #include "read_cmd_line.h"
 #include "libft.h"
 #include "env_ctrl.h"
+#include <signal.h>
 
-extern int g_status;
+extern volatile sig_atomic_t g_status;
 
 void	test_exec_cmd(char *cmd_line)
 {

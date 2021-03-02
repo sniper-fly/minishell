@@ -68,8 +68,9 @@ int main(int argc, char *argv[], char *envp[])
 #include "utils.h"
 #include "libft.h"
 #include <stdlib.h>
+#include <signal.h>
 
-extern int g_status;
+extern volatile sig_atomic_t g_status;
 
 static void test_my_exit(char **args, int n)
 {
