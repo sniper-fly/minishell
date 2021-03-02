@@ -128,6 +128,7 @@ int		main(void)
 #include "parse.h"
 #include <stdio.h>
 #include "libft.h"
+#include <string.h>
 
 static void leak_test_func1(void)
 {
@@ -136,7 +137,7 @@ static void leak_test_func1(void)
 	int		buf_size;
 
 	buf_size = 10;
-	dst = malloc(sizeof(char) * buf_size);
+	dst = ft_calloc(sizeof(char), buf_size);
 	for (int i = 0; src[i]; i++)
 		dst = auto_resize_cpy(dst, i, &buf_size, src[i]);
 	ft_putendl_fd(dst, 1);
@@ -150,10 +151,38 @@ static void leak_test_func2(void)
 	int		buf_size;
 
 	buf_size = 10;
-	dst = malloc(sizeof(char) * buf_size);
+	dst = ft_calloc(sizeof(char), buf_size);
 	for (int i = 0; src[i]; i++)
 		dst = auto_resize_cpy(dst, i, &buf_size, src[i]);
 	ft_putendl_fd(dst, 1);
+	free(dst);
+}
+
+void	leak_test_func3()
+{
+	char *src;
+	char *dst;
+	int		bufsize = 10;
+	int		idx = 0;
+	dst = ft_calloc(sizeof(char*), bufsize);
+	src = ft_calloc(sizeof(char*), 20000);
+	for (int i = 0; i < 10000; i++)
+	{
+		if (i % 10 == 0)
+		{
+			src[idx] = '\n';
+			dst[idx] = '\n';
+			idx++;
+		}
+		src[idx] = (i % 10) + '0';
+		dst = auto_resize_cpy(dst, idx, &bufsize, (i % 10) + '0');
+		idx++;
+	}
+	if (strcmp(src, dst))
+		printf("cpy failed\n");
+	// ft_putstr_fd(src, 1);
+	// ft_putstr_fd(dst, 2);
+	free(src);
 	free(dst);
 }
 
@@ -161,6 +190,7 @@ int		main(void)
 {
 	leak_test_func1();
 	leak_test_func2();
+	leak_test_func3();
 }
 
 #endif
