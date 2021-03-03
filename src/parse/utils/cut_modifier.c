@@ -65,8 +65,6 @@ char		*cut_modifier(char *src)
 	int		i_dst;
 
 	dst = ft_calloc(sizeof(char*), ft_strlen(src));
-	if (dst == NULL)
-		return (NULL);
 	i_dst = 0;
 	i_src = 0; 
 	while (src[i_src])

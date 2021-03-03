@@ -7,11 +7,8 @@
 
 # define DIVIDER -3
 
-#ifndef DEBUG  //後で削除。デバッグ用で値をいじれるように
-# define RESIZE_BUF_LEN 1000 
-#endif
-
-# define BUF_LEN 1000
+# define RESIZE_BUF_LEN 200 
+# define BUF_LEN 200
 
 char		***convert_line2tasks(char *line);
 void		replace_meta_with_divider(char *line, char rplced_ch);

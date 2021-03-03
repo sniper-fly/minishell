@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 11:01:41 by rnakai            #+#    #+#             */
-/*   Updated: 2020/08/05 16:57:08 by rnakai           ###   ########.fr       */
+/*   Updated: 2021/03/03 12:42:18 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char		**ft_split(char const *str, char ch)
 	if (!(trimmed_str = ft_strtrim(str, divider)))
 		return (NULL);
 	words = count_words(trimmed_str, ch);
-	if (!(ret_db_ptr = (char **)malloc(sizeof(char *) * (words + 1))))
+	if (!(ret_db_ptr = (char **)ft_calloc(sizeof(char *), (words + 1))))
 	{
 		free(trimmed_str);
 		return (NULL);

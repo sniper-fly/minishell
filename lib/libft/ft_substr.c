@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 12:48:19 by rnakai            #+#    #+#             */
-/*   Updated: 2020/07/11 12:44:45 by rnakai           ###   ########.fr       */
+/*   Updated: 2021/03/03 12:32:46 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char		*ft_substr(char const *s, unsigned int start, size_t len)
 		return ((char *)ft_calloc(1, sizeof(char)));
 	if (s_size < len + start)
 		len = s_size - start;
-	ptr = (char *)malloc(sizeof(char) * (len + 1));
+	ptr = (char *)ft_calloc(sizeof(char), len + 1);
 	if (ptr == NULL)
 		return (NULL);
 	idx = 0;

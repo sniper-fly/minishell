@@ -23,8 +23,7 @@ char		***convert_line2tasks(char *line)
 
 	cut_last_endl(line);
 	replace_meta_with_divider(line, ';');
-	semicolon_splitted = ft_split(line, DIVIDER); //should free TODO: error処理
-	//ここでプロセス行数がわかるので、行数分+1 malloc
+	semicolon_splitted = ft_split(line, DIVIDER);
 	tasks = (char***)ft_calloc(sizeof(char**),
 		(count_string_arr_row(semicolon_splitted) + 1)); //TODO:error処理
 	i = 0;

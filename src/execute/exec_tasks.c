@@ -70,12 +70,7 @@ void			exec_tasks(char ***tasks)
 	i = 0;
 	while (tasks[i]) //行のループ
 	{
-		if (!(procs = parse_each_task(tasks[i])))
-		{
-			g_status = malloc_error();
-			++i;
-			continue;
-		}
+		procs = parse_each_task(tasks[i]);
 		if (should_exec_builtin_func(procs))
 			exec_single_process_builtin(&procs[0]);
 		else
