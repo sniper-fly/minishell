@@ -6,12 +6,11 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 17:47:07 by rnakai            #+#    #+#             */
-/*   Updated: 2020/07/02 17:55:16 by rnakai           ###   ########.fr       */
+/*   Updated: 2021/03/03 12:39:17 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char		*ft_strdup(const char *str)
 {
@@ -19,7 +18,7 @@ char		*ft_strdup(const char *str)
 	size_t	strsize;
 
 	strsize = ft_strlen(str);
-	ptr = (char *)malloc((strsize + 1) * sizeof(char));
+	ptr = (char *)ft_calloc((strsize + 1), sizeof(char));
 	if (ptr == NULL)
 	{
 		return (NULL);
