@@ -1,0 +1,22 @@
+Valid commands ==========
+[32mVALID[m : echo \\
+
+[32mVALID[m : \\
+
+
+Invalid commands ========
+minishell: syntax error terminating with backslash is forbidden.
+[31mINVALID[m : \
+
+minishell: syntax error terminating with backslash is forbidden.
+[31mINVALID[m : \\\
+
+minishell: syntax error terminating with backslash is forbidden.
+[31mINVALID[m : \\\\\
+
+minishell: syntax error terminating with backslash is forbidden.
+[31mINVALID[m : echo \
+
+minishell: syntax error terminating with backslash is forbidden.
+[31mINVALID[m : echo\a \\\
+

@@ -1,3 +1,52 @@
+#ifdef IS_CMD_LINE_TERMINATED_WITH_BKSLSH_C
+
+#include <stdlib.h>
+#include "libft.h"
+#include "validation.h"
+#include "constants.h"
+#include "struct/t_bool.h"
+
+static void test_backslash(char *cmd_line)
+{
+	t_bool ret_bool;
+
+	ret_bool = is_cmd_line_terminated_with_bkslsh(cmd_line);
+	if(ret_bool == TRUE)
+		ft_putstr_fd("\x1b[31mINVALID\x1b[m", STD_OUT);
+	else
+		ft_putstr_fd("\x1b[32mVALID\x1b[m", STD_OUT);
+	ft_putstr_fd(" : ", STD_OUT);
+	ft_putendl_fd(cmd_line, STD_OUT);
+}
+
+int main(void)
+{
+	char *valid_cmds[] =
+	{
+		"echo \\\\\n",
+		"\\\\\n",
+	};
+
+	char *invalid_cmds[] =
+	{
+		"\\\n",
+		"\\\\\\\n",
+		"\\\\\\\\\\\n",
+		"echo \\\n",
+		"echo\\a \\\\\\\n",
+	};
+
+	ft_putstr_fd("Valid commands ==========\n", STD_OUT);
+	for(size_t i = 0; i < sizeof(valid_cmds) / sizeof(char *); ++i)
+		test_backslash(valid_cmds[i]);
+
+	ft_putstr_fd("\nInvalid commands ========\n", STD_OUT);
+	for(size_t i = 0; i < sizeof(invalid_cmds) / sizeof(char *); ++i)
+		test_backslash(invalid_cmds[i]);
+}
+
+#endif
+
 #ifdef IS_VALID_QUOTE_C
 
 #include <stdlib.h>

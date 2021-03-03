@@ -76,5 +76,6 @@ test_unit CUT_MODIFIER_C
 test_unit IS_VALID_QUOTE_C
 test_unit IS_VALID_CHAR_CODE_C
 test_unit IS_VALID_META_AND_REDIRECT_C
+test_unit IS_CMD_LINE_TERMINATED_WITH_BKSLSH_C
 
 # test_unit PARSE_EACH_TASK_C #不完全なテストなのでまだ追加しない
