@@ -57,6 +57,11 @@ static void	leak_test(void)
 		"\"$}\"",			"\"$}\"",
 		"\"$$\"",			"\"$$\"",
 		"\" $$ \"",			"\" $$ \"",
+		"\"$_a\"",			"\"\"",
+		"\"$+a\"",			"\"$+a\"",
+		"$+a",				"$+a",
+		"\"$?\"",			"\"42\"",
+		"\"$name+a\"",		"\"nop+a\"",
 	};
 	char*	env_to_add1[] = {"export", "name=nop", NULL};
 	char*	env_to_add2[] = {"export", "foo=bar", NULL};
