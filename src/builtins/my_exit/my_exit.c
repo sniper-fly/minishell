@@ -49,12 +49,13 @@ int				my_exit(char **args)
 			ft_putstr_fd("minishell: exit: ", STD_ERR);
 			ft_putstr_fd(args[i], STD_ERR);
 			ft_putendl_fd(": numeric argument required", STD_ERR);
-			g_status = MISUSE_OF_SHELL_BUILTINS;
 			exit(MISUSE_OF_SHELL_BUILTINS);
 		}
 		++i;
 	}
+	if (!args[1])
+		exit(SUCCEEDED);
 	if (args[1])
-		g_status = ft_atol(args[1]) & 255;
-	exit(g_status);
+		exit(ft_atol(args[1]) & 255);
+	return (SUCCEEDED);
 }
