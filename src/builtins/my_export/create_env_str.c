@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "libft.h"
+#include "utils.h"
 #include "struct/env_list.h"
 
 static int	count_bk_slsh_should_insert(char *value)
@@ -24,7 +25,7 @@ static char	*insert_back_slash(char *value)
 	if (!(value_inserted_bk_slsh =
 	malloc(sizeof(char) *
 	(ft_strlen(value) + count_bk_slsh_should_insert(value) + 1))))
-		return (NULL);
+		exit(malloc_error());
 	i = 0;
 	while (*value)
 	{
@@ -49,16 +50,15 @@ static char	*create_tmp_env_str(char *env_str, t_env_list *env_node)
 	if (ft_strchr(env_node->value, '\\') || ft_strchr(env_node->value, '$')
 	|| ft_strchr(env_node->value, '\"'))
 	{
-		if (!(value_inserted_bk_slsh = insert_back_slash(env_node->value)))
-			return (NULL);
+		value_inserted_bk_slsh = insert_back_slash(env_node->value);
 		if (!(tmp = ft_strjoin(env_str, value_inserted_bk_slsh)))
-			return (NULL);
+			exit(malloc_error());
 		free(value_inserted_bk_slsh);
 	}
 	else
 	{
 		if (!(tmp = ft_strjoin(env_str, env_node->value)))
-			return (NULL);
+			exit(malloc_error());
 	}
 	return (tmp);
 }
@@ -69,16 +69,18 @@ char		*create_env_str(t_env_list *env_node)
 	char	*tmp;
 
 	if (!(env_node->value))
-		env_str = ft_strdup(env_node->key);
+	{
+		if (!(env_str = ft_strdup(env_node->key)))
+			exit(malloc_error());
+	}
 	else
 	{
 		if (!(env_str = ft_strjoin(env_node->key, "=\"")))
-			return (NULL);
-		if (!(tmp = create_tmp_env_str(env_str, env_node)))
-			return (NULL);
+			exit(malloc_error());
+		tmp = create_tmp_env_str(env_str, env_node);
 		free(env_str);
 		if (!(env_str = ft_strjoin(tmp, "\"")))
-			return (NULL);
+			exit(malloc_error());
 		free(tmp);
 	}
 	return (env_str);

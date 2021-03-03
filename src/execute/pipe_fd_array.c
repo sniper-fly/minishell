@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include "utils.h"
 #include "execute.h"
 #include "struct/process.h"
 
@@ -11,11 +12,11 @@ int		**create_pipe_fd_array(t_process *procs)
 	i = 0;
 	num_of_procs = count_procs(procs);
 	if (!(pipe_fd = malloc(sizeof(int *) * num_of_procs)))
-		return (NULL);
+		exit(malloc_error());
 	while (i < num_of_procs)
 	{
 		if (!(pipe_fd[i] = malloc(sizeof(int) * 2)))
-			return (NULL);
+			exit(malloc_error());
 		++i;
 	}
 	return (pipe_fd);

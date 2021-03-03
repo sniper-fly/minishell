@@ -9,6 +9,13 @@
 
 extern volatile sig_atomic_t g_status;
 
+static void		put_numeric_argument_error(char *arg)
+{
+	ft_putstr_fd("minishell: exit: ", STD_ERR);
+	ft_putstr_fd(arg, STD_ERR);
+	ft_putendl_fd(": numeric argument required", STD_ERR);
+}
+
 static t_bool	is_numeric_argument(char *arg)
 {
 	int	i;
@@ -46,15 +53,14 @@ int				my_exit(char **args)
 		}
 		if (!is_numeric_argument(args[i]))
 		{
-			ft_putstr_fd("minishell: exit: ", STD_ERR);
-			ft_putstr_fd(args[i], STD_ERR);
-			ft_putendl_fd(": numeric argument required", STD_ERR);
-			g_status = MISUSE_OF_SHELL_BUILTINS;
+			put_numeric_argument_error(args[i]);
 			exit(MISUSE_OF_SHELL_BUILTINS);
 		}
 		++i;
 	}
+	if (!args[1])
+		exit(SUCCEEDED);
 	if (args[1])
-		g_status = ft_atol(args[1]) & 255;
-	exit(g_status);
+		exit(ft_atol(args[1]) & 255);
+	return (SUCCEEDED);
 }

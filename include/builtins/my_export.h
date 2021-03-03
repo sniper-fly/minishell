@@ -3,7 +3,7 @@
 
 #include "struct/env_list.h"
 
-int			sort_keys_by_lexical_order(char **env_str_arr);
+void		sort_keys_by_lexical_order(char **env_str_arr);
 char 		*create_env_str(t_env_list *env_node);
 int			print_env_at_my_export(void);
 t_env_list	**create_new_env_nodes_arr(char **args, int *exit_status);

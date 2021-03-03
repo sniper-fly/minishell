@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "libft.h"
+#include "utils.h"
 
 char	*join_cmd_to_path(char *cmd, char *path_ptr)
 {
@@ -10,14 +11,14 @@ char	*join_cmd_to_path(char *cmd, char *path_ptr)
 	if (path_ptr[ft_strlen(path_ptr) - 1] != '/')
 	{
 		if (!(add_slash = ft_strjoin(path_ptr, "/")))
-			return (NULL);
+			exit(malloc_error());
 		if (!(cmd_path = ft_strjoin(add_slash, cmd)))
-			return (NULL);
+			exit(malloc_error());
 	}
 	else
 	{
 		if (!(cmd_path = ft_strjoin(path_ptr, cmd)))
-			return (NULL);
+			exit(malloc_error());
 	}
 	free(add_slash);
 	return (cmd_path);
