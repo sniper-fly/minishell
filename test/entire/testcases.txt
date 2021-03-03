@@ -1,0 +1,6 @@
+echo hello
+ls
+ls | wc
+hoge
+echo 'hello'
+echo '
