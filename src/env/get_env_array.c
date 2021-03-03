@@ -29,22 +29,16 @@ static char	*make_env_str(t_env_list *env_var)
 	char	*env_var_str;
 
 	if (!(tmp = ft_strjoin(env_var->key, "=")))
-		return (NULL);
+		exit(malloc_error());
 	if (env_var->value)
 	{
 		if (!(env_var_str = ft_strjoin(tmp, env_var->value)))
-		{
-			free(tmp);
-			return (NULL);
-		}
+			exit(malloc_error());
 	}
 	else
 	{
 		if (!(env_var_str = ft_strdup(tmp)))
-		{
-			free(tmp);
-			return (NULL);
-		}
+			exit(malloc_error());
 	}
 	free(tmp);
 	return (env_var_str);
@@ -57,17 +51,12 @@ char		**get_env_array(void)
 	t_env_list	*env_var;
 
 	if (!(env = malloc(sizeof(char *) * (count_env_list() + 1))))
-		return (NULL);
+		exit(malloc_error());
 	i = 0;
 	env_var = g_env_list->next;
 	while (env_var->key)
 	{
-		if (!(env[i] = make_env_str(env_var)))
-		{
-			free_string_arr(env);
-			g_status = malloc_error();
-			return (NULL);
-		}
+		env[i] = make_env_str(env_var);
 		++i;
 		env_var = env_var->next;
 	}
