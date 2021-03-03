@@ -56,3 +56,4 @@ function update_each_file() {
 # update_each_file IS_VALID_QUOTE_C
 # update_each_file IS_VALID_CHAR_CODE_C
 # update_each_file IS_VALID_META_AND_REDIRECT_C
+# update_each_file IS_CMD_LINE_TERMINATED_WITH_BKSLSH_C
