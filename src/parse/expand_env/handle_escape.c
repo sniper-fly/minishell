@@ -16,9 +16,7 @@ static char	*handle_backslash(
 static t_bool	should_interpret_as_envvar(char *str, int i)
 {
 	if (str[i] == '$' &&
-		!((str[i + 1] == BACK_SLASH || ft_isspace(str[i + 1]) ||
-		str[i + 1] == '}' || str[i + 1] == '$' || str[i + 1] == '\0' ||
-		str[i + 1] == SINGLE_QUOTE || str[i + 1] == DOUBLE_QUOTE)))
+	(ft_isalnum(str[i + 1]) || str[i + 1] == '_' || str[i + 1] == '?'))
 	{
 		return (TRUE);
 	}
