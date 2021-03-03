@@ -43,6 +43,8 @@ static void	exec_cmd(int i, int **pipe_fd, t_process *procs)
 		exit(SUCCEEDED);
 	if (!(procs[i].cmd[0][0]))
 		if_command_not_found(procs[i].cmd[0]);
+	if (!ft_strcmp(procs[i].cmd[0], "exit"))
+		my_exit_at_child_process(procs[i].cmd);
 	if (is_builtin_func(procs[i].cmd[0]))
 	{
 		exec_builtins(procs[i].cmd);
