@@ -101,11 +101,6 @@ int main(void)
 		"echo \'a\\\'\' ", //   'a\''
 		"echo \"a",
 		"echo \"\\", //この例だとセグフォする可能性がある
-		"\\",
-		"\\\\\\",
-		"\\\\\\\\\\",
-		"echo \\",
-		"echo\\a \\\\\\",
 	};
 
 	ft_putstr_fd("Valid commands ==========\n", STD_OUT);
