@@ -8,6 +8,7 @@ int my_unset(char **args);
 int my_env(char **args); 
 int my_pwd(char **args);
 int my_exit(char **args);
+int	my_exit_at_child_process(char **args);
 int	redir_fail_cmd(char **args);
 void exec_builtins(char **args);
 
