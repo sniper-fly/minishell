@@ -37,18 +37,11 @@ static char	*get_command_path(char *cmd)
 	char	**path_db_ptr;
 
 	if (!(path_db_ptr = get_path_array()))
-	{
-		g_status = malloc_error();
 		return (NULL);
-	}
 	i = 0;
 	while (path_db_ptr[i])
 	{
-		if (!(cmd_path = join_cmd_to_path(cmd, path_db_ptr[i])))
-		{
-			g_status = malloc_error();
-			return (NULL);
-		}
+		cmd_path = join_cmd_to_path(cmd, path_db_ptr[i]);
 		if (is_there_execute_file_at(cmd_path))
 			return (cmd_path);
 		free(cmd_path);
