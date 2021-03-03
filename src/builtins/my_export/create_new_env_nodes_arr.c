@@ -15,7 +15,7 @@ t_env_list	**create_new_env_nodes_arr(char **args, int *exit_status)
 
 	if (!(new_env_nodes =
 	malloc(sizeof(t_env_list *) * (count_string_arr_row(args)))))
-		return (NULL);
+		exit(malloc_error());
 	i = 0;
 	while (args[i + 1])
 	{

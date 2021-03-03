@@ -36,13 +36,12 @@ static char	**create_env_str_arr_from_env_list(int node_count)
 	i = 0;
 	env_node = g_env_list->next;
 	if (!(env_str_arr = malloc(sizeof(char *) * (node_count + 1))))
-		return (NULL);
+		exit(malloc_error());
 	while (i < node_count)
 	{
 		if (ft_strcmp(env_node->key, "_"))
 		{
-			if (!(env_str_arr[i] = create_env_str(env_node)))
-				return (NULL);
+			env_str_arr[i] = create_env_str(env_node);
 			++i;
 		}
 		env_node = env_node->next;
@@ -56,10 +55,8 @@ int			print_env_at_my_export(void)
 	int		i;
 	char	**env_str_arr;
 
-	if (!(env_str_arr = create_env_str_arr_from_env_list(count_env_node())))
-		return (malloc_error());
-	if (sort_keys_by_lexical_order(env_str_arr) < 0)
-		return (malloc_error());
+	env_str_arr = create_env_str_arr_from_env_list(count_env_node());
+	sort_keys_by_lexical_order(env_str_arr);
 	i = 0;
 	while (env_str_arr[i])
 	{

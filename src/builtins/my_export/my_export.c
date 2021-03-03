@@ -18,8 +18,7 @@ int	my_export(char **args)
 		exit_status = print_env_at_my_export();
 	else
 	{
-		if (!(new_env_nodes = create_new_env_nodes_arr(args, &exit_status)))
-			return (malloc_error());
+		new_env_nodes = create_new_env_nodes_arr(args, &exit_status);
 		i = 0;
 		while (new_env_nodes[i])
 		{
