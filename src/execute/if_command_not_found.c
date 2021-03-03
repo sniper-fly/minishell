@@ -3,6 +3,8 @@
 #include "constants.h"
 #include "exit_status.h"
 
+extern int	g_status;
+
 void	if_command_not_found(char *cmd_path)
 {
 	ft_putstr_fd("minishell: ", STD_ERR);

@@ -44,6 +44,8 @@ static void	exec_cmd(int i, int **pipe_fd, t_process *procs)
 		g_status = SUCCEEDED;
 		exit(g_status);
 	}
+	if (!(procs[i].cmd[0][0]))
+		if_command_not_found(procs[i].cmd[0]);
 	if (is_builtin_func(procs[i].cmd[0]))
 	{
 		exec_builtins(procs[i].cmd);
