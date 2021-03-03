@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "libft.h"
 #include "utils.h"
 #include "struct/env_list.h"
@@ -24,9 +25,6 @@ char	**get_path_array(void)
 	if (tmp == g_env_list)
 		return (NULL);
 	if (!(path = ft_split(tmp->value, ':')))
-	{
-		g_status = malloc_error();
-		return (NULL);
-	}
+		exit(malloc_error());
 	return (path);
 }
