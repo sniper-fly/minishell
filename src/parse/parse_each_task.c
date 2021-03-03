@@ -42,8 +42,6 @@ t_process			*parse_each_task(char **str_procs)
 
 	proc_num = count_string_arr_row(str_procs);
 	procs = ft_calloc(sizeof(t_process), proc_num + 1); //TODO:
-	if (procs == NULL)
-		return (NULL);
 	procs[proc_num].is_end = TRUE;
 	i = 0;
 	while (str_procs[i])
