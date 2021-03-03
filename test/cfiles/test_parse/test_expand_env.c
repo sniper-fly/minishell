@@ -57,6 +57,11 @@ static void	leak_test(void)
 		"\"$}\"",			"\"$}\"",
 		"\"$$\"",			"\"$$\"",
 		"\" $$ \"",			"\" $$ \"",
+		"\"$_a\"",			"\"\"",
+		"\"$+a\"",			"\"$+a\"",
+		"$+a",				"$+a",
+		"\"$?\"",			"\"42\"",
+		"\"$name+a\"",		"\"nop+a\"",
 	};
 	char*	env_to_add1[] = {"export", "name=nop", NULL};
 	char*	env_to_add2[] = {"export", "foo=bar", NULL};
@@ -108,6 +113,9 @@ int		main(void)
 	char str7[] = "ab$hey\\";
 	char str8[] = "a$hey'";
 	char str9[] = "$$hey'";
+	char str10[] = "$hey+yo";
+	char str11[] = "$hey_yo";
+	char str12[] = "$hey$yo";
 
 	test_get_single_env_key(str1, 1);
 	test_get_single_env_key(str2, 1);
@@ -118,7 +126,9 @@ int		main(void)
 	test_get_single_env_key(str7, 3);
 	test_get_single_env_key(str8, 2);
 	test_get_single_env_key(str9, 2);
-	test_get_single_env_key(str9, 1);
+	test_get_single_env_key(str10, 1);
+	test_get_single_env_key(str11, 1);
+	test_get_single_env_key(str12, 1);
 }
 
 #endif

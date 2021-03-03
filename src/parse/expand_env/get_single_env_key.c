@@ -6,12 +6,9 @@
 
 static t_bool	is_env_end_char(char ch)
 {
-	if (ch == BACK_SLASH || ft_isspace(ch) || ch == DOUBLE_QUOTE ||
-		ch == SINGLE_QUOTE || ch == '$' || ch == '\0')
-	{
-		return (TRUE);
-	}
-	return (FALSE);
+	if (ft_isalnum(ch) || ch == '_')
+		return (FALSE);
+	return (TRUE);
 }
 
 /*
