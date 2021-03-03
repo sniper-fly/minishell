@@ -10,4 +10,10 @@ t_bool	is_valid_command_line(char *cmd_line);
 void	setup_shell(char **line, char **envp);
 int		init_pwd(void);
 
+int		read_cmd_line(char *line);
+t_bool	is_valid_command_line(char *cmd_line);
+char	***convert_line2tasks(char *line);
+void	exec_tasks(char ***tasks);
+void	free_tasks(char ***tasks);
+
 #endif
