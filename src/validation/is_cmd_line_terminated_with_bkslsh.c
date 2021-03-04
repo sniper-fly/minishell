@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_cmd_line_terminated_with_bkslsh.c               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yyabumot <yyabumot@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/04 15:05:44 by yyabumot          #+#    #+#             */
+/*   Updated: 2021/03/04 15:06:46 by yyabumot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "struct/t_bool.h"
 #include "constants.h"
 #include "validation.h"
