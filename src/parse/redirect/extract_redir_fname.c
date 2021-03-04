@@ -10,7 +10,8 @@ static void	free_three(char *str1, char *str2, char *str3)
 	free(str3);
 }
 
-char		*extract_redir_fname(t_redir_mode *current_redir, char *raw_redir_fname)
+char		*extract_redir_fname(
+	t_redir_mode *current_redir, char *raw_redir_fname)
 {
 	char			*redir_expanded;
 	char			*redir_trimmed;

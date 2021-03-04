@@ -8,7 +8,7 @@ char		*get_redirect_file(char *str, int i, int mode_bit)
 	int		start;
 	int		filename_len;
 
-	i += (mode_bit & REDIR_APPEND) ? 2 : 1; //append以外は1をプラス
+	i += (mode_bit & REDIR_APPEND) ? 2 : 1;
 	skip_space_idx(str, &i);
 	start = i;
 	while (!(str[i] == '\0' || ft_isspace(str[i])
@@ -29,5 +29,5 @@ char		*get_redirect_file(char *str, int i, int mode_bit)
 		i++;
 	}
 	filename_len = i - start;
-	return (ft_substr(str, start, filename_len)); //TODO:
+	return (ft_substr(str, start, filename_len));
 }
