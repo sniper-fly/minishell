@@ -1,7 +1,7 @@
 # minishell
 
 This is a subject at 42Tokyo.  
-We implemented shell program from scratch.  
+We implemented a shell program like bash from scratch.  
 
 ## Member
 rnakai  
@@ -34,3 +34,6 @@ GNU Make 4.1
 gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0  
 
 just entering "make" command on the root of this repo.
+
+## Link
+https://github.com/sniper-fly/minishell
