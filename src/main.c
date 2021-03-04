@@ -29,17 +29,18 @@ int		main(int argc, char **argv, char **envp)
 		read_cmd_line(line);
 		if (is_full_of_space(line))
 			continue ;
-		if (!is_valid_command_line(line)) //lineは再利用するのでfreeしない
+		if (!is_valid_command_line(line))
 		{
-			g_status = SYNTAX_ERROR; //exit statusの名前設定NOTE:
+			g_status = SYNTAX_ERROR;
 			continue ;
 		}
-		tasks = convert_line2tasks(line); //TODO:
-		exec_tasks(tasks); //失敗したらtasksをfreeし忘れないように
+		tasks = convert_line2tasks(line);
+		exec_tasks(tasks);
 		free_tasks(tasks);
 	}
 	free(line);
-	(void)argc; (void)argv; (void)envp;
+	(void)argc;
+	(void)argv;
 }
 
 #endif
