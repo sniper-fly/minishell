@@ -62,6 +62,6 @@ void		my_execve(char **cmd, char **envp)
 		do_execve(cmd[0], cmd, envp);
 	if ((cmd_path = get_command_path(cmd[0])))
 		do_execve(cmd_path, cmd, envp);
-	else if (g_status != GENERAL_ERRORS)
+	else
 		if_command_not_found(cmd[0]);
 }

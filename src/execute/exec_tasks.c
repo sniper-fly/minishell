@@ -68,13 +68,13 @@ void			exec_tasks(char ***tasks)
 	t_process	*procs;
 
 	i = 0;
-	while (tasks[i]) //行のループ
+	while (tasks[i])
 	{
 		procs = parse_each_task(tasks[i]);
 		if (should_exec_builtin_func(procs))
 			exec_single_process_builtin(&procs[0]);
 		else
-			exec_cmds(procs); //パイプのwhileループ(列のループ)
+			exec_cmds(procs);
 		free_procs(procs);
 		++i;
 	}
