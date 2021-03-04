@@ -24,7 +24,7 @@ static int	comapre_keys(char *env1, char *env2)
 	return (cmp_result);
 }
 
-void			sort_keys_by_lexical_order(char **env_str_arr)
+void		sort_keys_by_lexical_order(char **env_str_arr)
 {
 	int		i;
 	int		j;
