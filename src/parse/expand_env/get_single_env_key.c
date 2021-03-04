@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:52:37 by rnakai            #+#    #+#             */
-/*   Updated: 2021/03/04 14:52:38 by rnakai           ###   ########.fr       */
+/*   Updated: 2021/03/04 16:45:36 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ static t_bool	is_env_end_char(char ch)
 		return (FALSE);
 	return (TRUE);
 }
-
-/*
-** str[idx]から、環境変数の終端までの文字列を返却する
-*/
 
 char			*get_single_env_key(char *str, int idx)
 {

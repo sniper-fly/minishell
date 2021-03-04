@@ -6,7 +6,7 @@
 /*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:49:03 by rnakai            #+#    #+#             */
-/*   Updated: 2021/03/04 14:49:04 by rnakai           ###   ########.fr       */
+/*   Updated: 2021/03/04 16:44:41 by rnakai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 #include "libft.h"
 #include "utils.h"
 #include <stdlib.h>
-
-/*
-** dst = auto_resize_cpy(dst, i, buf_size, src[i]);
-** このようにして、dstの容量を気にせずにイテレートしてコピーし続けられる。
-** 容量が一杯になったら自動でdstをresizeしてくれる
-** ただし、イテレートする過程で、dstが参照するアドレスは書き変わる場合があることに注意
-** また、dstにはmallocで確保した配列しかいれることができない。
-*/
 
 char		*auto_resize_cpy(char *dst, int idx, int *buf_size, char src_ch)
 {
