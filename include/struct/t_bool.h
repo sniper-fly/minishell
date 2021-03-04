@@ -1,7 +1,7 @@
 #ifndef T_BOOL_H
-#define T_BOOL_H
+# define T_BOOL_H
 
-typedef enum
+typedef	enum
 {
 	FALSE = 0,
 	TRUE = 1

@@ -14,7 +14,7 @@
 # define SUCCESS 1
 # define ERROR -1
 
-# define ARG_MAX 262144 //guacamolle でgetconf ARG_MAX
+# define ARG_MAX 262144
 
 # define PROMPT "minishell> "
 
