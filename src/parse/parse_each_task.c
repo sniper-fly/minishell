@@ -22,7 +22,7 @@ static t_process	*parse_cmd(char **str_procs, t_process *procs)
 	char	**raw_cmds;
 
 	i = 0;
-	while (str_procs[i]) //プロセスごとに回す
+	while (str_procs[i])
 	{
 		expanded_str = expand_env_var_str(str_procs[i]);
 		raw_cmds = split_str_by_space(expanded_str);
@@ -33,7 +33,6 @@ static t_process	*parse_cmd(char **str_procs, t_process *procs)
 	return (procs);
 }
 
-//プロセス列を処理。扱っているのはパイプで区切られた二次元配列
 t_process			*parse_each_task(char **str_procs)
 {
 	t_process	*procs;
@@ -41,7 +40,7 @@ t_process			*parse_each_task(char **str_procs)
 	int			i;
 
 	proc_num = count_string_arr_row(str_procs);
-	procs = ft_calloc(sizeof(t_process), proc_num + 1); //TODO:
+	procs = ft_calloc(sizeof(t_process), proc_num + 1);
 	procs[proc_num].is_end = TRUE;
 	i = 0;
 	while (str_procs[i])
@@ -49,7 +48,6 @@ t_process			*parse_each_task(char **str_procs)
 		if (parse_redirect(str_procs[i], &(procs[i])) == ERROR)
 		{
 			g_status = GENERAL_ERRORS;
-			// free_single_proc(&procs[i]);
 			ft_bzero(&procs[i], sizeof(t_process));
 			free(str_procs[i]);
 			str_procs[i] = ft_strdup("___redirect_failure___");

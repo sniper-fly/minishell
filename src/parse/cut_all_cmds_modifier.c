@@ -11,7 +11,7 @@ char		**cut_all_cmds_modifier(char **raw_cmds)
 	i = 0;
 	while (raw_cmds[i])
 	{
-		cmds[i] = cut_modifier(raw_cmds[i]); //TODO:
+		cmds[i] = cut_modifier(raw_cmds[i]);
 		i++;
 	}
 	return (cmds);
