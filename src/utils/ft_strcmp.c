@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnakai <rnakai@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: yyabumot <yyabumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:50:39 by rnakai            #+#    #+#             */
-/*   Updated: 2021/03/04 14:50:39 by rnakai           ###   ########.fr       */
+/*   Updated: 2021/03/04 15:01:49 by yyabumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 int		ft_strcmp(char *s1, char *s2)
 {
