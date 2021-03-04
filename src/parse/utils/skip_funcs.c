@@ -12,7 +12,6 @@ void		skip_space_idx(char *str, int *i)
 void		skip_until_end_single_quote(char *line, int *idx)
 {
 	(*idx)++;
-	//ヌル文字までにクォートが閉じているかはvalidateで検査するが、一応チェックしておく
 	while (line[*idx] != SINGLE_QUOTE && line[*idx] != '\0')
 		(*idx)++;
 	(*idx)++;
@@ -29,7 +28,7 @@ void		skip_until_end_double_quote(char *line, int *idx)
 			continue ;
 		}
 		if (line[*idx] == DOUBLE_QUOTE || line[*idx] == '\0')
-			break;
+			break ;
 		(*idx)++;
 	}
 	(*idx)++;

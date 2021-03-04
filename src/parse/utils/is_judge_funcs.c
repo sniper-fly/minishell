@@ -12,7 +12,6 @@ t_bool			is_escape(char ch)
 	return (FALSE);
 }
 
-//strtrimしてもなお、空白が残っている場合。エスケープあり。
 t_bool			is_ambiguous_err(char *redir_trimmed)
 {
 	int		i;

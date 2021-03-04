@@ -19,7 +19,7 @@ char		*auto_resize_cpy(char *dst, int idx, int *buf_size, char src_ch)
 	if (idx < *buf_size - 2)
 	{
 		dst[idx] = src_ch;
-			return (dst);
+		return (dst);
 	}
 	while (idx >= *buf_size - 2)
 		*buf_size += RESIZE_BUF_LEN;
