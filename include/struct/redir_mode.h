@@ -1,8 +1,8 @@
-#ifndef REDIRECT_H
-# define REDIRECT_H
+#ifndef REDIR_MODE_H
+# define REDIR_MODE_H
 
 /*
-** mode_bitで使うbitフラグ
+** flags for mode_bit
 */
 
 # define REDIR_BAD_FD	0b10000
@@ -14,7 +14,7 @@
 typedef struct		s_redirect
 {
 	int		mode_bit;
-	char	*fd_str; 			//for error msg
+	char	*fd_str;
 }					t_redir_mode;
 
 #endif

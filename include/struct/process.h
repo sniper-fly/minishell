@@ -2,44 +2,16 @@
 # define PROCESS_H
 
 # include "struct/t_bool.h"
+
 typedef struct	s_process
 {
 	char		**cmd;
 	char		*red_in_file_name;
 	char		*red_out_file_name;
 	char		*red_err_file_name;
-	int			red_out_mode; // O_TRUNC or O_APPEND | O_CREATE | O_WRONLY
-	int			red_err_mode; // O_TRUNC or O_APPEND | O_CREATE | O_WRONLY
-	t_bool		is_end; //列の最後を表す。列の終わりのみTRUE
+	int			red_out_mode;
+	int			red_err_mode;
+	t_bool		is_end;
 }				t_process;
 
-// "cat aaa | ls -l ; echo hello"
-// A | B | C ; D | E ; F
-
-// t_process_list	**list;
-// t_process_list	element;
-// (list[0][1].cmd)[1] == -l
-
-// A B C
-// D E
-// F
-
-# endif
-
-// //リストの列
-// typedef struct	s_process_list
-// {
-// 	t_cmd_list				*cmd;
-// 	char					*red_in_file_name;
-// 	int						should_append;
-// 	char					*red_out_file_name;
-// 	struct s_process_list	*next;
-// 	struct s_process_list	*prev;
-// }				t_process_list;
-
-// //リストの行
-// typedef struct	s_sequential_processes_list
-// {
-// 	t_process_list						*proc;
-// 	struct s_sequential_processes_list	*next;
-// }				t_sequential_processes_list;
+#endif

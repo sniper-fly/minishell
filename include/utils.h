@@ -1,8 +1,8 @@
 #ifndef UTILS_H
-#define UTILS_H
+# define UTILS_H
 
-#include "struct/env_list.h"
-#include "struct/process.h"
+# include "struct/env_list.h"
+# include "struct/process.h"
 
 void		ft_perror(char *str);
 void		putchar_times_fd(char ch, int times, int fd);
