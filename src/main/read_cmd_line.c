@@ -6,7 +6,7 @@
 #include "utils.h"
 #include <signal.h>
 
-extern volatile sig_atomic_t						g_status;
+extern volatile sig_atomic_t	g_status;
 extern volatile sig_atomic_t	g_is_reading_cmd_line;
 
 static t_bool	is_there_endl(char *line)
@@ -35,7 +35,6 @@ static int		read_cmd_line_recursive(char *line, int size_has_read)
 			"minishell: Input reached maximum size(ARG_MAX)\n", STD_ERR);
 		return (ERROR);
 	}
-	//もし改行が含まれてなかったら、つまりctrl-Dが入力されたら
 	if (!is_there_endl(line))
 	{
 		read_cmd_line_recursive(line, ft_strlen(line));
@@ -43,7 +42,7 @@ static int		read_cmd_line_recursive(char *line, int size_has_read)
 	return (0);
 }
 
-int		read_cmd_line(char *line)
+int				read_cmd_line(char *line)
 {
 	int		actual_read_size;
 
@@ -54,7 +53,7 @@ int		read_cmd_line(char *line)
 	if (line[0] == '\0')
 	{
 		ft_putendl_fd("exit", STD_ERR);
-		exit(g_status);		//TODO: exitコードは最後のコマンドの終了値、つまり$?が入る
+		exit(g_status);
 	}
 	else if (actual_read_size == ERROR)
 	{
@@ -63,10 +62,9 @@ int		read_cmd_line(char *line)
 	}
 	else if (actual_read_size == ARG_MAX)
 	{
-		ft_putstr_fd( "minishell: Input reached maximum size.\n", STD_ERR);
+		ft_putstr_fd("minishell: Input reached maximum size.\n", STD_ERR);
 		return (ERROR);
 	}
-	//もし改行が含まれてなかったら、つまりctrl-Dが入力されたら
 	if (!is_there_endl(line))
 		read_cmd_line_recursive(line, ft_strlen(line));
 	return (0);

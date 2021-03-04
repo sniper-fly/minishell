@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "utils.h"
 
-static char	*handle_backslash(
+static char		*handle_backslash(
 	char *expanded_str, int *buflen, char *str, int *i)
 {
 	expanded_str = auto_resize_join(expanded_str, buflen, str[*i]);
@@ -23,7 +23,7 @@ static t_bool	should_interpret_as_envvar(char *str, int i)
 	return (FALSE);
 }
 
-static char	*handle_double_quote(
+static char		*handle_double_quote(
 	char *expanded_str, int *buflen, char *str, int *i)
 {
 	expanded_str = auto_resize_join(expanded_str, buflen, str[*i]);
@@ -48,7 +48,7 @@ static char	*handle_double_quote(
 	return (expanded_str);
 }
 
-static char	*handle_single_quote(
+static char		*handle_single_quote(
 	char *expanded_str, int *buflen, char *str, int *i)
 {
 	expanded_str = auto_resize_join(expanded_str, buflen, str[*i]);
@@ -63,7 +63,8 @@ static char	*handle_single_quote(
 	return (expanded_str);
 }
 
-char	*handle_escape( char *expanded_str, int *buflen, char *str, int *i)
+char			*handle_escape(
+	char *expanded_str, int *buflen, char *str, int *i)
 {
 	if (str[*i] == BACK_SLASH)
 	{
@@ -75,7 +76,6 @@ char	*handle_escape( char *expanded_str, int *buflen, char *str, int *i)
 		expanded_str = handle_single_quote(expanded_str, buflen, str, i);
 		return (expanded_str);
 	}
-	// DOUBLE_QUOTE
 	expanded_str = handle_double_quote(expanded_str, buflen, str, i);
 	return (expanded_str);
 }

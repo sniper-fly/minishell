@@ -26,7 +26,7 @@ static void	do_execve(char *cmd_path, char **cmd, char **envp)
 		if (errno == EACCES)
 			exit(COMMAND_CANNOT_EXECUTE);
 		else
-			exit(GENERAL_ERRORS);	// TODO: exitのステータス要検証
+			exit(GENERAL_ERRORS);
 	}
 }
 

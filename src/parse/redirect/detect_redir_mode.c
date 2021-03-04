@@ -11,13 +11,13 @@ static void		init_redir_mode(t_redir_mode *redir_mode)
 	redir_mode->fd_str = NULL;
 }
 
-static void		set_redir_fd_str(char *str_proc, int i, t_redir_mode *redir_mode)
+static void		set_redir_fd_str(
+	char *str_proc, int i, t_redir_mode *redir_mode)
 {
 	int		fd_len;
 
 	fd_len = 0;
 	i--;
-	//もし i - 1 が0以上で、数字だったら
 	while (i >= 0 && ft_isdigit(str_proc[i]) == TRUE)
 	{
 		fd_len++;
@@ -55,7 +55,8 @@ static t_bool	is_fd_pair_valid(t_redir_mode *redir_mode)
 	return (TRUE);
 }
 
-void			detect_redir_mode(char *str_proc, int i, t_redir_mode *redir_mode)
+void			detect_redir_mode(
+	char *str_proc, int i, t_redir_mode *redir_mode)
 {
 	init_redir_mode(redir_mode);
 	set_redir_fd_str(str_proc, i, redir_mode);

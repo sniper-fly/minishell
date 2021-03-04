@@ -14,7 +14,7 @@ static void		cut_last_endl(char *line)
 		*endl_ptr = '\0';
 }
 
-char		***convert_line2tasks(char *line)
+char			***convert_line2tasks(char *line)
 {
 	char		**semicolon_splitted;
 	char		**pipe_spilitted;
@@ -25,12 +25,12 @@ char		***convert_line2tasks(char *line)
 	replace_meta_with_divider(line, ';');
 	semicolon_splitted = ft_split(line, DIVIDER);
 	tasks = (char***)ft_calloc(sizeof(char**),
-		(count_string_arr_row(semicolon_splitted) + 1)); //TODO:error処理
+		(count_string_arr_row(semicolon_splitted) + 1));
 	i = 0;
 	while (semicolon_splitted[i])
 	{
 		replace_meta_with_divider(semicolon_splitted[i], '|');
-		pipe_spilitted = ft_split(semicolon_splitted[i], DIVIDER); //TODO:error処理
+		pipe_spilitted = ft_split(semicolon_splitted[i], DIVIDER);
 		tasks[i] = pipe_spilitted;
 		i++;
 	}

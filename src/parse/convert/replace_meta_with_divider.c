@@ -20,7 +20,7 @@ void		replace_meta_with_divider(char *line, char rplced_ch)
 		}
 		else if (line[i] == BACK_SLASH && line[i + 1] == rplced_ch)
 		{
-			i += 2; //ヌル終端は保証されているのでセグフォしない
+			i += 2;
 			continue ;
 		}
 		if (line[i] == rplced_ch)

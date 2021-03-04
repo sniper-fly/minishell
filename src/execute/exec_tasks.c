@@ -23,7 +23,8 @@ static t_bool	should_exec_builtin_func(t_process *procs)
 	return (FALSE);
 }
 
-static void reset_standard_fds(t_process *proc, int fd_stdin, int fd_stdout, int fd_stderr)
+static void		reset_standard_fds(
+	t_process *proc, int fd_stdin, int fd_stdout, int fd_stderr)
 {
 	int	fd;
 
@@ -48,7 +49,7 @@ static void reset_standard_fds(t_process *proc, int fd_stdin, int fd_stdout, int
 	}
 }
 
-static void exec_single_process_builtin(t_process *proc)
+static void		exec_single_process_builtin(t_process *proc)
 {
 	int	fd_stdin;
 	int	fd_stdout;

@@ -66,7 +66,7 @@ char		*cut_modifier(char *src)
 
 	dst = ft_calloc(sizeof(char*), ft_strlen(src));
 	i_dst = 0;
-	i_src = 0; 
+	i_src = 0;
 	while (src[i_src])
 	{
 		if (is_escape(src[i_src]))
