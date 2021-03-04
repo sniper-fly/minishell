@@ -6,7 +6,7 @@
 /*   By: yyabumot <yyabumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 14:51:36 by yyabumot          #+#    #+#             */
-/*   Updated: 2021/03/04 14:51:37 by yyabumot         ###   ########.fr       */
+/*   Updated: 2021/03/04 16:25:30 by yyabumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int				my_exit(char **args)
 		++i;
 	}
 	if (!args[1])
-		exit(SUCCEEDED);
+		exit(g_status);
 	if (args[1])
 		exit(ft_atol(args[1]) & 255);
 	return (SUCCEEDED);
