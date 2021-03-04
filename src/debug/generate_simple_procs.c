@@ -22,23 +22,19 @@ t_process		**generate_simple_procs(char *line)
 	int			j;
 
 	cut_last_endl(line);
-	semicolon_splitted = ft_split(line, ';'); //should free TODO: error処理
-	//ここでプロセス行数がわかるので、行数分+1 malloc
+	semicolon_splitted = ft_split(line, ';');
 	procs = (t_process**)ft_calloc(sizeof(t_process*),
-		(count_string_arr_row(semicolon_splitted) + 1)); //TODO:error処理
-	
+		(count_string_arr_row(semicolon_splitted) + 1));
 	i = 0;
 	while (semicolon_splitted[i])
 	{
-		pipe_spilitted = ft_split(semicolon_splitted[i], '|'); //should free TODO:error処理
-		//ここで各プロセス列数がわかるので、各行における列数 + 1 malloc
+		pipe_spilitted = ft_split(semicolon_splitted[i], '|');
 		procs[i] = (t_process*)ft_calloc(sizeof(t_process),
-			(count_string_arr_row(pipe_spilitted) + 1)); //TODO:error処理
+			(count_string_arr_row(pipe_spilitted) + 1));
 		j = 0;
 		while (pipe_spilitted[j])
 		{
-			// ここで、既に二次元配列になったコマンドラインが取得できる
-			procs[i][j].cmd = ft_split(pipe_spilitted[j], ' '); //should free TODO:error処理
+			procs[i][j].cmd = ft_split(pipe_spilitted[j], ' ');
 			j++;
 		}
 		free_string_arr(pipe_spilitted);
