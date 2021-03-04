@@ -5,7 +5,6 @@
 #include "struct/t_bool.h"
 #include <stdlib.h>
 
-// $があり、かつその次の文字が\,space,},\0のいずれかでない
 static t_bool	should_interpret_as_envvar(char *str, int i)
 {
 	if (str[i] == '$' &&
@@ -17,11 +16,12 @@ static t_bool	should_interpret_as_envvar(char *str, int i)
 	return (FALSE);
 }
 
-char			*interpret_envvar( char *expanded_str, int *buflen, char *str, int *i)
+char			*interpret_envvar(
+	char *expanded_str, int *buflen, char *str, int *i)
 {
 	char	*env_key;
 
-	(*i)++; //$をスキップする
+	(*i)++;
 	env_key = get_single_env_key(str, *i);
 	expanded_str = join_env_value(expanded_str, buflen, env_key);
 	(*i) += ft_strlen(env_key);
@@ -36,7 +36,7 @@ char			*expand_env_var_str(char *str)
 	int		i;
 
 	buflen = BUF_LEN;
-	expanded_str = ft_calloc(sizeof(char), buflen); //TODO:
+	expanded_str = ft_calloc(sizeof(char), buflen);
 	i = 0;
 	while (str[i])
 	{

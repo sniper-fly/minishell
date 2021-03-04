@@ -14,6 +14,7 @@ static t_bool	is_env_end_char(char ch)
 /*
 ** str[idx]から、環境変数の終端までの文字列を返却する
 */
+
 char			*get_single_env_key(char *str, int idx)
 {
 	char	*single_envkey;
@@ -23,8 +24,7 @@ char			*get_single_env_key(char *str, int idx)
 	if (str[idx] == '?')
 		return (ft_strdup("?"));
 	buf_size = BUF_LEN;
-	single_envkey = ft_calloc(sizeof(char), buf_size); //TODO:
-	// if (str[idx] == '{')の場合は余裕があったらやる
+	single_envkey = ft_calloc(sizeof(char), buf_size);
 	i = 0;
 	while (!is_env_end_char(str[idx]))
 	{

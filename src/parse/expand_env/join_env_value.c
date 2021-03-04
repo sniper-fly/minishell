@@ -7,12 +7,12 @@
 
 extern volatile sig_atomic_t	g_status;
 
-static char *join_status_ch(char *expanded_str, int *buflen)
+static char	*join_status_ch(char *expanded_str, int *buflen)
 {
 	char	*status_ch;
 	int		i;
 
-	status_ch = ft_itoa(g_status); //TODO:
+	status_ch = ft_itoa(g_status);
 	i = 0;
 	while (status_ch[i])
 	{
