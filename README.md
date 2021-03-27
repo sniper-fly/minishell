@@ -1,4 +1,5 @@
 # minishell
+![minishell](https://user-images.githubusercontent.com/50983271/112708070-21312c80-8ef3-11eb-8109-153f417399ba.gif)
 
 This is a subject at 42Tokyo.  
 We implemented a shell program like bash from scratch.  
